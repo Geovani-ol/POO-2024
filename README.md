@@ -45,37 +45,15 @@ Este curso de Programación Orientada a Objetos (POO) está diseñado para propo
 
 1. **Introducción a la POO** 🌟
 
-   - Conceptos básicos y paradigma de POO
-
 2. **Clases y Objetos** 🏛️
-
-   - Definición y uso de clases
-   - Creación y manipulación de objetos
 
 3. **Herencia** 🌳
 
-   - Conceptos de herencia
-   - Implementación y mejores prácticas
-
 4. **Polimorfismo** 🔄
-
-   - Tipos de polimorfismo
-   - Aplicaciones prácticas
 
 5. **Manejo de Excepciones** ⚠️
 
-   - Tipos de excepciones
-   - Técnicas de manejo de errores
-
 6. **Flujos y Archivos** 📁
-   - Operaciones de entrada/salida
-   - Manipulación de archivos
-
-### Evaluación
-
-- Prácticas y Tareas: 40%
-- Proyectos: 50%
-- Participación y Asistencia: 10%
 
 ### Recursos Adicionales
 
