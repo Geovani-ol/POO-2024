@@ -2,6 +2,9 @@ import consultorios.Consultorio;
 import hospital.Hospital;
 import medicos.Medico;
 import pacientes.Paciente;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +14,7 @@ public class Main {
         Hospital hospital = new Hospital();
 
         while (true) {
-            System.out.println("*** SISTEMA HOSPITAL*");
+            System.out.println("\n*** SISTEMA HOSPITAL*");
             System.out.println("\n** Menu **");
             System.out.println("1.- Registrar Pacientes");
             System.out.println("2.- Registrar Medicos");
@@ -36,23 +39,31 @@ public class Main {
 
                     String id = hospital.generarIdPaciente();
 
-                    System.out.println("Ingresa el nombre del paciente: ");
+                    System.out.print("\nIngresa el nombre del paciente: ");
                     String nombre = scanner.nextLine();
 
-                    System.out.println("Ingresa el apellido: ");
+                    System.out.print("Ingresa el apellido: ");
                     String apellido = scanner.nextLine();
 
-                    System.out.println("Ingresa la fecha de nacimiento: ");
-                    String fechaNacimiento = scanner.nextLine();
+                    System.out.print("Ingresa el año de nacimiento del paciente: ");
+                    int anio = scanner.nextInt();
 
-                    System.out.println("Ingresa el tipo de sangre: ");
+                    System.out.print("Ingresa el mes de nacimiento del paciente: ");
+                    int mes = scanner.nextInt();
+
+                    System.out.print("Ingresa el día de nacimiento del paciente: ");
+                    int dia = scanner.nextInt();
+
+                    LocalDate fechaNacimiento = LocalDate.of(anio, mes, dia);
+
+                    System.out.print("Ingresa el tipo de sangre: ");
                     String tipoSangre = scanner.nextLine();
 
-                    System.out.println("Ingresa el sexo: ");
+                    System.out.print("Ingresa el sexo: ");
                     String sexo2 = scanner.nextLine();
                     char sexo = sexo2.charAt(0);
 
-                    System.out.println("Ingresa el numero de telefono: ");
+                    System.out.print("Ingresa el numero de telefono: ");
                     String telefono = scanner.nextLine();
 
                     Paciente paciente = new Paciente(id, nombre, apellido, fechaNacimiento, tipoSangre, sexo, telefono);
@@ -61,24 +72,32 @@ public class Main {
                     System.out.println("Paciente registrado exitosamente :D");
                     break;
                 case 2:
-                    System.out.println("--Seleccionaste la opción de registrar medicos--");
+                    System.out.println("\n--Seleccionaste la opción de registrar medicos--");
 
-                    System.out.println("Ingresa el nombre del medico: ");
+                    System.out.print("\nIngresa el nombre del medico: ");
                     String nombreMedico = scanner.nextLine();
 
-                    System.out.println("Ingresa el apellido: ");
+                    System.out.print("Ingresa el apellido: ");
                     String apellidoMedico = scanner.nextLine();
 
-                    System.out.println("Ingresa la fecha de nacimiento: ");
-                    String fechaNaciMedico = scanner.nextLine();
+                    System.out.print("Ingresa el año de nacimiento del médico: ");
+                    int anioMedico = scanner.nextInt();
 
-                    System.out.println("Ingresa el telefono del medico: ");
+                    System.out.print("Ingresa el mes de nacimiento del médico: ");
+                    int mesMedico = scanner.nextInt();
+
+                    System.out.print("Ingresa el día de nacimiento del médico: ");
+                    int diaMedico = scanner.nextInt();
+
+                    LocalDate fechaNaciMedico = LocalDate.of(anioMedico, mesMedico, diaMedico);
+
+                    System.out.print("Ingresa el telefono del medico: ");
                     String telMedico = scanner.nextLine();
 
-                    System.out.println("Ingresa el rfc del medico: ");
+                    System.out.print("Ingresa el rfc del medico: ");
                     String rfcMedico = scanner.nextLine();
 
-                    String idMedico= hospital.generarIdMedico(apellidoMedico,fechaNaciMedico);
+                    String idMedico= hospital.generarIdMedico(apellidoMedico, String.valueOf(fechaNaciMedico.getYear()));
 
                     Medico medico=new Medico(idMedico,nombreMedico,apellidoMedico,fechaNaciMedico,telMedico,rfcMedico);
                     hospital.registrarMedico(medico);
@@ -86,14 +105,14 @@ public class Main {
                     System.out.println("Medico registrado exitosamente :D");
                     break;
                 case 3:
-                    System.out.println("--Seleccionaste la opción de registrar consultorio--");
+                    System.out.println("\n--Seleccionaste la opción de registrar consultorio--");
 
                     String idConsultorio=hospital.generarIdConsultorio();
 
-                    System.out.println("Ingrese el piso del consultorio: ");
+                    System.out.print("\nIngrese el piso del consultorio: ");
                     int pisoConsultorio =scanner.nextInt();
 
-                    System.out.println("Ingrese el numero de consultorio: ");
+                    System.out.print("Ingrese el numero de consultorio: ");
                     int numeroConsultorio = scanner.nextInt();
 
                     Consultorio consultorio=new Consultorio(idConsultorio,pisoConsultorio,numeroConsultorio);
@@ -102,25 +121,54 @@ public class Main {
                     System.out.println("Consultorio registrado exitosamente :D");
                     break;
                 case 4:
-                    System.out.println("--Seleccionaste la opción de registrar consulta--");
+                    System.out.println("\n--Seleccionaste la opción de registrar consulta--");
+
+                    //int id = 1;
+                    System.out.print("\nIngresa el día de la consnulta deseada: ");
+                    int diaConsulta = scanner.nextInt();
+
+                    System.out.print("Ingresar el mes de la consullta deseada: ");
+                    int mesConsulta = scanner.nextInt();
+
+                    System.out.print("Ingresa el año de la consulta deseada: ");
+                    int anioConsulta = scanner.nextInt();
+
+                    System.out.print("Ingresa la hora de la consulta: ");
+                    int horaConsulta = scanner.nextInt();
+
+                    System.out.print("Ingresa los minutos de la consulta: ");
+                    int minutosConsulta = scanner.nextInt();
+
+                    LocalDateTime fechaConsulta = LocalDateTime.of(anioConsulta, mesConsulta, diaConsulta, horaConsulta, minutosConsulta);
+
+                    System.out.print("Ingresa el id del paciente: ");
+                    String pacienteId = scanner.nextLine();
+
+                    Paciente pacienteConsulta = hospital.obtenerPacientePorId(pacienteId);
+
+                    System.out.print("Ingresa el id del medico: ");
+                    String medicoId = scanner.nextLine();
+
+                    Medico medicoConsulta = hospital.obtenerMedicoPorId(medicoId);
+
                     break;
                 case 5:
-                    System.out.println("--Seleccionaste la opción de mostrar pacientes--");
+                    System.out.println("\n--Seleccionaste la opción de mostrar pacientes--");
                     hospital.mostrarPacientes();
                     break;
                 case 6:
-                    System.out.println("--Seleccionaste la opción de mostrar medicos--");
+                    System.out.println("\n--Seleccionaste la opción de mostrar medicos--");
                     hospital.mostrarMedicos();
                     break;
                 case 7:
-                    System.out.println("--Seleccionaste la opción de mostrar consultas--");
+                    System.out.println("\n--Seleccionaste la opción de mostrar consultas--");
                     return;
                 case 8:
-                    System.out.println("--Seleccionaste la opción de mostrar consultorios--");
+                    System.out.println("\n--Seleccionaste la opción de mostrar consultorios--");
                     hospital.mostrarConsultorio();
                     break;
                 case 9:
-                    System.out.println("--Seleccionaste la opción de buscar Paciente mediante la ID--");
+                    System.out.println("\n--Seleccionaste la opción de buscar Paciente mediante la ID--");
 
                     System.out.println("\nIngresa el Id del paciente que deseas buscar");
                     String idPaciente = scanner.nextLine();
@@ -128,7 +176,7 @@ public class Main {
                     hospital.mostrarPacienteID(idPaciente);
                     break;
                 case 10:
-                    System.out.println("--Seleccionaste la opción de buscar medicos mediante la ID--");
+                    System.out.println("\n--Seleccionaste la opción de buscar medicos mediante la ID--");
 
                     System.out.println("Ingresa el Id del medico que deseas buscar: ");
                     String idMedico2 = scanner.nextLine();
@@ -136,7 +184,7 @@ public class Main {
                     hospital.mostrarMedicoPorId(idMedico2);
                     break;
                 case 11:
-                    System.out.println("--Seleccionaste la opción de buscar consultorio mediante la ID--");
+                    System.out.println("\n--Seleccionaste la opción de buscar consultorio mediante la ID--");
 
                     System.out.println("Ingresa el Id del consultorio que deseas buscar: ");
                     String idConsultorio2= scanner.nextLine();
@@ -144,7 +192,7 @@ public class Main {
                     hospital.mostrarConsultorioPorId(idConsultorio2);
                     break;
                 case 12:
-                    System.out.println("--Seleccionaste la opcion de salir--");
+                    System.out.println("\n--Seleccionaste la opcion de salir--");
                     System.out.println("*HASTA LUEGO*");
                     return;
             }
