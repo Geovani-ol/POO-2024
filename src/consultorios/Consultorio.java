@@ -24,7 +24,7 @@ public class Consultorio {
         return numeroConsultorio;
     }
     public String mostrarConsultorio() {
-        return String.format("Id: %s Piso: %d Num. Consultorio: %d", getId(), getPiso(), getNumeroConsultorio());
+        return String.format("Id: %s  |  Piso: %d  |  Num. Consultorio: %d", getId(), getPiso(), getNumeroConsultorio());
     }
 
 

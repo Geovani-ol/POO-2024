@@ -7,7 +7,6 @@ import pacientes.Paciente;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Random;
 
 public class Hospital {
@@ -63,18 +62,29 @@ public class Hospital {
     }
 
     public void mostrarConsultorio(){
-        System.out.println("** Consultorios del Hospital **");
+        System.out.println("\n** Consultorios del Hospital **");
         for (Consultorio consultorio : this.listaConsultorios) {
             System.out.println(consultorio.mostrarConsultorio());
         }
     }
 
+    public void mostrarConsultas() {
+        System.out.println("\n** Consultas del Hospital");
+        for (Consulta consulta : this.listaConsultas) {
+            System.out.println(consulta.mostrarDatos());
+        }
+    }
+
     public Paciente obtenerPacientePorId(String idPaciente) {
-        return listaPacientes.stream().filter(p -> p.getId().equals(idPaciente)).findFirst().orElse(null);
+        return listaPacientes.stream().filter(paciente -> paciente.getId().equals(idPaciente)).findFirst().orElse(null);
     }
 
     public Medico obtenerMedicoPorId(String idMedico) {
-        return listaMedicos.stream().filter(m -> m.getId().equals(idMedico)).findFirst().orElse(null);
+        return listaMedicos.stream().filter(medico -> medico.getId().equals(idMedico)).findFirst().orElse(null);
+    }
+
+    public Consultorio obtenerConsultorioPorId(String idConsultorio) {
+        return listaConsultorios.stream().filter(consultorio -> consultorio.getId().equals(idConsultorio)).findFirst().orElse(null);
     }
 
     public void mostrarPacienteID(String idPaciente) {
@@ -84,6 +94,26 @@ public class Hospital {
             System.out.println(paciente.mostrarDatos());
         } else {
             System.out.println("No se encontro el paciente");
+        }
+    }
+
+    public void mostrarMedicoPorId(String idMedico){
+        Medico medico = obtenerMedicoPorId(idMedico);
+
+        if (medico != null) {
+            System.out.println(medico.mostrarMedico());
+        }else{
+            System.out.println("No se encontro el medico");
+        }
+    }
+
+    public void mostrarConsultorioPorId(String idConsultorio){
+        Consultorio consultorio = obtenerConsultorioPorId(idConsultorio);
+
+        if (consultorio != null) {
+            System.out.println(consultorio.mostrarConsultorio());
+        }else {
+            System.out.println("No se encontro el consultorio");
         }
     }
 
@@ -122,23 +152,5 @@ public class Hospital {
         int longitudConsultorio = this.listaConsultorios.size() + 1;
         int NumAleatorio = random.nextInt(500000);
         return String.format("C%d%d%d%d",longitudConsultorio,diaActual,anioActual,NumAleatorio);
-    }
-
-    public void mostrarMedicoPorId(String id){
-        Optional<Medico> medicoEncontrado=this.listaMedicos.stream().filter(medico -> medico.getId().equals(id)).findFirst();
-        if (medicoEncontrado.isPresent()) {
-            System.out.println(medicoEncontrado.get().mostrarMedico());
-        }else{
-            System.out.println("No se encontro el medico");
-        }
-    }
-
-    public void mostrarConsultorioPorId(String id){
-        Optional<Consultorio> consultorioEncontrado =listaConsultorios.stream().filter(consultorio -> consultorio.getId().equals(id)).findFirst();
-        if (consultorioEncontrado.isPresent()) {
-            System.out.println(consultorioEncontrado.get().mostrarConsultorio());
-        }else {
-            System.out.println("No se encontro el consultorio");
-        }
     }
 }

@@ -37,7 +37,10 @@ public class Consulta {
         return medico;
     }
 
-    public Consultorio getConsultorio() {
-        return consultorio;}
+    public Consultorio getConsultorio() { return consultorio; }
 
+    public String mostrarDatos() {
+        return String.format("Id: %d  |  Fecha Hora: %s  |  Paciente: %s  |  Médico: %s  |  Consultorio: %s",
+                getId(), getFechaHora(), getPaciente(), getMedico(), getConsultorio());
+    }
 }

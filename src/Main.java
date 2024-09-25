@@ -1,3 +1,4 @@
+import consultas.Consulta;
 import consultorios.Consultorio;
 import hospital.Hospital;
 import medicos.Medico;
@@ -59,6 +60,8 @@ public class Main {
                     System.out.print("Ingresa el tipo de sangre: ");
                     String tipoSangre = scanner.nextLine();
 
+                    scanner.nextLine();
+
                     System.out.print("Ingresa el sexo: ");
                     String sexo2 = scanner.nextLine();
                     char sexo = sexo2.charAt(0);
@@ -69,7 +72,7 @@ public class Main {
                     Paciente paciente = new Paciente(id, nombre, apellido, fechaNacimiento, tipoSangre, sexo, telefono);
                     hospital.registrarPacientes(paciente);
 
-                    System.out.println("Paciente registrado exitosamente :D");
+                    System.out.println("Paciente registrado exitosamente");
                     break;
                 case 2:
                     System.out.println("\n--Seleccionaste la opción de registrar medicos--");
@@ -94,15 +97,17 @@ public class Main {
                     System.out.print("Ingresa el telefono del medico: ");
                     String telMedico = scanner.nextLine();
 
+                    scanner.nextLine();
+
                     System.out.print("Ingresa el rfc del medico: ");
                     String rfcMedico = scanner.nextLine();
 
                     String idMedico= hospital.generarIdMedico(apellidoMedico, String.valueOf(fechaNaciMedico.getYear()));
 
-                    Medico medico=new Medico(idMedico,nombreMedico,apellidoMedico,fechaNaciMedico,telMedico,rfcMedico);
+                    Medico medico = new Medico(idMedico,nombreMedico,apellidoMedico,fechaNaciMedico,telMedico,rfcMedico);
                     hospital.registrarMedico(medico);
 
-                    System.out.println("Medico registrado exitosamente :D");
+                    System.out.println("Medico registrado exitosamente");
                     break;
                 case 3:
                     System.out.println("\n--Seleccionaste la opción de registrar consultorio--");
@@ -115,15 +120,16 @@ public class Main {
                     System.out.print("Ingrese el numero de consultorio: ");
                     int numeroConsultorio = scanner.nextInt();
 
-                    Consultorio consultorio=new Consultorio(idConsultorio,pisoConsultorio,numeroConsultorio);
+                    Consultorio consultorio = new Consultorio(idConsultorio,pisoConsultorio,numeroConsultorio);
                     hospital.registrarConsultorio(consultorio);
 
-                    System.out.println("Consultorio registrado exitosamente :D");
+                    System.out.println("Consultorio registrado exitosamente");
                     break;
                 case 4:
                     System.out.println("\n--Seleccionaste la opción de registrar consulta--");
 
-                    //int id = 1;
+                    int idConsulta = 1;
+
                     System.out.print("\nIngresa el día de la consnulta deseada: ");
                     int diaConsulta = scanner.nextInt();
 
@@ -146,11 +152,22 @@ public class Main {
 
                     Paciente pacienteConsulta = hospital.obtenerPacientePorId(pacienteId);
 
+                    scanner.nextLine();
+
                     System.out.print("Ingresa el id del medico: ");
                     String medicoId = scanner.nextLine();
 
                     Medico medicoConsulta = hospital.obtenerMedicoPorId(medicoId);
 
+                    System.out.print("Ingresa el id del consultorio: ");
+                    String consultorioId = scanner.nextLine();
+
+                    Consultorio consultorioConsulta = hospital.obtenerConsultorioPorId(consultorioId);
+
+                    Consulta consulta = new Consulta(idConsulta, fechaConsulta, pacienteConsulta, medicoConsulta, consultorioConsulta);
+                    hospital.registrarConsulta(consulta);
+
+                    System.out.println("Consulta registrada exitosamente");
                     break;
                 case 5:
                     System.out.println("\n--Seleccionaste la opción de mostrar pacientes--");
@@ -162,6 +179,7 @@ public class Main {
                     break;
                 case 7:
                     System.out.println("\n--Seleccionaste la opción de mostrar consultas--");
+                    hospital.mostrarConsultas();
                     return;
                 case 8:
                     System.out.println("\n--Seleccionaste la opción de mostrar consultorios--");

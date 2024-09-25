@@ -43,7 +43,7 @@ public class Medico {
         return rfc;
     }
     public String mostrarMedico() {
-        return String.format("ID: %s Nombre: %s Apellido: %s Fecha Nacimiento: %s Num. Telefono: %s Rfc: %s",
+        return String.format("ID: %s  |  Nombre: %s  |  Apellido: %s  |  Fecha Nacimiento: %s  |  Num. Telefono: %s  |  Rfc: %s",
                 getId(), getNombre(), getApellidos(), getFechaNacimiento(), getTelefono(), getRfc());
     }
 
