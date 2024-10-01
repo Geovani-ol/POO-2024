@@ -70,7 +70,7 @@ public class Hospital {
     }
 
     public void mostrarConsultas() {
-        System.out.println("\n** Consultas del Hospital");
+        System.out.println("\n** Consultas del Hospital **");
         for (Consulta consulta : this.listaConsultas) {
             System.out.println(consulta.mostrarDatos());
         }

@@ -23,8 +23,8 @@ public class Main {
             System.out.println("4.- Registrar Consulta");
             System.out.println("5.- Mostrar Pacientes");
             System.out.println("6.- Mostrar Medicos");
-            System.out.println("7.- Mostrar Consultas");
-            System.out.println("8.- Mostrar Consultorio");
+            System.out.println("7.- Mostrar Consultorios");
+            System.out.println("8.- Mostrar Consultas");
             System.out.println("9.- Buscar Paciente por Id");
             System.out.println("10. Buscar Medico por Id");
             System.out.println("11. Buscar Consultorio por Id");
@@ -154,6 +154,8 @@ public class Main {
 
                     Paciente pacienteConsulta = null;
 
+                    scanner.nextLine();
+
                     while (pacienteConsulta == null) {
                         System.out.print("Ingresa el id del paciente: ");
                         String pacienteId = scanner.nextLine();
@@ -161,11 +163,9 @@ public class Main {
                         pacienteConsulta = hospital.obtenerPacientePorId(pacienteId);
 
                         if (pacienteConsulta == null) {
-                            System.out.println("\n Paciente no encontrado, Intenta de nuevo\n");
+                            System.out.println("\nPaciente no encontrado, Intenta de nuevo\n");
                         }
                     }
-
-                    scanner.nextLine();
 
                     System.out.print("Ingresa el id del medico: ");
                     String medicoId = scanner.nextLine();
@@ -191,13 +191,13 @@ public class Main {
                     hospital.mostrarMedicos();
                     break;
                 case 7:
-                    System.out.println("\n--Seleccionaste la opción de mostrar consultas--");
-                    hospital.mostrarConsultas();
-                    return;
-                case 8:
                     System.out.println("\n--Seleccionaste la opción de mostrar consultorios--");
                     hospital.mostrarConsultorio();
                     break;
+                case 8:
+                    System.out.println("\n--Seleccionaste la opción de mostrar consultas--");
+                    hospital.mostrarConsultas();
+                    return;
                 case 9:
                     System.out.println("\n--Seleccionaste la opción de buscar Paciente mediante la ID--");
 

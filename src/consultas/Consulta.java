@@ -40,7 +40,15 @@ public class Consulta {
     public Consultorio getConsultorio() { return consultorio; }
 
     public String mostrarDatos() {
-        return String.format("Id: %s  |  Fecha: %s  |  Paciente: %s  |  Médico: %s  |  Consultorio: %s",
-                getId(), getFechaHora(), getPaciente(), getMedico(), getConsultorio());
+        return String.format("Id: %s  |  Fecha: %s  |  Id Paciente: %s  |  Paciente: %s  |  Id Medico: %s  |  Médico: %s  |  Piso Consultorio: %d  |  Numero Consultorio: %d",
+                getId(),
+                getFechaHora(),
+                paciente.getId(),
+                paciente.getNombre(),
+                medico.getId(),
+                medico.getNombre(),
+                consultorio.getPiso(),
+                consultorio.getNumeroConsultorio()
+        );
     }
 }
