@@ -7,13 +7,13 @@ import pacientes.Paciente;
 import java.time.LocalDateTime;
 
 public class Consulta {
-    public int id;
+    public String id;
     public LocalDateTime fechaHora;
     public Paciente paciente;
     public Medico medico;
     public Consultorio consultorio;
 
-    public Consulta(int id, LocalDateTime fechaHora, Paciente paciente, Medico medico, Consultorio consultorio) {
+    public Consulta(String id, LocalDateTime fechaHora, Paciente paciente, Medico medico, Consultorio consultorio) {
         this.id = id;
         this.fechaHora = fechaHora;
         this.paciente = paciente;
@@ -21,7 +21,7 @@ public class Consulta {
         this.consultorio = consultorio;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -40,7 +40,7 @@ public class Consulta {
     public Consultorio getConsultorio() { return consultorio; }
 
     public String mostrarDatos() {
-        return String.format("Id: %d  |  Fecha Hora: %s  |  Paciente: %s  |  Médico: %s  |  Consultorio: %s",
+        return String.format("Id: %s  |  Fecha: %s  |  Paciente: %s  |  Médico: %s  |  Consultorio: %s",
                 getId(), getFechaHora(), getPaciente(), getMedico(), getConsultorio());
     }
 }

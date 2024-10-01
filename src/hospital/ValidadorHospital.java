@@ -2,6 +2,7 @@ package hospital;
 
 import consultas.Consulta;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -26,4 +27,13 @@ public class ValidadorHospital {
         return true;
     }
 
+    public boolean validarFechaCorrecta(LocalDateTime fechaDeseada) {
+        LocalDateTime fechaActual = LocalDateTime.now();
+
+        if (fechaDeseada.isBefore(fechaActual)) {
+            return false;
+        }
+
+        return true;
+    }
 }

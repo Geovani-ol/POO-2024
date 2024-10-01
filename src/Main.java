@@ -128,7 +128,7 @@ public class Main {
                 case 4:
                     System.out.println("\n--Seleccionaste la opción de registrar consulta--");
 
-                    int idConsulta = 1;
+                    String idConsulta = hospital.generarIdConsulta();
 
                     System.out.print("\nIngresa el día de la consnulta deseada: ");
                     int diaConsulta = scanner.nextInt();
@@ -147,10 +147,23 @@ public class Main {
 
                     LocalDateTime fechaConsulta = LocalDateTime.of(anioConsulta, mesConsulta, diaConsulta, horaConsulta, minutosConsulta);
 
-                    System.out.print("Ingresa el id del paciente: ");
-                    String pacienteId = scanner.nextLine();
+                    if (!hospital.validarFechaConsulta(fechaConsulta)) {
+                        System.out.println("La fecha no puede estar en el pasado");
+                        return;
+                    }
 
-                    Paciente pacienteConsulta = hospital.obtenerPacientePorId(pacienteId);
+                    Paciente pacienteConsulta = null;
+
+                    while (pacienteConsulta == null) {
+                        System.out.print("Ingresa el id del paciente: ");
+                        String pacienteId = scanner.nextLine();
+
+                        pacienteConsulta = hospital.obtenerPacientePorId(pacienteId);
+
+                        if (pacienteConsulta == null) {
+                            System.out.println("\n Paciente no encontrado, Intenta de nuevo\n");
+                        }
+                    }
 
                     scanner.nextLine();
 
@@ -159,7 +172,7 @@ public class Main {
 
                     Medico medicoConsulta = hospital.obtenerMedicoPorId(medicoId);
 
-                    System.out.print("Ingresa el id del consultorio: ");
+                    System.out.print("Ingresa el id del consultorio: "); 
                     String consultorioId = scanner.nextLine();
 
                     Consultorio consultorioConsulta = hospital.obtenerConsultorioPorId(consultorioId);

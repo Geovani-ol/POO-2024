@@ -6,6 +6,7 @@ import medicos.Medico;
 import pacientes.Paciente;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -152,5 +153,15 @@ public class Hospital {
         int longitudConsultorio = this.listaConsultorios.size() + 1;
         int NumAleatorio = random.nextInt(500000);
         return String.format("C%d%d%d%d",longitudConsultorio,diaActual,anioActual,NumAleatorio);
+    }
+
+    public String generarIdConsulta() {
+        int diaActual = LocalDate.now().getDayOfMonth();
+        int numeroAleatorio = random.nextInt(100000 - 50) + 50;
+        return String.format("CO-%d-%d-%d", listaConsultas.size() + 1, numeroAleatorio, diaActual);
+    }
+
+    public boolean validarFechaConsulta(LocalDateTime fechaDeseada) {
+        return this.validador.validarFechaCorrecta(fechaDeseada);
     }
 }
