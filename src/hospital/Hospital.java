@@ -164,4 +164,16 @@ public class Hospital {
     public boolean validarFechaConsulta(LocalDateTime fechaDeseada) {
         return this.validador.validarFechaCorrecta(fechaDeseada);
     }
+
+    public boolean validarTelefonoPaciente(String telefono) {
+        return this.validador.validarTelefonoPaciente(telefono, this.listaPacientes);
+    }
+
+    public boolean validarTelefonoMedico(String telefono) {
+        return this.validador.validarTelefonoMedico(telefono, this.listaMedicos);
+    }
+
+    public boolean validarRFCMedico(String rfc) {
+        return this.validador.validarRFCMedico(rfc, this.listaMedicos);
+    }
 }
