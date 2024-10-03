@@ -3,19 +3,10 @@ package usuarios.medicos;
 import java.time.LocalDate;
 
 public class Medico {
-    public String id;
-    public String nombre;
-    public String apellidos;
-    public LocalDate fechaNacimiento;
-    private String telefono;
     private String rfc;
 
     public Medico(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String rfc) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.fechaNacimiento = fechaNacimiento;
-        this.telefono = telefono;
+        super(id, nombre, apellidos, fechaNacimiento, telefono);
         this.rfc = rfc;
     }
 
