@@ -1,24 +1,17 @@
 package usuarios.pacientes;
 
+import usuarios.Usuario;
+
 import java.time.LocalDate;
 
-public class Paciente {
-    public String id;
-    public String nombre;
-    public String apellidos;
-    public LocalDate fechaNacimiento;
+public class Paciente extends Usuario {
     public String tipoSangre;
     public char sexo;
-    private String telefono;
 
     public Paciente(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String tipoSangre, char sexo, String telefono) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.fechaNacimiento = fechaNacimiento;
+        super(id, nombre, apellidos, fechaNacimiento, telefono);
         this.tipoSangre = tipoSangre;
         this.sexo = sexo;
-        this.telefono = telefono;
     }
 
     // Getters

@@ -1,8 +1,10 @@
 package usuarios.medicos;
 
+import usuarios.Usuario;
+
 import java.time.LocalDate;
 
-public class Medico {
+public class Medico  extends Usuario {
     private String rfc;
 
     public Medico(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String rfc) {
