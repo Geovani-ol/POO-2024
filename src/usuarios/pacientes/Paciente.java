@@ -1,4 +1,4 @@
-package pacientes;
+package usuarios.pacientes;
 
 import java.time.LocalDate;
 

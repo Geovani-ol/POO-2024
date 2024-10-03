@@ -2,13 +2,15 @@ package hospital;
 
 import consultas.Consulta;
 import consultorios.Consultorio;
-import medicos.Medico;
-import pacientes.Paciente;
+import usuarios.medicos.Medico;
+import usuarios.pacientes.Paciente;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Hospital {
 
@@ -130,7 +132,7 @@ public class Hospital {
     }
 
     public String generarIdMedico(String apellidoMedico, String fechaNaciMedico){
-        //M-{Primeras 2 letras de su apellido} - {ultimo dígito de su año de nacimiento} - {año actual} - {numero aleatorio entre 50 y 700000} - {longitud de la lista de medicos + 1}
+        //M-{Primeras 2 letras de su apellido} - {ultimo dígito de su año de nacimiento} - {año actual} - {numero aleatorio entre 50 y 700000} - {longitud de la lista de usuarios.medicos + 1}
         LocalDate fecha = LocalDate.now();
         int anioActual = fecha.getYear();
         int longitudMedicoMasUno = this.listaMedicos.size() + 1;
@@ -175,5 +177,42 @@ public class Hospital {
 
     public boolean validarRFCMedico(String rfc) {
         return this.validador.validarRFCMedico(rfc, this.listaMedicos);
+    }
+
+    public void mostrarConsultasPorPaciente(String idPaciente) {
+        List<Consulta> consultasDelPaciente = listaConsultas.stream()
+                .filter(c -> c.getPaciente().getId().equals(idPaciente))
+                .toList();
+
+        if (consultasDelPaciente.isEmpty()) {
+            System.out.println("No se encontraron consultas: ");
+        } else {
+            System.out.println("Consultas registradas: ");
+            for (Consulta consulta : consultasDelPaciente) {
+                System.out.println(consulta.mostrarDatos());
+            }
+        }
+    }
+
+    public void mostrarConsultasPorMedico(String idMedico) {
+        List<Consulta> consultasDelMedico = listaConsultas.stream()
+                .filter(c -> c.getMedico().getId().equals(idMedico))
+                .toList();
+
+        if (consultasDelMedico.isEmpty()) {
+            System.out.println("No se encontraron consultas: ");
+        } else {
+            System.out.println("Consultas registradas: ");
+            for (Consulta consulta : consultasDelMedico) {
+                System.out.println(consulta.mostrarDatos());
+            }
+        }
+    }
+
+    public List<String> obtenerNombresPacientesPorMedico(String idMedico) {
+        return listaConsultas.stream()
+                .filter(c -> c.getMedico().getId().equals(idMedico))
+                .map(c -> c.getPaciente().mostrarDatos().concat("\n"))
+                .collect(Collectors.toList());
     }
 }

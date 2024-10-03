@@ -1,4 +1,4 @@
-package medicos;
+package usuarios.medicos;
 
 import java.time.LocalDate;
 
