@@ -51,7 +51,7 @@ public class Menu {
                 }
             } else {
 
-                mostrarErorInicioSesion(intentosUsuario);
+                mostrarErrorInicioSesion(intentosUsuario);
                 intentosUsuario++;
                 System.out.println(intentosUsuario);
                 if (intentosUsuario == intentosMAXIMOS) {

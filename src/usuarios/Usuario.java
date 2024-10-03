@@ -8,6 +8,7 @@ public class Usuario {
     public String apellidos;
     public LocalDate fechaNacimiento;
     public String telefono;
+    public String rol;
 
     public Usuario(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono) {
         this.id = id;
