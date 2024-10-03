@@ -194,7 +194,10 @@ public class Menu {
                         }
                     }
 
-                    Paciente paciente = new Paciente(id, nombre, apellido, fechaNacimiento, tipoSangre, sexo, telefono);
+                    System.out.println("Ingrese la contraseña del paciente");
+                    String contraseniaPaciente = scanner.nextLine();
+
+                    Paciente paciente = new Paciente(id, nombre, apellido, fechaNacimiento, tipoSangre, sexo, telefono, contraseniaPaciente);
                     hospital.registrarPacientes(paciente);
 
                     System.out.println("Paciente registrado exitosamente");
@@ -235,7 +238,7 @@ public class Menu {
 
                     while (rfcMedico == null) {
                         System.out.print("Ingresa el rfc del medico: ");
-                        rfcMedico = scanner.nextLine();
+                        rfcMedico = scanner.nextLine(); 
 
                         if (!hospital.validarRFCMedico(rfcMedico)) {
                             System.out.println("\nYa exixte un medico con el mismo rfc, Intente de nuevo");
@@ -243,9 +246,12 @@ public class Menu {
                         }
                     }
 
+                    System.out.println("Ingrese la contraseña del medico");
+                    String contraseniaMedico = scanner.nextLine();
+
                     String idMedico= hospital.generarIdMedico(apellidoMedico, String.valueOf(fechaNaciMedico.getYear()));
 
-                    Medico medico = new Medico(idMedico,nombreMedico,apellidoMedico,fechaNaciMedico,telMedico,rfcMedico);
+                    Medico medico = new Medico(idMedico,nombreMedico,apellidoMedico,fechaNaciMedico,telMedico,rfcMedico, contraseniaMedico);
                     hospital.registrarMedico(medico);
 
                     System.out.println("Medico registrado exitosamente");

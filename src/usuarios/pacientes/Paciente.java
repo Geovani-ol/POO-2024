@@ -1,6 +1,7 @@
 package usuarios.pacientes;
 
 import usuarios.Usuario;
+import usuarios.utils.Rol;
 
 import java.time.LocalDate;
 
@@ -8,8 +9,8 @@ public class Paciente extends Usuario {
     public String tipoSangre;
     public char sexo;
 
-    public Paciente(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String tipoSangre, char sexo, String telefono) {
-        super(id, nombre, apellidos, fechaNacimiento, telefono);
+    public Paciente(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String tipoSangre, char sexo, String telefono, String contrasenia) {
+        super(id, nombre, apellidos, fechaNacimiento, telefono, contrasenia, Rol.PACIENTE);
         this.tipoSangre = tipoSangre;
         this.sexo = sexo;
     }
