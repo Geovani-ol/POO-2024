@@ -4,6 +4,7 @@ import consultas.Consulta;
 import consultorios.Consultorio;
 import usuarios.medicos.Medico;
 import usuarios.pacientes.Paciente;
+import usuarios.administradores.Administrador;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class Hospital {
     public ArrayList<Medico> listaMedicos = new ArrayList<>();
     public ArrayList<Consulta> listaConsultas = new ArrayList<>();
     public ArrayList<Consultorio> listaConsultorios = new ArrayList<>();
+    public ArrayList<Administrador> listaAdministradores = new ArrayList<>();
     private ValidadorHospital validador = new ValidadorHospital();
     Random random = new Random();
 
@@ -50,6 +52,10 @@ public class Hospital {
         this.listaConsultorios.add(consultorio);
     }
 
+    public void registrarAdministrador(Administrador admin) {
+        this.listaAdministradores.add(admin);
+    }
+
     public void mostrarPacientes() {
         System.out.println("\n** Pacientes del Hospital **");
         for (Paciente paciente : this.listaPacientes) {
@@ -75,6 +81,12 @@ public class Hospital {
         System.out.println("\n** Consultas del Hospital **");
         for (Consulta consulta : this.listaConsultas) {
             System.out.println(consulta.mostrarDatos());
+        }
+    }
+
+    public void mostrarAdministradores() {
+        for(Administrador administrador : this.listaAdministradores) {
+            System.out.println(administrador.mostrarDatos());
         }
     }
 
@@ -163,6 +175,22 @@ public class Hospital {
         return String.format("CO-%d-%d-%d", listaConsultas.size() + 1, numeroAleatorio, diaActual);
     }
 
+    public String generarIdAdmin(String apellido, String fechaNacimiento) {
+        LocalDate fecha = LocalDate.now();
+        Random random = new Random();
+        String ap = apellido.substring(0, 2).toUpperCase();
+        char ultimoDigito = fechaNacimiento.charAt(fechaNacimiento.length()-1);
+        int yearActual = fecha.getYear();
+        int aleatorio = random.nextInt(51,70001);
+        int lista = listaAdministradores.size()+1;
+        return String.format("A-%s-%s-%d-%d-%d",
+                ap,
+                ultimoDigito,
+                yearActual,
+                aleatorio,
+                lista);
+    }
+
     public boolean validarFechaConsulta(LocalDateTime fechaDeseada) {
         return this.validador.validarFechaCorrecta(fechaDeseada);
     }
@@ -214,5 +242,13 @@ public class Hospital {
                 .filter(c -> c.getMedico().getId().equals(idMedico))
                 .map(c -> c.getPaciente().mostrarDatos().concat("\n"))
                 .collect(Collectors.toList());
+    }
+
+    public Administrador obtenerRfcAdmin(String rfc) {
+        return listaAdministradores.stream().filter(a -> a.getRfc().equals(rfc)).findFirst().orElse(null);
+    }
+
+    public Administrador obtenerTelefonoAdmin(String telefonoAdmin) {
+        return listaAdministradores.stream().filter(a -> a.getTelefono().equals(telefonoAdmin)).findFirst().orElse(null);
     }
 }

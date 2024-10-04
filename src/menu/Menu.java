@@ -5,6 +5,7 @@ import consultorios.Consultorio;
 import hospital.Hospital;
 import usuarios.medicos.Medico;
 import usuarios.pacientes.Paciente;
+import usuarios.administradores.Administrador;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -144,7 +145,9 @@ public class Menu {
             System.out.println("9.- Buscar Paciente por Id");
             System.out.println("10. Buscar Medico por Id");
             System.out.println("11. Buscar Consultorio por Id");
-            System.out.println("12. Salir");
+            System.out.println("12. Registrar administrador");
+            System.out.println("13. Mostrar administradores");
+            System.out.println("14. Salir");
 
             System.out.print("Selecciona una opción: ");
             int opcion = scanner.nextInt();
@@ -390,6 +393,70 @@ public class Menu {
                     hospital.mostrarConsultorioPorId(idConsultorio2);
                     break;
                 case 12:
+                    System.out.println("\nAccediste a la opcion de registrar un administrador");
+                    scanner.nextLine();
+
+                    System.out.println("Ingresa el nombre: ");
+                    String nombreAdmin = scanner.nextLine();
+
+
+                    System.out.println("Ingresa los apellidos: ");
+                    String apellidosAdmin = scanner.nextLine();
+
+                    System.out.println("Ingresa la contrasenia: ");
+                    String contraseniaAdmin = scanner.nextLine();
+
+                    System.out.println("Ingresa el año de nacimiento: ");
+                    int anioNacimientoAdmin = scanner.nextInt();
+
+                    System.out.println("Ingresa el mes de nacimiento: ");
+                    int mesNacimientoAdmin = scanner.nextInt();
+
+                    System.out.println("Ingresa el dia de nacimiento: ");
+                    int diaNacimientoAdmin = scanner.nextInt();
+                    scanner.nextLine();
+
+                    LocalDate fechaNacimientoAdmin = LocalDate.of(anioNacimientoAdmin,mesNacimientoAdmin,diaNacimientoAdmin);
+
+                    String telefonoAdmin = null;
+                    while(telefonoAdmin == null) {
+                        System.out.println("Ingresa el telefono: ");
+                        telefonoAdmin = scanner.nextLine();
+                        Administrador telefonoAdmin1 = hospital.obtenerTelefonoAdmin(telefonoAdmin);
+                        if(telefonoAdmin1 != null) {
+                            System.out.println("\nYa existe ese numero de telefono, intenta con otro\n");
+                            telefonoAdmin = null;
+                        }
+                    }
+
+                    String rfcAdmin = null;
+                    while(rfcAdmin == null) {
+                        System.out.println("Ingresa el RFC: ");
+                        rfcAdmin = scanner.nextLine();
+                        Administrador rfcAdmin1 = hospital.obtenerRfcAdmin(rfcAdmin);
+                        if(rfcAdmin1 != null) {
+                            System.out.println("\nYa existe ese RFC, intenta con otro\n");
+                            rfcAdmin = null;
+                        }
+                    }
+
+                    System.out.println("Ingresa tu sueldo quincenal: ");
+                    double sueldo = scanner.nextDouble();
+
+                    System.out.println("Ingresa los anios que llevas laborando: ");
+                    int antiguedad = scanner.nextInt();
+
+                    String idAdmin = hospital.generarIdAdmin(apellidosAdmin,String.valueOf(fechaNacimientoAdmin));
+
+                    Administrador administrador = new Administrador(idAdmin,nombreAdmin,apellidosAdmin,fechaNacimientoAdmin,telefonoAdmin, contraseniaAdmin,sueldo,rfcAdmin,antiguedad);
+                    hospital.registrarAdministrador(administrador);
+
+                    break;
+                case 13:
+//                    mostrar administradores
+                    hospital.mostrarAdministradores();
+                    break;
+                case 14:
                     System.out.println("\n--Seleccionaste la opcion de salir--");
                     System.out.println("*HASTA LUEGO*");
                     return;
