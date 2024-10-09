@@ -2,6 +2,7 @@ package hospital;
 
 import consultas.Consulta;
 import consultorios.Consultorio;
+import usuarios.Usuario;
 import usuarios.medicos.Medico;
 import usuarios.pacientes.Paciente;
 import usuarios.administradores.Administrador;
@@ -14,7 +15,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Hospital {
-
+    public ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     public ArrayList<Paciente> listaPacientes = new ArrayList<>();
     public ArrayList<Medico> listaMedicos = new ArrayList<>();
     public ArrayList<Consulta> listaConsultas = new ArrayList<>();
@@ -23,12 +24,20 @@ public class Hospital {
     private ValidadorHospital validador = new ValidadorHospital();
     Random random = new Random();
 
+    public Hospital() {
+        Administrador administrador = new Administrador("A-123456", "Geovani", "Lobato", LocalDate.of(1980, 7, 11), "4498326548", "Geo1107*", 50000, "GD156AD5AEF", 5);
+        this.listaUsuarios.add(administrador);
+        this.listaAdministradores.add(administrador);
+    }
+
     public void registrarPacientes(Paciente paciente) {
         this.listaPacientes.add(paciente);
+        this.listaUsuarios.add(paciente);
     }
 
     public void registrarMedico(Medico medico) {
         this.listaMedicos.add(medico);
+        this.listaUsuarios.add(medico);
     }
 
     public void registrarConsulta(Consulta consulta) {
@@ -54,6 +63,7 @@ public class Hospital {
 
     public void registrarAdministrador(Administrador admin) {
         this.listaAdministradores.add(admin);
+        this.listaUsuarios.add(admin);
     }
 
     public void mostrarPacientes() {
@@ -250,5 +260,15 @@ public class Hospital {
 
     public Administrador obtenerTelefonoAdmin(String telefonoAdmin) {
         return listaAdministradores.stream().filter(a -> a.getTelefono().equals(telefonoAdmin)).findFirst().orElse(null);
+    }
+
+    public Usuario validarInisioSesion(String idUsuario, String contrasenia) {
+        for (Usuario usuario : this.listaUsuarios) {
+            if (usuario.getId().equals(idUsuario) && usuario.getContrasenia().equals(contrasenia)) {
+                return usuario;
+            }
+        }
+
+        return null;
     }
 }

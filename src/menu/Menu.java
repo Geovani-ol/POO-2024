@@ -3,9 +3,11 @@ package menu;
 import consultas.Consulta;
 import consultorios.Consultorio;
 import hospital.Hospital;
+import usuarios.Usuario;
 import usuarios.medicos.Medico;
 import usuarios.pacientes.Paciente;
 import usuarios.administradores.Administrador;
+import usuarios.utils.Rol;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,12 +16,6 @@ import java.util.Scanner;
 public class Menu {
     private Scanner scanner = new Scanner(System.in);
     private Hospital hospital = new Hospital();
-    private final String USUARIO_PACIENTE = "juan123";
-    private final String CONTRASENIA_PACIENTE = "12345*";
-    private final String USUARIO_MEDICO = "ale123";
-    private final String CONTRASENIA_MEDICO = "54321*";
-    private final String USUARIO_ADMIN = "admin";
-    private final String CONTRASENIA_ADMIN = "admin1";
 
     public void login(){
 
@@ -29,36 +25,30 @@ public class Menu {
 
         while(intentosUsuario < intentosMAXIMOS) {
 
-            System.out.println("Ingresa el  usuario: ");
+            System.out.println("Ingresa el usuario: ");
             String usuario = scanner.nextLine();
 
             System.out.println("Ingresa la contrasenia: ");
             String contrasenia = scanner.nextLine();
 
-            if(usuario.equals(this.USUARIO_PACIENTE)) {
-                if(contrasenia.equals(this.CONTRASENIA_PACIENTE)) {
-                    this.mostrarMenuPaciente();
+            Usuario usuarioEnSesion = hospital.validarInisioSesion(usuario, contrasenia);
+
+            if (usuarioEnSesion instanceof Usuario) {
+                if (usuarioEnSesion.getRol() == Rol.PACIENTE) {
+                    Paciente pacienteEnSesion = (Paciente) usuarioEnSesion;
+                    this.mostrarMenuPaciente(pacienteEnSesion);
                     intentosUsuario = 0;
-                }
-            } else if(usuario.equals(this.USUARIO_MEDICO)){
-                if(contrasenia.equals(this.CONTRASENIA_MEDICO)) {
-                    this.mostrarMenuMedico();
+                } else if (usuarioEnSesion.getRol() == Rol.MEDICO) {
+                    Medico medicoEnSesion = (Medico) usuarioEnSesion;
+                    this.mostrarMenuMedico(medicoEnSesion);
                     intentosUsuario = 0;
-                }
-            } else if(usuario.equals(this.USUARIO_ADMIN)){
-                if(contrasenia.equals(this.CONTRASENIA_ADMIN)) {
-                    this.mostrarMenu();
+                } else {
+                    Administrador administradorEnSesion = (Administrador) usuarioEnSesion;
+                    this.mostrarMenuAdministrador(administradorEnSesion);
                     intentosUsuario = 0;
                 }
             } else {
-
-                mostrarErrorInicioSesion(intentosUsuario);
-                intentosUsuario++;
-                System.out.println(intentosUsuario);
-                if (intentosUsuario == intentosMAXIMOS) {
-                    System.out.println("\nHas excedido el numero de intentos permitidos\n");
-                    break;
-                }
+                intentosUsuario = mostrarErrorInicioSesion(intentosUsuario);
             }
         }
     }
@@ -68,10 +58,7 @@ public class Menu {
         return intentosUsuarios + 1;
     }
 
-    private void mostrarMenuPaciente(){
-        System.out.print("Ingresa tu Id: ");
-        String id = scanner.nextLine();
-
+    private void mostrarMenuPaciente(Paciente paciente){
         int opcion = 0;
         while(opcion !=2) {
             System.out.println("\n****BIENVENIDO****");
@@ -84,7 +71,7 @@ public class Menu {
                 case 1:
                     //ver consultas
                     System.out.println("\n--Seleccionaste la opción de ver consultas--");
-                    hospital.mostrarConsultasPorPaciente(id);
+                    hospital.mostrarConsultasPorPaciente(paciente.getId());
                     break;
                 case 2:
                     System.out.println("Saliendo del sistema");
@@ -97,7 +84,7 @@ public class Menu {
         scanner.nextLine();
     }
 
-    private void mostrarMenuMedico(){
+    private void mostrarMenuMedico(Medico medico){
         System.out.print("Ingresa tu Id: ");
         String id = scanner.nextLine();
         int opcion2 = 0;
@@ -130,7 +117,7 @@ public class Menu {
         scanner.nextLine();
     }
 
-    private void mostrarMenu() {
+    private void mostrarMenuAdministrador(Administrador administradorEnSesion) {
         while (true) {
             System.out.println("\n*** SISTEMA HOSPITAL ***");
             System.out.println("\n** Menu **");
