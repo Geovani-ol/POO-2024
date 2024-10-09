@@ -85,8 +85,6 @@ public class Menu {
     }
 
     private void mostrarMenuMedico(Medico medico){
-        System.out.print("Ingresa tu Id: ");
-        String id = scanner.nextLine();
         int opcion2 = 0;
         while(opcion2 !=3) {
             System.out.println("\n****BIENVENIDO****");
@@ -101,11 +99,11 @@ public class Menu {
                 case 1:
                     //ver consultas
                     System.out.println("\n--Seleccionaste la opción de ver consultas--");
-                    hospital.mostrarConsultasPorMedico(id);
+                    hospital.mostrarConsultasPorMedico(medico.getId());
                     break;
                 case 2:
 //                    ver mis usuarios.pacientes
-                    System.out.println(hospital.obtenerNombresPacientesPorMedico(id));
+                    System.out.println(hospital.obtenerNombresPacientesPorMedico(medico.getId()));
                     break;
                 case 3:
                     System.out.println("Saliendo del sistema");
@@ -142,7 +140,7 @@ public class Menu {
 
             switch (opcion) {
                 case 1:
-                    System.out.println("\n--Seleccionaste la opción de registrar usuarios.pacientes--");
+                    System.out.println("\n--Seleccionaste la opción de registrar pacientes--");
 
                     String id = hospital.generarIdPaciente();
 
@@ -189,6 +187,8 @@ public class Menu {
 
                     Paciente paciente = new Paciente(id, nombre, apellido, fechaNacimiento, tipoSangre, sexo, telefono, contraseniaPaciente);
                     hospital.registrarPacientes(paciente);
+
+                    hospital.listaUsuarios.add(paciente);
 
                     System.out.println("Paciente registrado exitosamente");
                     break;
@@ -243,6 +243,8 @@ public class Menu {
 
                     Medico medico = new Medico(idMedico,nombreMedico,apellidoMedico,fechaNaciMedico,telMedico,rfcMedico, contraseniaMedico);
                     hospital.registrarMedico(medico);
+
+                    hospital.listaUsuarios.add(medico);
 
                     System.out.println("Medico registrado exitosamente");
                     break;
@@ -438,9 +440,10 @@ public class Menu {
                     Administrador administrador = new Administrador(idAdmin,nombreAdmin,apellidosAdmin,fechaNacimientoAdmin,telefonoAdmin, contraseniaAdmin,sueldo,rfcAdmin,antiguedad);
                     hospital.registrarAdministrador(administrador);
 
+                    hospital.listaAdministradores.add(administrador);
+
                     break;
                 case 13:
-//                    mostrar administradores
                     hospital.mostrarAdministradores();
                     break;
                 case 14:
