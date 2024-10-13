@@ -10,7 +10,7 @@ public class Administrador extends Usuario {
     public Double sueldo;
     public int antiguedad;
 
-    public Administrador(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String direccion, String contrasenia, String rfc, Double sueldo, int antiguedad) {
+    public Administrador(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String direccion, String rfc, Double sueldo, int antiguedad, String contrasenia) {
         super(id, nombre, apellidos, fechaNacimiento, telefono, direccion, contrasenia, Rol.ADMINISTRADOR);
         this.rfc = rfc;
         this.sueldo = sueldo;
