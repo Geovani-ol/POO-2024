@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Cliente extends Usuario {
     public String curp;
 
-    public Cliente(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String direccion, String contrasenia, String curp) {
+    public Cliente(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String direccion, String curp, String contrasenia) {
         super(id, nombre, apellidos, fechaNacimiento, telefono, direccion, contrasenia, Rol.CLIENTE);
         this.curp = curp;
     }
