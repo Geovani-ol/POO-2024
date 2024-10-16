@@ -1,6 +1,7 @@
 package menu;
 
 import cine.Cine;
+import peliculas.Pelicula;
 import usuarios.Usuario;
 import usuarios.administradores.Administrador;
 import usuarios.clientes.Cliente;
@@ -119,9 +120,9 @@ public class Menu {
         while (true) {
             System.out.println("\n** Bienvenido Administrador " + administradorEnSesion.getNombre() + " **");
             System.out.println("1.- Registrar Administrador");
-            System.out.println("2.- Registrar Empleado");
+            System.out.println("2.- Registrar Pelicula");
             System.out.println("3.- Registrar Cliente");
-            System.out.println("4.- Mostrar Administradores");
+            System.out.println("4.- Mostrar Cartelera");
             System.out.println("5.- Mostrar Empleados");
             System.out.println("6.- Mostrar Clientes");
             System.out.println("7.- Salir");
@@ -180,12 +181,33 @@ public class Menu {
 
                     break;
                 case 2:
+                    System.out.println("Ingrese el título de la película:");
+                    String titulo = scanner.nextLine();
+
+                    System.out.println("Ingrese el género de la película:");
+                    String genero = scanner.nextLine();
+
+                    System.out.println("Ingrese la duración de la película:");
+                    String duracion = scanner.nextLine();
+
+                    System.out.println("Ingrese la clasificación de la película:");
+                    String clasificacion = scanner.nextLine();
+
+                    System.out.println("Ingrese la sinopsis de la película:");
+                    String sinopsis = scanner.nextLine();
+
+                    String idPelicula = cine.generarIdPelicula(titulo, duracion, clasificacion);
+
+                    Pelicula pelicula = new Pelicula(idPelicula, titulo, genero, duracion, clasificacion, sinopsis);
+                    cine.registrarPelicula(pelicula);
+
                     break;
                 case 3:
                     scanner.nextLine();
                     signup();
                     break;
                 case 4:
+                    cine.mostrarCartelera();
                     break;
                 case 5:
                     break;
