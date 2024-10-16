@@ -93,9 +93,9 @@ public class Cine {
 
     // Mostrar Cartelera
     public void mostrarCartelera(){
-        System.out.println("\n-- Cartelera de Peliculas --");
+        System.out.println("\n--- Cartelera de Peliculas ---\n");
 
-        int columnas = 2;
+        int columnas = 3;
         Cartelera cartelera = new Cartelera(listaPeliculas, columnas);
         cartelera.mostrarCartelera();
 

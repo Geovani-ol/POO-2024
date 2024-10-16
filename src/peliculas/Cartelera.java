@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Cartelera {
     private String[][] matrizCartelera;
-    private final int tamanoCelda = 20; // Tamaño fijo para cada celda
+    private final int tamanoCelda = 25, tamano = 10; // Tamaño fijo para cada celda
 
     // Constructor que toma el array de películas y el número de columnas deseadas
     public Cartelera(ArrayList<Pelicula> peliculas, int columnas) {
@@ -13,17 +13,17 @@ public class Cartelera {
         llenarCartelera(peliculas);
     }
 
-    // Método para llenar la matriz con los atributos de las películas
     private void llenarCartelera(ArrayList<Pelicula> peliculas) {
         int contador = 0;
         for (int i = 0; i < matrizCartelera.length; i++) {
             for (int j = 0; j < matrizCartelera[i].length; j++) {
                 if (contador < peliculas.size()) {
                     Pelicula pelicula = peliculas.get(contador);
-                    String contenidoCelda = ajustarTamano(pelicula.getTitulo(), tamanoCelda) + " " +
-                            ajustarTamano(pelicula.getDuracion(), tamanoCelda) + " " +
-                            ajustarTamano(pelicula.getGenero(), tamanoCelda) + " " +
-                            ajustarTamano(pelicula.getClasificacion(), tamanoCelda);
+                    int k = i + 1, l = j + 1;
+                    String celda = "P" + k + l;
+                    String contenidoCelda = celda + " - " + ajustarTamano(pelicula.getTitulo(), tamanoCelda) + " " +
+                            ajustarTamano(pelicula.getClasificacion(), tamano) + " " +
+                            ajustarTamano(pelicula.getDuracion(), tamano);
                     matrizCartelera[i][j] = contenidoCelda;
                     contador++;
                 } else {
@@ -33,7 +33,6 @@ public class Cartelera {
         }
     }
 
-    // Método para ajustar el tamaño de cada celda
     private String ajustarTamano(String texto, int tamano) {
         if (texto.length() > tamano) {
             return texto.substring(0, tamano);
@@ -45,14 +44,14 @@ public class Cartelera {
         return sb.toString();
     }
 
-    // Método para mostrar la cartelera en formato cuadriculado
     public void mostrarCartelera() {
-        for (int i = 0; i < matrizCartelera.length; i++) {
-            for (int j = 0; j < matrizCartelera[i].length; j++) {
-                System.out.print("| " + matrizCartelera[i][j] + " ");
+        System.out.println("Celda - " + ajustarTamano("Pelicula", tamanoCelda) + " " + ajustarTamano("Categoría", tamano) + " " + ajustarTamano("Duracion", tamano) + "\n");
+        for (String[] strings : matrizCartelera) {
+            for (String string : strings) {
+                System.out.print("| " + string + " ");
             }
             System.out.println("|");
-            System.out.println(new String(new char[matrizCartelera[i].length * (tamanoCelda * matrizCartelera[i].length)]).replace("\0", "-"));
+            System.out.println(new String(new char[(int) (strings.length * (tamanoCelda * 2.26))]).replace("\0", "-"));
         }
     }
 }
