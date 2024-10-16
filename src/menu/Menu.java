@@ -203,7 +203,10 @@ public class Menu {
         while (true) {
             System.out.println("\n** Bienvenido " + clienteEnSesion.getNombre() + " **");
             System.out.println("1.- Ver mis datos");
-            System.out.println("2.- Salir");
+            System.out.println("2.- Ver cartelera");
+            System.out.println("3.- Comprar boletos");
+            System.out.println("4.- Dulceria");
+            System.out.println("5.- Salir");
 
             System.out.print("Seleccione una opción: ");
             int opcionCliente = scanner.nextInt();
@@ -214,6 +217,16 @@ public class Menu {
                     System.out.println(clienteEnSesion.mostrarDatos());
                     break;
                 case 2:
+                    System.out.println("\n--    Mostrar Cartelera    --\n");
+                    break;
+                case 3:
+                    System.out.println("\n--    Comprar Boletos    --\n");
+                    //trabajando en la compra de boletos
+                    break;
+                case 4:
+                    System.out.println("\n--    Dulceria    --\n");
+                    break;
+                case 5:
                     scanner.nextLine();
                     return;
             }
