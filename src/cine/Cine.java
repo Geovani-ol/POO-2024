@@ -2,6 +2,7 @@ package cine;
 
 import peliculas.Cartelera;
 import peliculas.Pelicula;
+import salas.Sala;
 import usuarios.Usuario;
 import usuarios.administradores.Administrador;
 import usuarios.clientes.Cliente;
@@ -17,6 +18,7 @@ public class Cine {
     public ArrayList<Empleado> listaEmpleados = new ArrayList<>();
     public ArrayList<Cliente> listaClientes = new ArrayList<>();
     public ArrayList<Pelicula> listaPeliculas = new ArrayList<>();
+    public ArrayList<Sala> listaSalas = new ArrayList<>();
     Random random = new Random();
 
     public Cine() {
@@ -34,6 +36,30 @@ public class Cine {
         listaPeliculas.add(new Pelicula("P-FOR142P", "Forrest Gump", "Drama/Comedia", "142 min", "PG-13", "Un hombre con capacidades limitadas atraviesa eventos históricos de EE. UU."));
         listaPeliculas.add(new Pelicula("P-THE136R", "The Matrix", "Ciencia Ficción/Acción", "136 min", "R", "Un programador de computadoras descubre que su realidad es una simulación creada por máquinas."));
         listaPeliculas.add(new Pelicula("P-GLA155R", "Gladiator", "Acción/Drama", "155 min", "R", "Un general romano caído en desgracia busca venganza contra el emperador."));
+        listaPeliculas.add(new Pelicula("P-STA121P", "Star Wars: A New Hope", "Ciencia Ficción", "121 min", "PG", "Luke Skywalker se une a la Alianza Rebelde para derrotar al Imperio."));
+        listaPeliculas.add(new Pelicula("P-THE178P", "The Lord of the Rings: The Fellowship of the Ring", "Fantasía", "178 min", "PG-13", "Un joven hobbit emprende un peligroso viaje para destruir un anillo maldito."));
+        listaPeliculas.add(new Pelicula("P-SHA142P", "Shawshank Redemption", "Drama", "142 min", "R", "Un hombre condenado injustamente a prisión trama su escape durante años."));
+        listaPeliculas.add(new Pelicula("P-TOY081P", "Toy Story", "Animación/Aventura", "81 min", "G", "Un juguete cowboy compite por el afecto de su dueño con un nuevo juguete espacial."));
+        listaPeliculas.add(new Pelicula("P-AVA162P", "Avatar", "Ciencia Ficción", "162 min", "PG-13", "Un marine discapacitado se infiltra en una raza alienígena para extraer un recurso valioso."));
+        listaPeliculas.add(new Pelicula("P-JUR127P", "Jurassic Park", "Aventura/Ciencia Ficción", "127 min", "PG-13", "Un parque temático con dinosaurios clonados se convierte en una trampa mortal."));
+        listaPeliculas.add(new Pelicula("P-LIO118P", "The Lion King", "Animación/Drama", "118 min", "G", "Un león joven debe reclamar su lugar como rey después de la muerte de su padre."));
+        listaPeliculas.add(new Pelicula("P-FIG127P", "Fight Club", "Drama", "127 min", "R", "Un oficinista insomne se une a un carismático vendedor de jabón para formar un club de lucha subterráneo."));
+        listaPeliculas.add(new Pelicula("P-SIX107P", "The Sixth Sense", "Suspenso/Terror", "107 min", "PG-13", "Un niño que puede ver fantasmas busca la ayuda de un psicólogo infantil."));
+        listaPeliculas.add(new Pelicula("P-TER137R", "Terminator 2: Judgment Day", "Acción/Ciencia Ficción", "137 min", "R", "Un cyborg es enviado para proteger al futuro líder de la resistencia humana."));
+        listaPeliculas.add(new Pelicula("P-ING153R", "Inglourious Basterds", "Acción/Drama", "153 min", "R", "Un grupo de soldados judíos americanos planea asesinar a líderes nazis durante la Segunda Guerra Mundial."));
+        listaPeliculas.add(new Pelicula("P-SCH195R", "Schindler's List", "Drama/Bélico", "195 min", "R", "La historia de un empresario alemán que salvó a más de mil judíos del Holocausto."));
+        listaPeliculas.add(new Pelicula("P-REA132R", "The Revenant", "Aventura/Drama", "132 min", "R", "Un hombre de la frontera es dejado por muerto y busca venganza contra quienes lo traicionaron."));
+        listaPeliculas.add(new Pelicula("P-ALI117R", "Alien", "Terror/Ciencia Ficción", "117 min", "R", "La tripulación de una nave espacial se enfrenta a una criatura mortal a bordo."));
+        listaPeliculas.add(new Pelicula("P-GRA091P", "Gravity", "Ciencia Ficción/Drama", "91 min", "PG-13", "Dos astronautas quedan varados en el espacio después de que su transbordador es destruido."));
+        listaPeliculas.add(new Pelicula("P-MAR124P", "The Martian", "Ciencia Ficción", "124 min", "PG-13", "Un astronauta es abandonado en Marte y debe usar su ingenio para sobrevivir."));
+        listaPeliculas.add(new Pelicula("P-GRE130P", "Green Book", "Biografía/Drama", "130 min", "PG-13", "Un pianista afroamericano y su chofer blanco forman una inesperada amistad en la América segregada."));
+
+
+        listaSalas.add(new Sala("Sala 1", 5, 6));
+        listaSalas.add(new Sala("Sala 2", 6, 7));
+        listaSalas.add(new Sala("Sala 3", 7, 8));
+        listaSalas.add(new Sala("Sala 4", 8, 9));
+        listaSalas.add(new Sala("Sala 5", 9, 9));
     }
 
     // Generar ID de los Usuarios   U - { Año actua } - { 3 Letras del apellido } - { 1 Letra del nombre } - { Número random }
@@ -56,7 +82,8 @@ public class Cine {
         return String.format("C-%d%s%s%d", anio, apellidoTresletras, nombreUnaLetra, numeroRandom);
     }
 
-    // Generar Id de la Peliculas  P - {Primeras 3 letras del titulo}
+    // Generar Id de la Peliculas  P - {Primeras 3 letras del titulo}{Min de duracion}{Primera letra de la clasificacion}
+
     public String generarIdPelicula(String tituloPelicula, String duracionPelicula, String clasificacion) {
         String primerasTresLetras = tituloPelicula.length() >= 3 ? tituloPelicula.substring(0, 3).toUpperCase() : tituloPelicula.toUpperCase();
         String numerosDuracion = duracionPelicula.replaceAll("[^0-9]", "");
@@ -65,7 +92,7 @@ public class Cine {
         return String.format("P-%s%s%s", primerasTresLetras, numerosDuracion, letraClasificacion);
     }
 
-    // Registro de Usuarios
+    // Registros
 
     public void registrarAdministrador(Administrador administrador) {
         this.listaAdministradores.add(administrador);
@@ -77,9 +104,23 @@ public class Cine {
         this.listaUsuarios.add(cliente);
     }
 
-    // Registrar Pelicula
     public void registrarPelicula(Pelicula pelicula){
         this.listaPeliculas.add(pelicula);
+    }
+
+    public void registrarSala(Sala sala){
+        this.listaSalas.add(sala);
+    }
+
+    // Busqueda
+
+    public Sala buscarSalaPorNombre(String nombre) {
+        for (Sala sala : this.listaSalas) {
+            if (sala.getNombre().equalsIgnoreCase(nombre)) {
+                return sala;
+            }
+        }
+        return null;
     }
 
     // Mpstrar Usuarios
@@ -91,14 +132,38 @@ public class Cine {
         }
     }
 
-    // Mostrar Cartelera
+    // Mostrar Cartelera Y Asientos de Sala
     public void mostrarCartelera(){
         System.out.println("\n--- Cartelera de Peliculas ---\n");
 
         int columnas = 3;
         Cartelera cartelera = new Cartelera(listaPeliculas, columnas);
         cartelera.mostrarCartelera();
+    }
 
+    public void mostrarAsientosDeSala(String nombreSala) {
+        System.out.println("\n--- Asientos de Sala ---\n");
+
+        Sala sala = buscarSalaPorNombre(nombreSala);
+        if (sala != null) {
+            sala.mostrarAsientos();
+        } else {
+            System.out.println("No se ha encontrado la sala");
+        }
+    }
+
+    // Reserva de Asientos
+
+    public void reservarAsientos(String nombreSala, String[] asientos) {
+        Sala sala = buscarSalaPorNombre(nombreSala);
+        if (sala != null) {
+            for (String asiento : asientos) {
+                char fila = asiento.charAt(0);
+                int columna = Integer.parseInt(asiento.substring(1));
+
+                sala.reservarAsiento(fila, columna);
+            }
+        }
     }
 
     // Validaciones Externas

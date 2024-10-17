@@ -123,7 +123,7 @@ public class Menu {
             System.out.println("2.- Registrar Pelicula");
             System.out.println("3.- Registrar Cliente");
             System.out.println("4.- Mostrar Cartelera");
-            System.out.println("5.- Mostrar Empleados");
+            System.out.println("5.- Mostrar Assientos de Sala");
             System.out.println("6.- Mostrar Clientes");
             System.out.println("7.- Salir");
 
@@ -208,8 +208,25 @@ public class Menu {
                     break;
                 case 4:
                     cine.mostrarCartelera();
+
                     break;
                 case 5:
+                    cine.mostrarAsientosDeSala("Sala 1");
+                    System.out.println("Cuantos asientos quieres reservar?");
+                    int numeroAsientos = scanner.nextInt();
+                    String[] asientos = new String[numeroAsientos];
+
+                    scanner.nextLine();
+
+                    for (int i = 0; i < asientos.length; i++) {
+                        System.out.println("Selecciona un Asiento");
+                        String celda = scanner.nextLine();
+
+                        asientos[i] = celda;
+                    }
+
+                    cine.reservarAsientos("Sala 1", asientos);
+                    cine.mostrarAsientosDeSala("Sala 1");
                     break;
                 case 6:
                     cine.mostrarClientes();

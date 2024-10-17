@@ -46,6 +46,7 @@ public class Cartelera {
 
     public void mostrarCartelera() {
         System.out.println("Celda - " + ajustarTamano("Pelicula", tamanoCelda) + " " + ajustarTamano("Categoría", tamano) + " " + ajustarTamano("Duracion", tamano) + "\n");
+        System.out.println(new String(new char[(int) (matrizCartelera.length * (tamanoCelda * 2.26))]).replace("\0", "-"));
         for (String[] strings : matrizCartelera) {
             for (String string : strings) {
                 System.out.print("| " + string + " ");
