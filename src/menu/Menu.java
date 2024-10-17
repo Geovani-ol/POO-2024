@@ -75,36 +75,36 @@ public class Menu {
     }
 
     public void signup() {
-        System.out.println("\n-- Seleccionaste la opción de registrar Cliente --");
+        System.out.println("\n-- Seleccionaste la opción de registrar Cliente --\n");
 
-        System.out.print("\nIngrese el Nombre: ");
+        System.out.print("Ingrese el Nombre: ");
         String nombreCliente = scanner.nextLine();
 
-        System.out.print("\nIngrese los Apellidos: ");
+        System.out.print("Ingrese los Apellidos: ");
         String apellidosCliente = scanner.nextLine();
 
-        System.out.print("\nIngrese el Día de Nacimiento: ");
+        System.out.print("Ingrese el Día de Nacimiento: ");
         int diaCliente = scanner.nextInt();
 
-        System.out.print("\nIngrese el Mes de Nacimiento: ");
+        System.out.print("Ingrese el Mes de Nacimiento: ");
         int mesCliente = scanner.nextInt();
 
-        System.out.print("\nIngrese el Año de Nacimiento: ");
+        System.out.print("Ingrese el Año de Nacimiento: ");
         int anioCliente = scanner.nextInt();
 
         scanner.nextLine();
         LocalDate fechaNacimientoClietne = LocalDate.of(anioCliente, mesCliente, diaCliente);
 
-        System.out.print("\nIngrese el Telefono: ");
+        System.out.print("Ingrese el Telefono: ");
         String telefonoCliente = scanner.nextLine();
 
-        System.out.print("\nIngrese la Dirección: ");
+        System.out.print("Ingrese la Dirección: ");
         String direccionCliente = scanner.nextLine();
 
-        System.out.print("\nIngrese la CURP: ");
+        System.out.print("Ingrese la CURP: ");
         String curpClietne = scanner.nextLine();
 
-        System.out.print("\nIngrese la Contraseña: ");
+        System.out.print("Ingrese la Contraseña: ");
         String contraseniaCliente = scanner.nextLine();
 
         String idCliente = cine.generarIdCliente(nombreCliente, apellidosCliente);
@@ -118,7 +118,7 @@ public class Menu {
 
     public void menuAdministrador(Administrador administradorEnSesion) {
         while (true) {
-            System.out.println("\n** Bienvenido Administrador " + administradorEnSesion.getNombre() + " **");
+            System.out.println("\n-- Bienvenido Administrador " + administradorEnSesion.getNombre() + " --\n");
             System.out.println("1.- Registrar Administrador");
             System.out.println("2.- Registrar Pelicula");
             System.out.println("3.- Registrar Cliente");
@@ -223,7 +223,7 @@ public class Menu {
 
     public void menuCliente(Cliente clienteEnSesion) {
         while (true) {
-            System.out.println("\n** Bienvenido " + clienteEnSesion.getNombre() + " **");
+            System.out.println("\n-- Bienvenido " + clienteEnSesion.getNombre() + " --\n");
             System.out.println("1.- Ver mis datos");
             System.out.println("2.- Ver cartelera");
             System.out.println("3.- Comprar boletos");
