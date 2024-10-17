@@ -1,5 +1,9 @@
 # Programación Orientada a Objetos (POO)
 
+## GIF de la Tarea2/Unidad3
+
+![Tarea2/Unidad3](gif/Tarea2-Unidad2.gif)
+
 ### Descripción General
 
 Este curso de Programación Orientada a Objetos (POO) está diseñado para proporcionar una comprensión sólida de los principios fundamentales de la POO. A lo largo del semestre, los estudiantes aprenderán a diseñar, implementar y mantener aplicaciones utilizando técnicas orientadas a objetos.
