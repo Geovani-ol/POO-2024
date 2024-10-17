@@ -1,6 +1,7 @@
 package hospital;
 
 import consultas.Consulta;
+import consultas.utils.Status;
 import consultorios.Consultorio;
 import usuarios.Usuario;
 import usuarios.medicos.Medico;
@@ -270,5 +271,19 @@ public class Hospital {
         }
 
         return null;
+    }
+
+    public void verConsultasPaciente(String idPaciente) {
+        boolean existenConsultas = false;
+        for (Consulta consulta : this.listaConsultas) {
+            if (idPaciente.equals(consulta.getPaciente().getId()) && consulta.getStatus() == Status.PENDIENTE) {
+                existenConsultas = true;
+                System.out.println(consulta.mostrarDatos());
+            }
+        }
+
+        if (!existenConsultas) {
+            System.out.println("\n No tienes consultas agregadas");
+        }
     }
 }

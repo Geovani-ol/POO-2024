@@ -20,8 +20,10 @@ public class Menu {
     public void login(){
 
         int intentosMAXIMOS = 3, intentosUsuario = 0;
+
         System.out.println("BIENVENIDO");
         System.out.println("Inicia sesion para continuar");
+
 
         while(intentosUsuario < intentosMAXIMOS) {
 
@@ -60,14 +62,16 @@ public class Menu {
 
     private void mostrarMenuPaciente(Paciente paciente){
         int opcion = 0;
-        while(opcion !=2) {
+        while(opcion !=4) {
             System.out.println("\n****BIENVENIDO****");
             System.out.println("1. Ver consultas");
             System.out.println("2. Ver mis datos");
-            System.out.println("3. Salir");
+            System.out.println("3. Ver mi expediente");
+            System.out.println("4. Salir");
 
             System.out.println("Selecciona una opcion: ");
             opcion = scanner.nextInt();
+
             switch (opcion) {
                 case 1:
                     //ver consultas
@@ -79,6 +83,8 @@ public class Menu {
                     hospital.mostrarPacienteID(paciente.getId());
                     break;
                 case 3:
+                    break;
+                case 4:
                     System.out.println("Saliendo del sistema");
                     scanner.nextLine();
                     break;
@@ -91,12 +97,16 @@ public class Menu {
 
     private void mostrarMenuMedico(Medico medico){
         int opcion2 = 0;
-        while(opcion2 !=3) {
+        while(opcion2 !=7) {
             System.out.println("\n****BIENVENIDO****");
             System.out.println("1. Ver consultas");
             System.out.println("2. Ver mis pacientes");
             System.out.println("3. Ver mis datos");
-            System.out.println("4. Salir");
+            System.out.println("4. Ver consultar paciente");
+            System.out.println("5. Consultar expediente de paciente");
+            System.out.println("6. Completar contulta");
+            System.out.println("7. Salir");
+
 
             System.out.println("Selecciona una opcion: ");
             opcion2 = scanner.nextInt();
@@ -112,7 +122,7 @@ public class Menu {
                 case 3:
                     System.out.println("\n--Seleccionaste la opción de ver mis datos--");
                     hospital.mostrarMedicoPorId(medico.getId());
-                case 4:
+                case 7:
                     System.out.println("Saliendo del sistema");
                     break;
                 default:
@@ -218,6 +228,8 @@ public class Menu {
                     int diaMedico = scanner.nextInt();
 
                     LocalDate fechaNaciMedico = LocalDate.of(anioMedico, mesMedico, diaMedico);
+
+                    scanner.nextLine();
 
                     String telMedico = null;
 
@@ -363,7 +375,7 @@ public class Menu {
                 case 8:
                     System.out.println("\n--Seleccionaste la opción de mostrar consultas--");
                     hospital.mostrarConsultas();
-                    return;
+                    break;
                 case 9:
                     System.out.println("\n--Seleccionaste la opción de buscar Paciente mediante la ID--");
 
