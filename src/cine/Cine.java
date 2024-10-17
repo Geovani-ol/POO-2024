@@ -43,8 +43,15 @@ public class Cine {
         String apellidoTresletras = apellidosAdmin.substring(0, 3).toUpperCase();
         String nombreUnaLetra = nombreAdmin.substring(0, 1).toUpperCase();
         int numeroRandom = random.nextInt(100000 - 50) + 50;
-
-        return String.format("A-%d%s%s%d", anio, apellidoTresletras, nombreUnaLetra, numeroRandom);
+        String id;
+        do {
+            id = String.format("A-%d%s%s%d", anio, apellidoTresletras, nombreUnaLetra, numeroRandom);
+            if(obtenerIdsAdministradores(id) != null){
+                numeroRandom = random.nextInt(100000 - 50) + 50;
+            } else {
+                return id;
+            }
+        } while (true);
     }
 
     public String generarIdCliente(String nombreCliente, String apellidosCliente) {
@@ -52,8 +59,15 @@ public class Cine {
         String apellidoTresletras = apellidosCliente.substring(0, 3).toUpperCase();
         String nombreUnaLetra = nombreCliente.substring(0, 1).toUpperCase();
         int numeroRandom = random.nextInt(100000 - 50) + 50;
-
-        return String.format("C-%d%s%s%d", anio, apellidoTresletras, nombreUnaLetra, numeroRandom);
+        String id;
+        do {
+            id = String.format("C-%d%s%s%d", anio, apellidoTresletras, nombreUnaLetra, numeroRandom);
+            if(obtenerIdsClientes(id) != null){
+                numeroRandom = random.nextInt(100000 - 50) + 50;
+            } else {
+                return id;
+            }
+        } while (true);
     }
 
     // Generar Id de la Peliculas  P - {Primeras 3 letras del titulo}
@@ -111,5 +125,25 @@ public class Cine {
         }
 
         return null;
+    }
+
+//    metodo para obtener pelicula por id
+    public Pelicula obtenerPeliculaPorId(String idPelicula) {
+        return this.listaPeliculas.stream().filter(pelicula -> pelicula.getId().equals(idPelicula)).findFirst().orElse(null);
+    }
+    // metodo para generar ticket
+    /**public void ticket(Cliente cliente, Pelicula pelicula) {
+        LocalDate fecha = LocalDate.now();
+//        leer sala
+//        leer edad
+        int edad = fecha.getYear() - cliente.getFechaNacimiento().getYear();
+        String nombrePelicula = pelicula.getTitulo();
+
+    }*/
+    public Cliente obtenerIdsClientes(String idCliente) {
+        return this.listaClientes.stream().filter(c -> c.getId().equals(idCliente)).findFirst().orElse(null);
+    }
+    public Administrador obtenerIdsAdministradores(String idAdministrador) {
+        return this.listaAdministradores.stream().filter(a -> a.getId().equals(idAdministrador)).findFirst().orElse(null);
     }
 }

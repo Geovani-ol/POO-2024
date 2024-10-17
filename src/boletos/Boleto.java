@@ -3,6 +3,11 @@ package boletos;
 import java.time.LocalDateTime;
 
 public class Boleto {
+//    sala
+//    pelicula
+//    asiento
+//    tipo de pase
+
    // esta pendiente poner de tipo pelivula la pelicula
     public String pelicula;
 

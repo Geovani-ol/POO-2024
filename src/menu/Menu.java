@@ -181,6 +181,8 @@ public class Menu {
 
                     break;
                 case 2:
+                    System.out.println("\n╚╤σσ  Seleccionaste la opcion Registrar Pelicula   ╚◘╤╤σ\n");
+                    scanner.nextLine();
                     System.out.println("Ingrese el título de la película:");
                     String titulo = scanner.nextLine();
 
