@@ -1,6 +1,7 @@
 package cine;
 
 import peliculas.Cartelera;
+import peliculas.Funciones;
 import peliculas.Pelicula;
 import salas.Sala;
 import usuarios.Usuario;
@@ -9,6 +10,7 @@ import usuarios.clientes.Cliente;
 import usuarios.empleados.Empleado;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,6 +21,7 @@ public class Cine {
     public ArrayList<Cliente> listaClientes = new ArrayList<>();
     public ArrayList<Pelicula> listaPeliculas = new ArrayList<>();
     public ArrayList<Sala> listaSalas = new ArrayList<>();
+    public ArrayList<Funciones> listaFunciones = new ArrayList<>();
     Random random = new Random();
 
     public Cine() {
@@ -210,5 +213,32 @@ public class Cine {
     }
     public Administrador obtenerIdsAdministradores(String idAdministrador) {
         return this.listaAdministradores.stream().filter(a -> a.getId().equals(idAdministrador)).findFirst().orElse(null);
+    }
+
+    public void funciones() {
+        LocalTime horaActual = LocalTime.now();
+        Pelicula pelicula;
+        String idPelicula;
+        ArrayList<Pelicula> peliculasReproducidas = new ArrayList<>();
+        if (horaActual.isAfter(LocalTime.of(8,0)) && horaActual.isBefore(LocalTime.of(23,0))) {
+            // generar funciones
+
+            do {
+                int posicion = random.nextInt(0,this.listaPeliculas.size()-1);
+                String id = this.listaPeliculas.get(posicion).getId();
+                pelicula = peliculasReproducidas.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+                if (pelicula == null) {
+                    peliculasReproducidas.add(this.listaPeliculas.get(posicion));
+                    idPelicula = this.listaPeliculas.get(posicion).getId();
+                    return;
+                }
+            } while(true);
+
+            Funciones funcion = new Funciones(pelicula);
+            this.listaFunciones.add(funcion);
+
+        } else {
+            peliculasReproducidas.removeAll(peliculasReproducidas);
+        }
     }
 }
