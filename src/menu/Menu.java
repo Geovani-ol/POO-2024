@@ -273,4 +273,29 @@ public class Menu {
             }
         }
     }
+
+    public void menuEmpleado(Empleado empleadoEnSesion) {
+        while (true) {
+            System.out.println("Bienvenido " + empleadoEnSesion.getNombre()+"\n");
+            System.out.println("1.- Registrar entrada.");
+            System.out.println("2.- Registrar salida.");
+            System.out.println("3.- Ver mis datos.");
+            System.out.println("4.- Mostrar Registro de horarios y salidas");
+            System.out.println("\nSeleccione una opción: ");
+            int opcionEmpleado = scanner.nextInt();
+            switch (opcionEmpleado) {
+                case 1:
+                    empleadoEnSesion.registrarEntrada();
+                case 2:
+                    empleadoEnSesion.registrarSalida();
+                case 3:
+                    empleadoEnSesion.mostrarDatos();
+                case 4:
+                    empleadoEnSesion.mostrarRegistros();
+                case 5:
+                    scanner.nextLine();
+                    return;
+            }
+        }
+    }
 }
