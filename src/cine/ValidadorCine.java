@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ValidadorCine {
-    Cine cine = new Cine();
+    /**Cine cine = new Cine();
     Random random = new Random();
     ArrayList<Funciones> listaFunciones = cine.listaFunciones;
     ArrayList<Pelicula> peliculasReproducidas = cine.peliculasReproducidas;
@@ -23,5 +23,5 @@ public class ValidadorCine {
             return false;
         }
         return true;
-    }
+    }*/
 }
