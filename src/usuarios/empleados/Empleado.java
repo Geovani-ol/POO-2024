@@ -28,7 +28,7 @@ public class Empleado extends Usuario {
                 getRfc());
     }
 
-     public void registrarEntrada() {
+    /*public void registrarEntrada() {
         RegistroEmpleados nuevoRegistro = new RegistroEmpleados();
         registros.add(nuevoRegistro);
         System.out.println(nombre + " ha registrado la entrada.");
@@ -49,5 +49,5 @@ public class Empleado extends Usuario {
         for (RegistroEmpleados registro : registros) {
             System.out.println(registro);
         }
-    }
+    }*/
 }

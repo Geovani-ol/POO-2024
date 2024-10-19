@@ -1,10 +1,10 @@
 package menu;
 
 import cine.Cine;
-import peliculas.Pelicula;
 import usuarios.Usuario;
 import usuarios.administradores.Administrador;
 import usuarios.clientes.Cliente;
+import usuarios.empleados.Empleado;
 import usuarios.utils.Rol;
 
 import java.time.LocalDate;
@@ -21,6 +21,7 @@ public class Menu {
 
         while (intentosUsuario < intentosMaximos) {
             System.out.println("\n-- Inicia Sesión --");
+
             System.out.println("\nIngresa el usuario: ");
             String usuario = scanner.nextLine();
 
@@ -30,13 +31,35 @@ public class Menu {
             Usuario usuarioEnSesion = cine.validarInisioSesion(usuario, contrasenia);
 
             if (usuarioEnSesion instanceof Usuario) {
-                if (usuarioEnSesion.getRol() == Rol.ADMINISTRADOR){
-                    Administrador administradorEnSesion =(Administrador) usuarioEnSesion;
-                    menuAdministrador(administradorEnSesion);
+                if (usuarioEnSesion.getRol() == Rol.ADMINISTRADOR) {
+                    Administrador administradorEnSesion = (Administrador) usuarioEnSesion;
+                    MenuAdmin menuAdmin = new MenuAdmin();
+                    int opcionAdmin;
+                    boolean sesion = true;
+                    while (sesion) {
+                        opcionAdmin = menuAdmin.mostrarMenu(administradorEnSesion);
+                        sesion = menuAdmin.procesarDatos(opcionAdmin, cine, administradorEnSesion);
+                    }
                     intentosUsuario = 0;
                 } else if (usuarioEnSesion.getRol() == Rol.CLIENTE) {
                     Cliente clienteEnSesion = (Cliente) usuarioEnSesion;
-                    menuCliente(clienteEnSesion);
+                    MenuCliente menuCliente = new MenuCliente();
+                    int opcionCliente;
+                    boolean sesion = true;
+                    while (sesion) {
+                        opcionCliente = menuCliente.mostrarMenu(clienteEnSesion);
+                        sesion = menuCliente.procesarDatos(opcionCliente, cine, clienteEnSesion);
+                    }
+                    intentosUsuario = 0;
+                } else {
+                    Empleado empleadoEnSesion = (Empleado) usuarioEnSesion;
+                    MenuEmpleado menuEmpleado = new MenuEmpleado();
+                    int opcionEmpleado;
+                    boolean sesion = true;
+                    while (sesion) {
+                        opcionEmpleado = menuEmpleado.mostrarMenu(empleadoEnSesion);
+                        sesion = menuEmpleado.procesarDatos(opcionEmpleado, cine, empleadoEnSesion);
+                    }
                     intentosUsuario = 0;
                 }
             } else {
@@ -114,188 +137,5 @@ public class Menu {
 
         System.out.println("\nCliente registrado exitosamente");
         System.out.println("Usuario del Cliente: " + idCliente);
-    }
-
-    public void menuAdministrador(Administrador administradorEnSesion) {
-        while (true) {
-            System.out.println("\n-- Bienvenido Administrador " + administradorEnSesion.getNombre() + " --\n");
-            System.out.println("1.- Registrar Administrador");
-            System.out.println("2.- Registrar Pelicula");
-            System.out.println("3.- Registrar Cliente");
-            System.out.println("4.- Mostrar Cartelera");
-            System.out.println("5.- Mostrar Assientos de Sala");
-            System.out.println("6.- Mostrar Clientes");
-            System.out.println("7.- Salir");
-
-            System.out.print("Seleccione una opción: ");
-            int opcionAdmin = scanner.nextInt();
-
-            switch (opcionAdmin) {
-                case 1:
-                    scanner.nextLine();
-
-                    System.out.println("\n--- Registrar Administrado ---");
-
-                    System.out.print("\nIngrese el Nombre: ");
-                    String nombreAdmin = scanner.nextLine();
-
-                    System.out.print("\nIngrese los Apellidos: ");
-                    String apellidosAdmin = scanner.nextLine();
-
-                    System.out.print("\nIngrese el Día de Nacimiento: ");
-                    int diaAdmin = scanner.nextInt();
-
-                    System.out.print("\nIngrese el Mes de Nacimiento: ");
-                    int mesAdmin = scanner.nextInt();
-
-                    System.out.print("\nIngrese el Año de Nacimiento: ");
-                    int anioAdmin = scanner.nextInt();
-
-                    LocalDate fechaNacimientoAdmin = LocalDate.of(anioAdmin, mesAdmin, diaAdmin);
-
-                    System.out.print("\nIngrese el Telefono: ");
-                    String telefonoAdmin = scanner.nextLine();
-
-                    System.out.print("\nIngrese la Dirección: ");
-                    String direccionAdmin = scanner.nextLine();
-
-                    System.out.print("\nIngrese el RFC: ");
-                    String rfcAdmin = scanner.nextLine();
-
-                    System.out.print("\nIngrese el Sueldo: ");
-                    Double sueldoAdmin = scanner.nextDouble();
-
-                    System.out.print("\nIngrese la Antiguedad: ");
-                    int antiguedadAdmin = scanner.nextInt();
-
-                    System.out.print("\nIngrese la Contraseña: ");
-                    String contraseniaAdmin = scanner.nextLine();
-
-                    String idAdmin = cine.generarIdAdministrador(nombreAdmin, apellidosAdmin);
-
-                    Administrador administrador = new Administrador(idAdmin, nombreAdmin, apellidosAdmin, fechaNacimientoAdmin, telefonoAdmin, direccionAdmin, rfcAdmin, sueldoAdmin, antiguedadAdmin, contraseniaAdmin);
-                    cine.registrarAdministrador(administrador);
-                    cine.listaUsuarios.add(administrador);
-
-                    System.out.println("\nAdministrador registrado exitosamente");
-
-                    break;
-                case 2:
-                    System.out.println("\n╚╤σσ  Seleccionaste la opcion Registrar Pelicula   ╚◘╤╤σ\n");
-                    scanner.nextLine();
-                    System.out.println("Ingrese el título de la película:");
-                    String titulo = scanner.nextLine();
-
-                    System.out.println("Ingrese el género de la película:");
-                    String genero = scanner.nextLine();
-
-                    System.out.println("Ingrese la duración de la película:");
-                    String duracion = scanner.nextLine();
-
-                    System.out.println("Ingrese la clasificación de la película:");
-                    String clasificacion = scanner.nextLine();
-
-                    System.out.println("Ingrese la sinopsis de la película:");
-                    String sinopsis = scanner.nextLine();
-
-                    String idPelicula = cine.generarIdPelicula(titulo, duracion, clasificacion);
-
-                    Pelicula pelicula = new Pelicula(idPelicula, titulo, genero, duracion, clasificacion, sinopsis);
-                    cine.registrarPelicula(pelicula);
-
-                    break;
-                case 3:
-                    scanner.nextLine();
-                    signup();
-                    break;
-                case 4:
-                    cine.mostrarCartelera();
-
-                    break;
-                case 5:
-                    cine.mostrarAsientosDeSala("Sala 1");
-                    System.out.println("Cuantos asientos quieres reservar?");
-                    int numeroAsientos = scanner.nextInt();
-                    String[] asientos = new String[numeroAsientos];
-
-                    scanner.nextLine();
-
-                    for (int i = 0; i < asientos.length; i++) {
-                        System.out.println("Selecciona un Asiento");
-                        String celda = scanner.nextLine();
-
-                        asientos[i] = celda;
-                    }
-
-                    cine.reservarAsientos("Sala 1", asientos);
-                    cine.mostrarAsientosDeSala("Sala 1");
-                    break;
-                case 6:
-                    cine.mostrarClientes();
-                    break;
-                case 7:
-                    scanner.nextLine();
-                    return;
-            }
-        }
-    }
-
-    public void menuCliente(Cliente clienteEnSesion) {
-        while (true) {
-            System.out.println("\n-- Bienvenido " + clienteEnSesion.getNombre() + " --\n");
-            System.out.println("1.- Ver mis datos");
-            System.out.println("2.- Ver cartelera");
-            System.out.println("3.- Comprar boletos");
-            System.out.println("4.- Dulceria");
-            System.out.println("5.- Salir");
-
-            System.out.print("Seleccione una opción: ");
-            int opcionCliente = scanner.nextInt();
-
-            switch (opcionCliente) {
-                case 1:
-                    System.out.println("\n--- Mis Datos --- ");
-                    System.out.println(clienteEnSesion.mostrarDatos());
-                    break;
-                case 2:
-                    System.out.println("\n--    Mostrar Cartelera    --\n");
-                    break;
-                case 3:
-                    System.out.println("\n--    Comprar Boletos    --\n");
-                    //trabajando en la compra de boletos
-                    break;
-                case 4:
-                    System.out.println("\n--    Dulceria    --\n");
-                    break;
-                case 5:
-                    scanner.nextLine();
-                    return;
-            }
-        }
-    }
-
-    public void menuEmpleado(Empleado empleadoEnSesion) {
-        while (true) {
-            System.out.println("Bienvenido " + empleadoEnSesion.getNombre()+"\n");
-            System.out.println("1.- Registrar entrada.");
-            System.out.println("2.- Registrar salida.");
-            System.out.println("3.- Ver mis datos.");
-            System.out.println("4.- Mostrar Registro de horarios y salidas");
-            System.out.println("\nSeleccione una opción: ");
-            int opcionEmpleado = scanner.nextInt();
-            switch (opcionEmpleado) {
-                case 1:
-                    empleadoEnSesion.registrarEntrada();
-                case 2:
-                    empleadoEnSesion.registrarSalida();
-                case 3:
-                    empleadoEnSesion.mostrarDatos();
-                case 4:
-                    empleadoEnSesion.mostrarRegistros();
-                case 5:
-                    scanner.nextLine();
-                    return;
-            }
-        }
     }
 }
