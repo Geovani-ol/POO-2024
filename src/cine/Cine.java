@@ -22,6 +22,8 @@ public class Cine {
     public ArrayList<Pelicula> listaPeliculas = new ArrayList<>();
     public ArrayList<Sala> listaSalas = new ArrayList<>();
     public ArrayList<Funciones> listaFunciones = new ArrayList<>();
+    ArrayList<Pelicula> peliculasReproducidas = new ArrayList<>();
+    ValidadorCine validador = new ValidadorCine();
     Random random = new Random();
 
     public Cine() {
@@ -215,27 +217,50 @@ public class Cine {
         return this.listaAdministradores.stream().filter(a -> a.getId().equals(idAdministrador)).findFirst().orElse(null);
     }
 
+    public boolean validarDisponibilidadPelicula(int posicion){
+
+    }
+
     public void funciones() {
         LocalTime horaActual = LocalTime.now();
-        Pelicula pelicula;
         String idPelicula;
-        ArrayList<Pelicula> peliculasReproducidas = new ArrayList<>();
+
         if (horaActual.isAfter(LocalTime.of(8,0)) && horaActual.isBefore(LocalTime.of(23,0))) {
             // generar funciones
-
-            do {
-                int posicion = random.nextInt(0,this.listaPeliculas.size()-1);
-                String id = this.listaPeliculas.get(posicion).getId();
-                pelicula = peliculasReproducidas.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
-                if (pelicula == null) {
-                    peliculasReproducidas.add(this.listaPeliculas.get(posicion));
-                    idPelicula = this.listaPeliculas.get(posicion).getId();
-                    return;
+            Pelicula pelicula = null;
+            while(pelicula == null){
+                pelicula = this.listaPeliculas.get(random.nextInt(0,listaPeliculas.size()-1));
+                if (peliculasReproducidas.contains(pelicula)) {
+                    pelicula = null;
                 }
-            } while(true);
+            }
+            LocalTime startTime = LocalTime.of(8, 0);
+            LocalTime endTime = LocalTime.of(23, 0);
+            int durationBetweenShows = 30; // 30 minutes between shows
 
-            Funciones funcion = new Funciones(pelicula);
-            this.listaFunciones.add(funcion);
+            for (Pelicula pelicula1 : listaPeliculas) {
+                Sala sala1 = listaSalas.get(random.nextInt(listaSalas.size()));
+                Sala sala2;
+                do {
+                    sala2 = listaSalas.get(random.nextInt(listaSalas.size()));
+                } while (sala1.equals(sala2));
+
+                LocalTime showTime1 = startTime;
+                LocalTime showTime2 = startTime.plusMinutes(durationBetweenShows);
+
+                while (showTime1.isBefore(endTime) && showTime2.isBefore(endTime)) {
+                    Funciones funcion1 = new Funciones(pelicula1, sala1, showTime1);
+                    Funciones funcion2 = new Funciones(pelicula1, sala2, showTime2);
+
+                    listaFunciones.add(funcion1);
+                    listaFunciones.add(funcion2);
+
+                    showTime1 = showTime1.plusMinutes( Integer.parseInt(pelicula1.getDuracion()) + durationBetweenShows);
+                    showTime2 = showTime2.plusMinutes(Integer.parseInt(pelicula1.getDuracion()) + durationBetweenShows);
+                }
+            }
+
+
 
         } else {
             peliculasReproducidas.removeAll(peliculasReproducidas);
