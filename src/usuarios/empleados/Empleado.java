@@ -27,4 +27,27 @@ public class Empleado extends Usuario {
                 getDireccion(),
                 getRfc());
     }
+
+    /*public void registrarEntrada() {
+        RegistroEmpleados nuevoRegistro = new RegistroEmpleados();
+        registros.add(nuevoRegistro);
+        System.out.println(nombre + " ha registrado la entrada.");
+    }
+
+    public void registrarSalida() {
+        if (!registros.isEmpty() && registros.get(registros.size() - 1).getSalida() == null) {
+            registros.get(registros.size() - 1).registrarSalida();
+            System.out.println(nombre + " ha registrado la salida.");
+        }
+        else {
+            System.out.println("No se encontró una entrada sin salida.");
+        }
+    }
+
+    public void mostrarRegistros() {
+        System.out.println("Registros de " + nombre + ":");
+        for (RegistroEmpleados registro : registros) {
+            System.out.println(registro);
+        }
+    }*/
 }

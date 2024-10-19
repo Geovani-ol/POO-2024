@@ -218,6 +218,7 @@ public class Cine {
     }
 
 
+
     public void funciones() {
         LocalTime horaActual = LocalTime.now();
         String idPelicula;
@@ -263,4 +264,5 @@ public class Cine {
             peliculasReproducidas.removeAll(peliculasReproducidas);
         }
     }
+
 }
