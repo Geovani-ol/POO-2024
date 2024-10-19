@@ -30,7 +30,7 @@ public class Administrador extends Usuario{
     }
 
     public String mostrarDatos() {
-        return String.format("Id: %s, nombre: %s, apellidos: %s, fecha de nacimiento: %s, teléfono: %s, sueldo: %f, RFC: %s, antiguedad: %d",
+        return String.format("Id: %s  |  Nombre: %s  |  Apellidos: %s  |  Fecha de Nacimiento: %s  |  Teléfono: %s  |  Sueldo: %f  |  RFC: %s  |  Antiguedad: %d",
                 getId(),
                 getNombre(),
                 getApellidos(),

@@ -2,7 +2,7 @@
 
 ## GIF de la Tarea2/Unidad3
 
-![Tarea2/Unidad3](gif/Tarea2-Unidad2.gif)
+![Tarea3/Unidad3](gif/Tarea3-Unidad3.gif)
 
 ### Descripción General
 

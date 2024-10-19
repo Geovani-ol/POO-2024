@@ -3,6 +3,7 @@ package hospital;
 import consultas.Consulta;
 import consultas.utils.Status;
 import consultorios.Consultorio;
+import expediente.Expediente;
 import usuarios.Usuario;
 import usuarios.medicos.Medico;
 import usuarios.pacientes.Paciente;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Hospital {
@@ -285,5 +287,51 @@ public class Hospital {
         if (!existenConsultas) {
             System.out.println("\n No tienes consultas agregadas");
         }
+    }
+
+    public Consulta obternerConsultaPorId(String idConsulta) {
+        for (Consulta consulta : this.listaConsultas) {
+            if (consulta.getId().equals(idConsulta)) {
+                return consulta;
+            }
+        }
+
+        return null;
+    }
+
+    public void eliminarConsultaPorId(String idConsulta) {
+        for (Consulta consulta : this.listaConsultas) {
+            if (consulta.getId().equals(idConsulta)) {
+                this.listaConsultas.remove(consulta);
+                return;
+            }
+        }
+    }
+
+    public void generarExpedienteConsulta(String idConsulta, String idPaciente) {
+        Scanner scanner = new Scanner(System.in);
+        Consulta consulta = this.obternerConsultaPorId(idConsulta);
+
+        if (consulta == null) {
+            System.out.println("No existe una consulta con el ID proorcionado");
+            return;
+        }
+
+        Paciente paciente = this.obtenerPacientePorId(idPaciente);
+
+        if (paciente == null) {
+            System.out.println("No existe con el ID proporcionado");
+            return;
+        }
+
+        consulta.setStatus(Status.TERMINADA);
+
+        this.eliminarConsultaPorId(idConsulta);
+
+        System.out.println("Ingresa las observaciones finales de la consulta:");
+        String observaciones = scanner.nextLine();
+
+        Expediente expediente = new Expediente(consulta,observaciones);
+        paciente.registrarExpediente(expediente);
     }
 }

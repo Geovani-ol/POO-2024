@@ -43,6 +43,14 @@ public class Consulta {
 
     public Consultorio getConsultorio() { return consultorio; }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public String mostrarDatos() {
         return String.format("Id: %s  |  Fecha: %s  |  Id Paciente: %s  |  Paciente: %s  |  Id Medico: %s  |  Médico: %s  |  Piso Consultorio: %d  |  Numero Consultorio: %d",
                 getId(),
@@ -54,9 +62,5 @@ public class Consulta {
                 consultorio.getPiso(),
                 consultorio.getNumeroConsultorio()
         );
-    }
-
-    public Status getStatus() {
-        return status;
     }
 }
