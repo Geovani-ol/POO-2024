@@ -217,9 +217,6 @@ public class Cine {
         return this.listaAdministradores.stream().filter(a -> a.getId().equals(idAdministrador)).findFirst().orElse(null);
     }
 
-    public boolean validarDisponibilidadPelicula(int posicion){
-
-    }
 
     public void funciones() {
         LocalTime horaActual = LocalTime.now();
