@@ -1,6 +1,7 @@
 package menu;
 
 import cine.Cine;
+import metodoPago.MetodoPago;
 import peliculas.Pelicula;
 import usuarios.administradores.Administrador;
 
@@ -105,7 +106,8 @@ public class MenuAdmin {
                 menu.signup();
                 break;
             case 4:
-                cine.mostrarCartelera();
+                /*MetodoPago metodoPago = new MetodoPago();
+                metodoPago.procesarTarjeta(administradorEnSesion);*/
 
                 break;
             case 5:
