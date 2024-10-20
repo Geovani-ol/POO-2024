@@ -19,7 +19,8 @@ public class MenuAdmin {
         System.out.println("4.- Mostrar Cartelera");
         System.out.println("5.- Mostrar Assientos de Sala");
         System.out.println("6.- Mostrar Clientes");
-        System.out.println("7.- Salir");
+        System.out.println("7.- Mostrar Funciones");
+        System.out.println("8.- Salir");
 
         System.out.print("Seleccione una opción: ");
         return scanner.nextInt();
@@ -132,6 +133,12 @@ public class MenuAdmin {
                 cine.mostrarClientes();
                 break;
             case 7:
+                cine.listaFunciones.removeAll(cine.listaFunciones);
+                for (int i = 0; i < 5; i++) {
+                    cine.funciones(i);
+                }
+                cine.mostrarFunciones();
+            case 8:
                 scanner.nextLine();
                 return false;
         }
