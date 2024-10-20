@@ -308,25 +308,34 @@ public class Cine {
                 case 1:
                     tipoAsiento = "REGULAR";
                     precioAsiento = 100.0;
+                    if (descuento) {
+                        precioAsientoT  = precioAsiento * 0.75;
+                        precioAsientoT = precioAsientoT * numeroAsientos;
+                    }
+                    precioAsientoT = precioAsiento * numeroAsientos;
                     break;
                 case 2:
                     tipoAsiento = "PREMIUM";
                     precioAsiento = 200.0;
+                    if (descuento) {
+                        precioAsientoT  = precioAsiento * 0.75;
+                        precioAsientoT = precioAsientoT * numeroAsientos;
+                    }
+                    precioAsientoT = precioAsiento * numeroAsientos;
                     break;
                 case 3:
                     tipoAsiento = "VIP";
                     precioAsiento = 400.0;
+                    if (descuento) {
+                        precioAsientoT  = precioAsiento * 0.75;
+                        precioAsientoT = precioAsientoT * numeroAsientos;
+                    }
+                    precioAsientoT = precioAsiento * numeroAsientos;
                     break;
                 default:
                     System.out.println("Opción no válida");
                     return;
             }
-            if (descuento) {
-                precioAsientoT = precioAsiento * 0.75;
-            } else {
-                precioAsientoT = precioAsiento;
-            }
-            precioAsientoT *= numeroAsientos;
 
             scanner.nextLine();
             String[] asientos = new String[numeroAsientos];
