@@ -1,27 +1,25 @@
 package cine;
-
 import peliculas.Funciones;
-import peliculas.Pelicula;
-
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ValidadorCine {
 
-    public boolean validarDisponibilidadSala(LocalTime horaInicio, LocalTime horaFin, String nombreSala, ArrayList<Funciones> listaFunciones){
-        for(Funciones funcion : listaFunciones){
+    public boolean validarDisponibilidadSala(LocalTime horaInicio, LocalTime horaFin, String nombreSala, ArrayList<Funciones> listaFunciones) {
+        for (Funciones funcion : listaFunciones) {
+            if (funcion.getSala().getNombre() == nombreSala) {
 
-            if(funcion.getSala().getNombre() == nombreSala && horaInicio.isAfter(funcion.getHorarioInicio()) ){
-                if (horaInicio.isBefore(funcion.getHorarioFin()) && horaFin.isAfter(funcion.getHorarioInicio())){
-
+                LocalTime inicioExistente = funcion.getHorarioInicio();
+                LocalTime finExistente = funcion.getHorarioFin();
+                // Verifica si los horarios se solapan
+                if (horaInicio.isBefore(finExistente) && horaFin.isAfter(inicioExistente)) {
                     return false;
                 }
             }
         }
         return true;
     }
+
 
     /**Cine cine = new Cine();
     Random random = new Random();

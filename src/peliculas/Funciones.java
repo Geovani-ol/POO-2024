@@ -46,4 +46,24 @@ public class Funciones {
     public LocalTime getHorarioFin() {
         return horarioFin;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+
+    public void setHorarioInicio(LocalTime horarioInicio) {
+        this.horarioInicio = horarioInicio;
+    }
+
+    public void setHorarioFin(LocalTime horarioFin) {
+        this.horarioFin = horarioFin;
+    }
 }

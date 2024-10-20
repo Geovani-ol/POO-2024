@@ -254,4 +254,15 @@ public class Cine {
         }
     }
 
+    public Funciones obtenerFuncionPorId(int id){
+        return this.listaFunciones.stream().filter(f -> f.getId() == id).findFirst().orElse(null);
+    }
+    public String mostrarFuncionPorId(int id){
+        Funciones funcion = obtenerFuncionPorId(id);
+        if(funcion != null){
+            return funcion.mostrarDatos();
+        }
+        return "Funcion no encontrada";
+    }
+
 }

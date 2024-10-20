@@ -69,4 +69,8 @@ public class Sala {
             System.out.println("El asiento " + filaLetra + columna +" ya está ocupado");
         }
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }
