@@ -2,7 +2,6 @@ package peliculas;
 
 import salas.Sala;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Funciones {

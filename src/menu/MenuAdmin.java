@@ -78,7 +78,7 @@ public class MenuAdmin {
 
                 break;
             case 2:
-                System.out.println("\n╚╤σσ  Seleccionaste la opcion Registrar Pelicula   ╚◘╤╤σ\n");
+                System.out.println("\n--  Seleccionaste la opción Registrar Pelicula --\n");
                 scanner.nextLine();
                 System.out.println("Ingrese el título de la película:");
                 String titulo = scanner.nextLine();
@@ -103,12 +103,14 @@ public class MenuAdmin {
                 break;
             case 3:
                 scanner.nextLine();
-                Menu menu = new Menu();
+                Menu menu = new Menu(cine);
                 menu.signup();
                 break;
             case 4:
                 /*MetodoPago metodoPago = new MetodoPago();
                 metodoPago.procesarTarjeta(administradorEnSesion);*/
+
+                cine.mostrarCartelera();
 
                 break;
             case 5:
@@ -141,6 +143,9 @@ public class MenuAdmin {
             case 8:
                 scanner.nextLine();
                 return false;
+            default:
+                System.out.println("Selección Incorrecta, Intente Nuevamente");
+                break;
         }
         return true;
     }

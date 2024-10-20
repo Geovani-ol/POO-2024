@@ -32,6 +32,9 @@ public class MenuEmpleado {
             case 5:
                 scanner.nextLine();
                 return false;
+            default:
+                System.out.println("Selección Incorrecta, Intente Nuevamente");
+                break;
         }
         return true;
     }
