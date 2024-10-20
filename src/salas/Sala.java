@@ -71,4 +71,8 @@ public class Sala {
             return false;
         }
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

@@ -21,7 +21,7 @@ public class Funciones {
     }
 
     public String mostrarDatos() {
-        return String.format("ID: %d   |   Pelicula: %s  |   %s  |  horario Inicio: %s  |  horario Fin: %s",
+        return String.format("Codigo: %d   |   Pelicula: %s  |   %s  |  horario Inicio: %s  |  horario Fin: %s",
                 getId(),
                 pelicula.getTitulo(),
                 sala.getNombre(),
@@ -44,5 +44,25 @@ public class Funciones {
     }
     public LocalTime getHorarioFin() {
         return horarioFin;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+
+    public void setHorarioInicio(LocalTime horarioInicio) {
+        this.horarioInicio = horarioInicio;
+    }
+
+    public void setHorarioFin(LocalTime horarioFin) {
+        this.horarioFin = horarioFin;
     }
 }

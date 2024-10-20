@@ -2,10 +2,12 @@ package menu;
 
 import cine.Cine;
 import metodoPago.MetodoPago;
+import peliculas.Funciones;
 import peliculas.Pelicula;
 import usuarios.administradores.Administrador;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class MenuAdmin {
@@ -20,7 +22,8 @@ public class MenuAdmin {
         System.out.println("5.- Mostrar Assientos de Sala");
         System.out.println("6.- Mostrar Clientes");
         System.out.println("7.- Mostrar Funciones");
-        System.out.println("8.- Salir");
+        System.out.println("8.- Editar Funciones");
+        System.out.println("9.- Salir");
 
         System.out.print("Seleccione una opción: ");
         return scanner.nextInt();
@@ -107,40 +110,91 @@ public class MenuAdmin {
                 menu.signup();
                 break;
             case 4:
-                /*MetodoPago metodoPago = new MetodoPago();
-                metodoPago.procesarTarjeta(administradorEnSesion);*/
+
 
                 cine.mostrarCartelera();
 
                 break;
             case 5:
-                cine.mostrarAsientosDeSala("Sala 1");
-                System.out.println("Cuantos asientos quieres reservar?");
-                int numeroAsientos = scanner.nextInt();
-                String[] asientos = new String[numeroAsientos];
-
-                scanner.nextLine();
-
-                for (int i = 0; i < asientos.length; i++) {
-                    System.out.println("Selecciona un Asiento");
-                    String celda = scanner.nextLine();
-
-                    asientos[i] = celda;
-                }
-
-                cine.reservarAsientos("Sala 1", asientos);
-                cine.mostrarAsientosDeSala("Sala 1");
                 break;
             case 6:
                 cine.mostrarClientes();
                 break;
             case 7:
                 cine.listaFunciones.removeAll(cine.listaFunciones);
-                for (int i = 0; i < 5; i++) {
+                for (int i = 1; i <= 5; i++) {
                     cine.funciones(i);
                 }
                 cine.mostrarFunciones();
+                break;
             case 8:
+                scanner.nextLine();
+                int opcion = 0;
+                boolean bandera = true;
+                cine.mostrarFunciones();
+                while(bandera) {
+                    System.out.println("\n-- Seleccionaste la opcion de editar las funciones --\n");
+                    System.out.println("1.- Editar Funcion");
+                    System.out.println("2.- Eliminar Funcion");
+                    System.out.println("3.- Regresar");
+                    System.out.print("Seleccione una opción: ");
+                    opcion = scanner.nextInt();
+                    switch (opcion) {
+                        case 1:
+                            System.out.println("Ingresa el id de la Funcion que deseas modificar: ");
+                            int idFuncion = scanner.nextInt();
+                            Funciones funcion = cine.obtenerFuncionPorId(idFuncion);
+                            System.out.println("La funcion que quieres editar es la siguiente: ");
+                            cine.mostrarFuncionPorId(idFuncion);
+                            boolean bandera2 = true;
+                            while(bandera2) {
+                                System.out.println("Que deseas modificar?");
+                                System.out.println("1.- Hora");
+                                System.out.println("2.- Sala");
+                                System.out.println("3.- Pelicula");
+                                System.out.println("4.- Regresar");
+                                System.out.print("Seleccione una opción: ");
+                                int opcion2 = scanner.nextInt();
+                                switch (opcion2) {
+                                    case 1:
+                                        System.out.println("Ingresa la nueva hora: ");
+                                        int hora = scanner.nextInt();
+                                        System.out.println("Ingresa los nuevos minutos");
+                                        int minutos = scanner.nextInt();
+                                        funcion.setHorarioInicio(LocalTime.of(hora, minutos));
+                                        System.out.println("\nCambio de hora exitoso\n");
+                                        break;
+                                    case 2:
+                                        System.out.println("Ingresa la nueva sala: ");
+                                        int sala = scanner.nextInt();
+                                        funcion.sala.setNombre("Sala ".concat(String.valueOf(sala)));
+                                        break;
+                                    case 3:
+                                        System.out.println("Ingresa el id de la nueva pelicula: ");
+                                        String idNuevaPelicula = scanner.nextLine();
+                                        funcion.pelicula = cine.obtenerPeliculaPorId(idNuevaPelicula);
+                                        break;
+                                    case 4:
+                                        return false;
+                                }
+                            }
+                            break;
+                        case 2:
+                            System.out.println("Ingresa el id de la Funcion que deseas eliminar: ");
+                            int idFuncionEliminar = scanner.nextInt();
+                            Funciones funcionEliminar = cine.obtenerFuncionPorId(idFuncionEliminar);
+                            cine.listaFunciones.remove(funcionEliminar);
+                            System.out.println("Funcion eliminada con exito");
+                            break;
+                        case 3:
+                            return false;
+                        default:
+                            System.out.println("\nOpcion no valida\n");
+                            break;
+                    }
+                }
+                break;
+            case 9:
                 scanner.nextLine();
                 return false;
             default:

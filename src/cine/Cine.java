@@ -11,10 +11,7 @@ import usuarios.empleados.Empleado;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Cine {
     public ArrayList<Usuario> listaUsuarios = new ArrayList<>();
@@ -175,23 +172,24 @@ public class Cine {
 
     // Reserva de Asientos
 
-    public String[] reservarAsientos(String nombreSala, String[] asientos) {
+    public void reservarAsientos(String nombreSala, String[] asientos) {
         Sala sala = buscarSalaPorNombre(nombreSala);
-        ArrayList<String> reservados = new ArrayList<>();
         if (sala != null) {
             for (String asiento : asientos) {
                 char fila = asiento.charAt(0);
-                int columna = Integer.parseInt(asiento.substring(1));
+                String columnaStr = asiento.substring(1);
 
-                boolean reserva = sala.reservarAsiento(fila, columna);
-
-                if (reserva) {
-                    reservados.add(asiento);
+                int columna = 0;
+                try {
+                    columna = Integer.parseInt(columnaStr);
+                } catch (NumberFormatException e) {
+                    System.out.println("El valor ingresado para la columna es inválido. Ingrese un número válido para la columna.");
+                    return;
                 }
+
+                sala.reservarAsiento(fila, columna);
             }
         }
-
-        return reservados.toArray(new String[0]);
     }
 
     // Validaciones Externas
@@ -207,6 +205,7 @@ public class Cine {
     }
 
     //    metodo para obtener pelicula por id
+
     public Pelicula obtenerPeliculaPorId(String idPelicula) {
         return this.listaPeliculas.stream().filter(pelicula -> pelicula.getId().equals(idPelicula)).findFirst().orElse(null);
     }
@@ -236,7 +235,7 @@ public class Cine {
             Sala sala = null;
             do {
                 sala = listaSalas.get(random.nextInt(0,listaSalas.size()-1));
-                LocalTime horaFin = LocalTime.of(Hora,Minutos, 0).plusMinutes(Integer.parseInt(pelicula.getDuracion()));
+                LocalTime horaFin = LocalTime.of(Hora,Minutos,0).plusMinutes(Integer.parseInt(pelicula.getDuracion()));
                 validador.validarDisponibilidadSala(horaActual, horaFin, sala.getNombre(), listaFunciones);
             }while (false);
             Funciones funcion = new Funciones(idFuncion,pelicula, sala, horaActual, horaActual.plusMinutes(Integer.parseInt(pelicula.getDuracion())));
@@ -248,61 +247,109 @@ public class Cine {
 
     // metodo mostrar datos de funciones
     public void mostrarFunciones() {
-        System.out.println("\n--- Funciones de Cinépolis ---\n");
+        System.out.println("\n--- Funciones de Disponibles ---\n");
         for (Funciones funcion : this.listaFunciones) {
             System.out.println(funcion.mostrarDatos());
         }
     }
 
-    public Funciones generarFuncion(Pelicula pelicula) {
-        if (pelicula == null) {
-            return null;
+    public Funciones obtenerFuncionPorId(int id){
+        return this.listaFunciones.stream().filter(f -> f.getId() == id).findFirst().orElse(null);
+    }
+    public String mostrarFuncionPorId(int id){
+        Funciones funcion = obtenerFuncionPorId(id);
+        if(funcion != null){
+            return funcion.mostrarDatos();
         }
-        int Hora = random.nextInt(8, 20); // Hora aleatoria entre 8:00 y 20:00
-        int Minutos = random.nextInt(0, 59);
-        LocalTime horaActual = LocalTime.of(Hora, Minutos, 0);
-        Sala sala = listaSalas.get(random.nextInt(listaSalas.size())); // Selecciona una sala aleatoria
-
-        Funciones funcion = new Funciones(1, pelicula, sala, horaActual, horaActual.plusMinutes(Integer.parseInt(pelicula.getDuracion())));
-        listaFunciones.add(funcion);
-        return funcion;
+        return "Funcion no encontrada";
     }
 
-    public void comprarBoleto(String codigoPelicula) {
+    public void comprarBoleto(Cliente cliente) {
         Scanner scanner = new Scanner(System.in);
-        int columnas = 3;
-        Cartelera cartelera = new Cartelera(this, listaPeliculas, columnas);
-        Pelicula peliculaSeleccionada = cartelera.obtenerPeliculaDeCartelera(codigoPelicula);
+        this.listaFunciones.removeAll(this.listaFunciones);
+        for (int i = 1; i <= 5; i++) {
+            this.funciones(i);
+        }
+        this.mostrarFunciones();
 
-        if (peliculaSeleccionada != null) {
-            System.out.println("Has seleccionado: " + peliculaSeleccionada.getTitulo());
-            Funciones funcion = generarFuncion(peliculaSeleccionada);
+        System.out.println("\nIntroduce el Codigo de la función que deseas:");
+        int idFuncion = scanner.nextInt();
+        Funciones funcionSeleccionada = obtenerFuncionPorId(idFuncion);
 
-            this.mostrarAsientosDeSala(funcion.getSala().getNombre());
+        if (funcionSeleccionada != null) {
+            boolean descuento = cliente.mesCumpleanios();
+            System.out.println("Has seleccionado: " + funcionSeleccionada.getPelicula().getTitulo());
+            mostrarAsientosDeSala(funcionSeleccionada.getSala().getNombre());
 
-            System.out.println("Cuantos asientos quieres reservar?");
-            int numeroAsientos = scanner.nextInt();
-            String[] asientos = new String[numeroAsientos];
-
-            scanner.nextLine();
-
-            for (int i = 0; i < asientos.length; i++) {
-                System.out.println("Selecciona un Asiento");
-                String celda = scanner.nextLine();
-
-                asientos[i] = celda;
+            System.out.println("¿Cuántos asientos quieres reservar?");
+            int numeroAsientos = 0;
+            try {
+                numeroAsientos = scanner.nextInt();
+                if (numeroAsientos <= 0) {
+                    System.out.println("El número de asientos debe ser mayor a cero.");
+                    return;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, introduce un número válido.");
+                return;
+            } finally {
+                scanner.nextLine();
             }
 
-            String[] asientosReservado = this.reservarAsientos(funcion.getSala().getNombre(), asientos);
+            System.out.println("\n- ¿Qué tipos de asientos quieres reservar? -\n");
+            System.out.println("1.- REGULAR - $100");
+            System.out.println("2.- PREMIUM - $200");
+            System.out.println("3.- VIP - $400");
+            System.out.println("Selecciona una opción:");
+            int opcion = scanner.nextInt();
+            String tipoAsiento = "";
+            Double precioAsiento = 0.0, precioAsientoT = 0.0;
+            switch (opcion) {
+                case 1:
+                    tipoAsiento = "REGULAR";
+                    precioAsiento = 100.0;
+                    break;
+                case 2:
+                    tipoAsiento = "PREMIUM";
+                    precioAsiento = 200.0;
+                    break;
+                case 3:
+                    tipoAsiento = "VIP";
+                    precioAsiento = 400.0;
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+                    return;
+            }
+            if (descuento) {
+                precioAsientoT = precioAsiento * 0.75;
+            } else {
+                precioAsientoT = precioAsiento;
+            }
+            precioAsientoT *= numeroAsientos;
+
+            scanner.nextLine();
+            String[] asientos = new String[numeroAsientos];
+            for (int i = 0; i < asientos.length; i++) {
+                System.out.println("Selecciona un asiento:");
+                asientos[i] = scanner.nextLine();
+            }
+
+            reservarAsientos(funcionSeleccionada.getSala().getNombre(), asientos);
+            mostrarAsientosDeSala(funcionSeleccionada.getSala().getNombre());
 
             System.out.println("Boleto comprado con éxito:");
-            System.out.println("Película: " + funcion.getPelicula().getTitulo());
-            System.out.println("Sala: " + funcion.getSala().getNombre());
-            System.out.println("Asientos: " + Arrays.toString(asientosReservado));
-            System.out.println("Hora: " + funcion.getHorarioInicio());
-            System.out.println("Duración: " + funcion.getPelicula().getDuracion() + " min");
+            System.out.println("Película: " + funcionSeleccionada.getPelicula().getTitulo());
+            System.out.println(funcionSeleccionada.getSala().getNombre());
+            System.out.println("Precio por asiento: " + precioAsiento + " / Precio total: " + (precioAsiento * numeroAsientos));
+            System.out.println("Asientos reservados: " + Arrays.toString(asientos));
+            System.out.println("Tipo de asiento: " + tipoAsiento);
+            System.out.println("Cliente: " + cliente.getNombre() + " " + cliente.getApellidos());
+            System.out.println("Hora: " + funcionSeleccionada.getHorarioInicio());
+            System.out.println("Duración: " + funcionSeleccionada.getPelicula().getDuracion() + " minutos");
+            System.out.println("Descuento aplicable: " + descuento);
         } else {
-            System.out.println("Película no encontrada.");
+            System.out.println("Función no encontrada.");
         }
     }
 }

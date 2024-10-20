@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Cartelera {
     private String[][] matrizCartelera;
+    private Pelicula[][] referenciaPeliculas;
     private final int tamanoCelda = 25, tamano = 10; // Tamaño fijo para cada celda
     Cine cine;
 
@@ -14,6 +15,7 @@ public class Cartelera {
         this.cine = cine;
         int filas = (int) Math.ceil((double) peliculas.size() / columnas);
         this.matrizCartelera = new String[filas][columnas];
+        this.referenciaPeliculas = new Pelicula[filas][columnas];
         llenarCartelera(peliculas);
     }
 
@@ -29,6 +31,7 @@ public class Cartelera {
                             ajustarTamano(pelicula.getClasificacion(), tamano) + " " +
                             ajustarTamano(pelicula.getDuracion(), tamano);
                     matrizCartelera[i][j] = contenidoCelda;
+                    referenciaPeliculas[i][j] = pelicula; // Guardamos la referencia de la película
                     contador++;
                 } else {
                     matrizCartelera[i][j] = ajustarTamano("", tamanoCelda);
@@ -58,24 +61,5 @@ public class Cartelera {
             System.out.println("|");
             System.out.println(new String(new char[(int) (strings.length * (tamanoCelda * 2.26))]).replace("\0", "-"));
         }
-    }
-
-    public Pelicula obtenerPeliculaDeCartelera(String codigoPelicula) {
-        for (int i = 0; i < matrizCartelera.length; i++) {
-            for (int j = 0; j < matrizCartelera[i].length; j++) {
-                if (matrizCartelera[i][j] != null && matrizCartelera[i][j].startsWith(codigoPelicula)) {
-                    String[] partes = matrizCartelera[i][j].split(" - ");
-                    if (partes.length > 1) {
-                        String tituloPelicula = partes[1].trim();
-                        for (Pelicula pelicula : cine.listaPeliculas) {
-                            if (pelicula.getTitulo().equals(tituloPelicula)) {
-                                return pelicula;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return null;
     }
 }
