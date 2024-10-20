@@ -318,7 +318,7 @@ public class Cine {
                     tipoAsiento = "PREMIUM";
                     precioAsiento = 200.0;
                     if (descuento) {
-                        precioAsientoT  = precioAsiento * 0.75;
+                        precioAsientoT  = precioAsiento * 0.6;
                         precioAsientoT = precioAsientoT * numeroAsientos;
                     }
                     precioAsientoT = precioAsiento * numeroAsientos;
@@ -327,7 +327,7 @@ public class Cine {
                     tipoAsiento = "VIP";
                     precioAsiento = 400.0;
                     if (descuento) {
-                        precioAsientoT  = precioAsiento * 0.75;
+                        precioAsientoT  = precioAsiento * 0.35;
                         precioAsientoT = precioAsientoT * numeroAsientos;
                     }
                     precioAsientoT = precioAsiento * numeroAsientos;
