@@ -5,6 +5,7 @@ import metodoPago.MetodoPago;
 import peliculas.Funciones;
 import peliculas.Pelicula;
 import usuarios.administradores.Administrador;
+import usuarios.empleados.Empleado;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,12 +19,15 @@ public class MenuAdmin {
         System.out.println("1.- Registrar Administrador");
         System.out.println("2.- Registrar Pelicula");
         System.out.println("3.- Registrar Cliente");
-        System.out.println("4.- Mostrar Cartelera");
-        System.out.println("5.- Mostrar Assientos de Sala");
-        System.out.println("6.- Mostrar Clientes");
-        System.out.println("7.- Mostrar Funciones");
-        System.out.println("8.- Editar Funciones");
-        System.out.println("9.- Salir");
+        System.out.println("4.- Registrar Empleado");
+        System.out.println("5.- Mostrar Funciones");
+        System.out.println("6.- Mostrar Cartelera");
+        System.out.println("7.- Mostrar Assientos de Sala");
+        System.out.println("8.- Mostrar Clientes");
+        System.out.println("9.- Registrar Funciones");
+        System.out.println("10.- Editar Funciones");
+        System.out.println("11.- Mostrar Emleados");
+        System.out.println("12.- Salir");
 
         System.out.print("Seleccione una opción: ");
         return scanner.nextInt();
@@ -110,24 +114,75 @@ public class MenuAdmin {
                 menu.signup();
                 break;
             case 4:
+                // REGISTRAR EMPLEADO
+                scanner.nextLine();
+                System.out.println("\n--- Registrar Empleado ---");
 
+                System.out.print("\nIngrese el Nombre: ");
+                String nombreEmpleado = scanner.nextLine();
 
+                System.out.print("\nIngrese los Apellidos: ");
+                String apellidosEmpleado = scanner.nextLine();
+
+                System.out.print("\nIngrese el Día de Nacimiento: ");
+                int diaEmpleado = scanner.nextInt();
+
+                System.out.print("\nIngrese el Mes de Nacimiento: ");
+                int mesEmpleado = scanner.nextInt();
+
+                System.out.print("\nIngrese el Año de Nacimiento: ");
+                int anioEmpleado = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("\nIngrese el Telefono: ");
+                String telefonoEmpleado = scanner.nextLine();
+
+                System.out.print("\nIngrese la Dirección: ");
+                String direccionEmpleado = scanner.nextLine();
+
+                System.out.print("\nIngrese el RFC: ");
+                String rfcEmpleado = scanner.nextLine();
+
+                System.out.print("\nIngrese la contrasenia: ");
+                String contraseniaEmpleado = scanner.nextLine();
+
+                LocalDate fechaNacimientoEmpleado = LocalDate.of(anioEmpleado, mesEmpleado, diaEmpleado);
+                String idEmpleado = cine.generarIdEmpleados(nombreEmpleado, apellidosEmpleado);
+
+                Empleado empleado = new Empleado(idEmpleado, nombreEmpleado, apellidosEmpleado, fechaNacimientoEmpleado, telefonoEmpleado, direccionEmpleado, contraseniaEmpleado, rfcEmpleado);
+                cine.registrarEmpleado(empleado);
+                break;
+            case 5:
+                System.out.println("\nSeleccionaste la opcion de mostrar funciones\n");
+                cine.mostrarFunciones();
+                break;
+            case 6:
                 cine.mostrarCartelera();
 
                 break;
-            case 5:
-                break;
-            case 6:
-                cine.mostrarClientes();
-                break;
             case 7:
-                cine.listaFunciones.removeAll(cine.listaFunciones);
-                for (int i = 1; i <= 5; i++) {
-                    cine.funciones(i);
-                }
-                cine.mostrarFunciones();
                 break;
             case 8:
+                cine.mostrarClientes();
+                break;
+            case 9:
+                int numeroDeFunciones;
+                boolean bandera1 = true;
+                while(bandera1){
+                    System.out.println("\nCuantas funciones quieres generar en este dia? \n");
+                    numeroDeFunciones = scanner.nextInt();
+                    if(numeroDeFunciones > 5){
+                        System.out.println("No se pueden generar mas de 5 funciones por dia");
+                        bandera1 = true;
+                    } else {
+                        cine.setcantidadFunciones(numeroDeFunciones);
+                        cine.generarFunciones();
+                        bandera1 = false;
+                    }
+                }
+
+                break;
+            case 10:
                 scanner.nextLine();
                 int opcion = 0;
                 boolean bandera = true;
@@ -194,7 +249,10 @@ public class MenuAdmin {
                     }
                 }
                 break;
-            case 9:
+            case 11:
+                cine.mostrarEmpleados();
+                break;
+            case 12:
                 scanner.nextLine();
                 return false;
             default:
