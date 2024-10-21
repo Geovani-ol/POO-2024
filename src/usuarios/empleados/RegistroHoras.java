@@ -3,7 +3,6 @@ package usuarios.empleados;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class RegistroHoras {
     private ArrayList<String> horasEntrada;

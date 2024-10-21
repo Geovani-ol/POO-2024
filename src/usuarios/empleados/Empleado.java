@@ -37,7 +37,4 @@ public class Empleado extends Usuario {
     public RegistroHoras obtenerHoras(String nombreEmpleado) {
         return registros.get(nombreEmpleado);
     }
-
-
-
 }

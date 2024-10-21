@@ -30,20 +30,14 @@ public class MenuCliente {
 
                 cine.comprarBoleto(clienteEnSesion);
                 break;
-            case 3:
-<<<<<<< HEAD
-                System.out.println("\n--    Comprar Boletos    --\n");
-                //trabajando en la compra de boletos
-                break;
             case 4:
-
                 System.out.println("\n--    Dulceria    --\n");
                 System.out.println("Seleccione lo que desea comprar: ");
                 System.out.println("1.- Palomitas y nachos");
                 System.out.println("2.- Bebidas");
                 System.out.println("3.- Combos");
                 System.out.println("4.- Regresar");
-                int o=scanner.nextInt();
+                int o = scanner.nextInt();
                 switch (o) {
                     case 1: System.out.println("Palomitas y Nachos:");
                         for (Dulceria producto: cine.listaPalomitas) {
@@ -61,8 +55,6 @@ public class MenuCliente {
                 }
                 break;
             case 5:
-=======
->>>>>>> f72cd219a770cba49c131c5e51ef33c9f0d38e8a
                 scanner.nextLine();
                 return false;
             default:
