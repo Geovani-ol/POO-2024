@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class Cine {
+public class Cine  {
     public ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     public ArrayList<Administrador> listaAdministradores = new ArrayList<>();
     public ArrayList<Empleado> listaEmpleados = new ArrayList<>();
@@ -23,6 +23,7 @@ public class Cine {
     public ArrayList<Funciones> listaFunciones = new ArrayList<>();
     ArrayList<Pelicula> peliculasReproducidas = new ArrayList<>();
     ValidadorCine validador = new ValidadorCine();
+    public int cantidadFunciones;
     Random random = new Random();
 
     public Cine() {
@@ -58,6 +59,8 @@ public class Cine {
         listaPeliculas.add(new Pelicula("P-MAR124P", "The Martian", "Ciencia Ficción", "124", "PG-13", "Un astronauta es abandonado en Marte y debe usar su ingenio para sobrevivir."));
         listaPeliculas.add(new Pelicula("P-GRE130P", "Green Book", "Biografía/Drama", "130", "PG-13", "Un pianista afroamericano y su chofer blanco forman una inesperada amistad en la América segregada."));
 
+        listaEmpleados.add(new Empleado("E-2024TERP73586","POLA","Tejas",LocalDate.of(1990, 7, 11),"4432659874","Vicente","P09876","2314"));
+
 
         listaSalas.add(new Sala("Sala 1", 5, 6));
         listaSalas.add(new Sala("Sala 2", 6, 7));
@@ -82,6 +85,14 @@ public class Cine {
                 return id;
             }
         } while (true);
+    }
+
+    public String generarIdEmpleados(String nombreEmpleado, String apellidosEmpleado) {
+        int anio = LocalDate.now().getYear();
+        String apellidoTresletras = apellidosEmpleado.substring(0, 3).toUpperCase();
+        String nombreUnaLetra = nombreEmpleado.substring(0, 1).toUpperCase();
+        int numeroRandom = random.nextInt(100000 - 50) + 50;
+        return String.format("E-%d%s%s%d", anio, apellidoTresletras, nombreUnaLetra, numeroRandom);
     }
 
     public String generarIdCliente(String nombreCliente, String apellidosCliente) {
@@ -121,6 +132,10 @@ public class Cine {
         this.listaClientes.add(cliente);
         this.listaUsuarios.add(cliente);
     }
+    public void registrarEmpleado(Empleado empleado) {
+        this.listaEmpleados.add(empleado);
+        this.listaUsuarios.add(empleado);
+    }
 
     public void registrarPelicula(Pelicula pelicula){
         this.listaPeliculas.add(pelicula);
@@ -147,6 +162,13 @@ public class Cine {
         System.out.println("\n-- Clientes de Cinépolis");
         for (Cliente cliente : this.listaClientes) {
             System.out.println(cliente.mostrarDatos());
+        }
+    }
+
+    public void mostrarEmpleados() {
+        System.out.println("\n-- Empleados de Cinépolis");
+        for (Empleado empleado : this.listaEmpleados) {
+            System.out.println(empleado.mostrarDatos());
         }
     }
 
@@ -360,5 +382,23 @@ public class Cine {
         } else {
             System.out.println("Función no encontrada.");
         }
+    }
+    public void generarFunciones() {
+        this.listaFunciones.removeAll(this.listaFunciones);
+        for (int i = 1; i <= getCantidadFunciones(); i++) {
+            this.funciones(i);
+        }
+    }
+
+    public Cliente obtenerClientePorId(String id ) {
+        return this.listaClientes.stream().filter(c -> c.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    public void setcantidadFunciones(int cantidadFunciones) {
+        this.cantidadFunciones = cantidadFunciones;
+    }
+
+    public int getCantidadFunciones() {
+        return cantidadFunciones;
     }
 }
