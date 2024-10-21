@@ -32,7 +32,7 @@ public class Cine {
 
         ArrayList<Pelicula> peliculasReproducidas = new ArrayList<>();
         ValidadorCine validador = new ValidadorCine();
-        public int cantidadFunciones;
+        public int cantidadFunciones=5;
         Random random = new Random();
 
         public Cine() {
@@ -68,7 +68,11 @@ public class Cine {
             listaPeliculas.add(new Pelicula("P-MAR124P", "The Martian", "Ciencia Ficción", "124", "PG-13", "Un astronauta es abandonado en Marte y debe usar su ingenio para sobrevivir."));
             listaPeliculas.add(new Pelicula("P-GRE130P", "Green Book", "Biografía/Drama", "130", "PG-13", "Un pianista afroamericano y su chofer blanco forman una inesperada amistad en la América segregada."));
 
+            listaEmpleados.add(new Empleado("E-2024ZUNP43809", "Pancho", "Zunigs", LocalDate.of(2002,5,2),"1289943", "huerta", "1299", "1299"));
+            listaUsuarios.add(new Empleado("E-2024ZUNP43809", "Pancho", "Zunigs", LocalDate.of(2002,5,2),"1289943", "huerta", "1299", "1299"));
 
+            listaClientes.add(new Cliente("C-2024OLVJ20881","Jose","Olvera",LocalDate.of(2005,4,19),"2345678","hueertas","235ytrer","0099"));
+            listaUsuarios.add(new Cliente("C-2024OLVJ20881","Jose","Olvera",LocalDate.of(2005,4,19),"2345678","hueertas","235ytrer","0099"));
             listaSalas.add(new Sala("Sala 1", 5, 6));
             listaSalas.add(new Sala("Sala 2", 6, 7));
             listaSalas.add(new Sala("Sala 3", 7, 8));
@@ -578,9 +582,10 @@ public class Cine {
 
         public void generarFunciones() {
             this.listaFunciones.removeAll(this.listaFunciones);
-            for (int i = 1; i <= getCantidadFunciones(); i++) {
+            for (int i = 1; i <= this.getCantidadFunciones(); i++) {
                 this.funciones(i);
             }
+            this.mostrarFunciones();
         }
 
         public Cliente obtenerClientePorId(String id) {

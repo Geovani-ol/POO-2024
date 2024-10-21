@@ -7,21 +7,16 @@ import java.util.HashMap;
 
 public class Empleado extends Usuario {
     public String rfc;
-    public HashMap<String, RegistroHoras> registros;
 
     public Empleado(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String direccion, String contrasenia, String rfc) {
         super(id, nombre, apellidos, fechaNacimiento, telefono, direccion, contrasenia, Rol.EMPLEADO);
         this.rfc = rfc;
-        this.registros = new HashMap<>();
     }
 
     public String getRfc() {
         return rfc;
     }
 
-    public HashMap<String, RegistroHoras> getRegistros() {
-        return registros;
-    }
 
     public String mostrarDatos(){
         return String.format("Id: %s  |  Nombre: %s  |  Apellidos: %s  |  Fecha de Nacimiento: %s  |  Telefono: %s  |  Dirección: %s  |  RFC: %s",
@@ -34,7 +29,13 @@ public class Empleado extends Usuario {
                 getRfc());
     }
 
+<<<<<<< HEAD
     public RegistroHoras obtenerHoras(String nombreEmpleado) {
         return registros.get(nombreEmpleado);
     }
+=======
+
+
+
+>>>>>>> afe1aa738bd01bf93ec3fcaad58a45139e248216
 }
