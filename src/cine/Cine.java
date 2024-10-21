@@ -374,11 +374,6 @@ public class Cine {
         public void comprarBoleto(Cliente cliente) {
             Scanner scanner = new Scanner(System.in);
             MetodoPago metodoPago = new MetodoPago();
-            this.listaFunciones.removeAll(this.listaFunciones);
-            for (int i = 1; i <= 5; i++) {
-                this.funciones(i);
-            }
-            this.mostrarFunciones();
 
             System.out.println("\nIntroduce el Codigo de la función que deseas:");
             int idFuncion = scanner.nextInt();

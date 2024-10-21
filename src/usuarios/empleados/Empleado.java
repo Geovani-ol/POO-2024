@@ -28,4 +28,6 @@ public class Empleado extends Usuario {
                 getDireccion(),
                 getRfc());
     }
+
+
 }
