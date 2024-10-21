@@ -73,6 +73,7 @@ public class Cine {
 
             listaClientes.add(new Cliente("C-2024OLVJ20881","Jose","Olvera",LocalDate.of(2005,4,19),"2345678","hueertas","235ytrer","0099"));
             listaUsuarios.add(new Cliente("C-2024OLVJ20881","Jose","Olvera",LocalDate.of(2005,4,19),"2345678","hueertas","235ytrer","0099"));
+
             listaSalas.add(new Sala("Sala 1", 5, 6));
             listaSalas.add(new Sala("Sala 2", 6, 7));
             listaSalas.add(new Sala("Sala 3", 7, 8));

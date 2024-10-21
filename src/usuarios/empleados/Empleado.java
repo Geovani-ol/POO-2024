@@ -28,14 +28,4 @@ public class Empleado extends Usuario {
                 getDireccion(),
                 getRfc());
     }
-
-<<<<<<< HEAD
-    public RegistroHoras obtenerHoras(String nombreEmpleado) {
-        return registros.get(nombreEmpleado);
-    }
-=======
-
-
-
->>>>>>> afe1aa738bd01bf93ec3fcaad58a45139e248216
 }
