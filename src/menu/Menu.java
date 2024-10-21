@@ -11,8 +11,12 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
-    Cine cine = new Cine();
+    Cine cine;
     Scanner scanner = new Scanner(System.in);
+
+    public Menu(Cine cine) {
+        this.cine = cine;
+    }
 
     public void inicioSecion() {
         int intentosMaximos = 3, intentosUsuario = 0;

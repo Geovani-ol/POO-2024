@@ -1,15 +1,21 @@
 package peliculas;
 
+import cine.Cine;
+
 import java.util.ArrayList;
 
 public class Cartelera {
     private String[][] matrizCartelera;
+    private Pelicula[][] referenciaPeliculas;
     private final int tamanoCelda = 25, tamano = 10; // Tamaño fijo para cada celda
+    Cine cine;
 
     // Constructor que toma el array de películas y el número de columnas deseadas
-    public Cartelera(ArrayList<Pelicula> peliculas, int columnas) {
+    public Cartelera(Cine cine, ArrayList<Pelicula> peliculas, int columnas) {
+        this.cine = cine;
         int filas = (int) Math.ceil((double) peliculas.size() / columnas);
         this.matrizCartelera = new String[filas][columnas];
+        this.referenciaPeliculas = new Pelicula[filas][columnas];
         llenarCartelera(peliculas);
     }
 
@@ -25,6 +31,7 @@ public class Cartelera {
                             ajustarTamano(pelicula.getClasificacion(), tamano) + " " +
                             ajustarTamano(pelicula.getDuracion(), tamano);
                     matrizCartelera[i][j] = contenidoCelda;
+                    referenciaPeliculas[i][j] = pelicula; // Guardamos la referencia de la película
                     contador++;
                 } else {
                     matrizCartelera[i][j] = ajustarTamano("", tamanoCelda);

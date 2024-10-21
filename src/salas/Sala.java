@@ -54,19 +54,25 @@ public class Sala {
         }
     }
 
-    public void reservarAsiento(char filaLetra, int columna) {
+    public boolean reservarAsiento(char filaLetra, int columna) {
         int fila = filaLetra - 'A';
 
         if (fila < 0 || fila >= filas || columna <= 0 || columna > columnas) {
-            System.out.println("Asiento no existente");
-            return;
+            System.out.println("Asiento no " + filaLetra + columna + " existente");
+            return false;
         }
 
         if (asientos[fila][columna - 1] == 'O') {
             asientos[fila][columna - 1] = 'X';
             System.out.println("Asiento " + filaLetra + columna + " reservado exitosamente");
+            return true;
         } else {
             System.out.println("El asiento " + filaLetra + columna +" ya está ocupado");
+            return false;
         }
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

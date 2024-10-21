@@ -27,4 +27,9 @@ public class Cliente extends Usuario {
                 getDireccion(),
                 getCurp());
     }
+
+    public boolean mesCumpleanios() {
+        LocalDate fecha = LocalDate.now();
+        return this.fechaNacimiento.getMonth() == fecha.getMonth();
+    }
 }
