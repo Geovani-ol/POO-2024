@@ -36,6 +36,8 @@ public class MenuEmpleado {
                 //empleadoEnSesion.registrarSalida();
             case 4:
                 System.out.println(empleadoEnSesion.mostrarDatos());
+                //empleadoEnSesion.mostrarRegistros();
+
             case 5:
                 //System.out.println(empleadoEnSesion.mostrarRegistros());
             case 6:

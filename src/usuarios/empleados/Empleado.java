@@ -2,19 +2,25 @@ package usuarios.empleados;
 
 import usuarios.Usuario;
 import usuarios.utils.Rol;
-
 import java.time.LocalDate;
+import java.util.HashMap;
 
 public class Empleado extends Usuario {
     public String rfc;
+    public HashMap<String, RegistroHoras> registros;
 
-    public Empleado(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String direccion, String contrasenia, String rfc) {
+    public Empleado(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String direccion, String contrasenia, String rfc, HashMap<String, RegistroHoras> registros) {
         super(id, nombre, apellidos, fechaNacimiento, telefono, direccion, contrasenia, Rol.EMPLEADO);
         this.rfc = rfc;
+        this.registros = new HashMap<>();
     }
 
     public String getRfc() {
         return rfc;
+    }
+
+    public HashMap<String, RegistroHoras> getRegistros() {
+        return registros;
     }
 
     public String mostrarDatos(){
@@ -28,26 +34,10 @@ public class Empleado extends Usuario {
                 getRfc());
     }
 
-    /*public void registrarEntrada() {
-        RegistroEmpleados nuevoRegistro = new RegistroEmpleados();
-        registros.add(nuevoRegistro);
-        System.out.println(nombre + " ha registrado la entrada.");
+    public RegistroHoras obtenerHoras(String nombreEmpleado) {
+        return registros.get(nombreEmpleado);
     }
 
-    public void registrarSalida() {
-        if (!registros.isEmpty() && registros.get(registros.size() - 1).getSalida() == null) {
-            registros.get(registros.size() - 1).registrarSalida();
-            System.out.println(nombre + " ha registrado la salida.");
-        }
-        else {
-            System.out.println("No se encontró una entrada sin salida.");
-        }
-    }
 
-    public void mostrarRegistros() {
-        System.out.println("Registros de " + nombre + ":");
-        for (RegistroEmpleados registro : registros) {
-            System.out.println(registro);
-        }
-    }*/
+
 }
