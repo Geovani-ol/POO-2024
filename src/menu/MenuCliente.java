@@ -14,9 +14,13 @@ public class MenuCliente {
         System.out.println("\n-- Bienvenido " + clienteEnSesion.getNombre() + " --\n");
         System.out.println("1.- Ver mis datos");
         System.out.println("2.- Comprar boletos");
+<<<<<<< HEAD
+        System.out.println("3.- Salir");
+=======
         System.out.println("3.- Mostrar Funciones");
         System.out.println("4.- Dulceria");
         System.out.println("5.- Salir");
+>>>>>>> afe1aa738bd01bf93ec3fcaad58a45139e248216
 
         System.out.print("Seleccione una opción: ");
         return scanner.nextInt();
@@ -33,6 +37,8 @@ public class MenuCliente {
                 cine.comprarBoleto(clienteEnSesion);
                 break;
             case 3:
+<<<<<<< HEAD
+=======
                 cine.mostrarFunciones();
                 break;
             case 4:
@@ -61,6 +67,7 @@ public class MenuCliente {
                 }
                 break;
             case 5:
+>>>>>>> afe1aa738bd01bf93ec3fcaad58a45139e248216
                 scanner.nextLine();
                 return false;
             default:

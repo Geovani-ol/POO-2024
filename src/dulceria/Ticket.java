@@ -1,30 +1,33 @@
 package dulceria;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Ticket {
-    public List<Dulceria> productosEnCarrito;
+    public ArrayList<Dulceria> productosEnCarrito = new ArrayList<>();
     private double total;
 
-    public Ticket() {
-        productosEnCarrito = new ArrayList<>();
-        total = 0;
-    }
 
     // Agregar un producto al carrito
     public void agregarProducto(Dulceria producto) {
-        productosEnCarrito.add(producto);
-        total += producto.getPrecio();
+        this.productosEnCarrito.add(producto);
+        this.total += producto.getPrecio();
     }
 
     // Mostrar los productos en el carrito y el total
-    public void mostrarCarrito() {
-        System.out.println("Productos en el carrito:");
-        for (Dulceria producto : productosEnCarrito) {
-            System.out.println(producto);
+    public void mostrarTicket(Double precioAsientoT) {
+        if (productosEnCarrito.isEmpty()) {
+            System.out.println("El carrito está vacío.");
+        } else {
+            System.out.println("\n -- Ticket --\n");
+            for (Dulceria producto : productosEnCarrito) {
+                System.out.println(producto.getNombre() + " - Precio: $" + producto.getPrecio());
+            }
+            System.out.println("\n------------------------------------\n");
+            System.out.println("SubTotal: $" + total);
+            System.out.println("Asientos: $" + precioAsientoT);
+            System.out.println("\n------------------------------------\n");
+            System.out.println("Total: $" + (total + precioAsientoT));
         }
-        System.out.println("Total: $" + total);
     }
 
     // Obtener el total del carrito

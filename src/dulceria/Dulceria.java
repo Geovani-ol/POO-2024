@@ -3,13 +3,13 @@ package dulceria;
 public class Dulceria {
     private String nombre;
     private double precio;
-    private String tamaño;
+    private String tamanio;
     private String descripcion;
 
-    public Dulceria(String nombre, double precio, String tamaño, String descripcion) {
+    public Dulceria(String nombre, double precio, String tamanio, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
-        this.tamaño = tamaño;
+        this.tamanio = tamanio;
         this.descripcion = descripcion;
     }
 
@@ -22,8 +22,8 @@ public class Dulceria {
         return precio;
     }
 
-    public String getTamaño() {
-        return tamaño;
+    public String getTamanio() {
+        return tamanio;
     }
 
     public String getDescripcion() {
@@ -31,6 +31,6 @@ public class Dulceria {
     }
 
     public String toString() {
-        return nombre + " (" + tamaño + ") - $" + precio + " - " + descripcion;
+        return nombre + " (" + tamanio + ") - $" + precio + " - " + descripcion;
     }
 }

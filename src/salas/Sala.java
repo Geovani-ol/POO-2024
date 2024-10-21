@@ -2,7 +2,7 @@ package salas;
 
 import peliculas.Funciones;
 
-public class Sala extends Funciones {
+public class Sala {
     private String nombre;
     private char[][] asientos;
     private int filas;
