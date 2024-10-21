@@ -1,6 +1,7 @@
 package menu;
 
 import cine.Cine;
+import dulceria.Dulceria;
 import usuarios.clientes.Cliente;
 
 import java.util.Scanner;
@@ -34,7 +35,29 @@ public class MenuCliente {
                 //trabajando en la compra de boletos
                 break;
             case 4:
+
                 System.out.println("\n--    Dulceria    --\n");
+                System.out.println("Seleccione lo que desea comprar: ");
+                System.out.println("1.- Palomitas y nachos");
+                System.out.println("2.- Bebidas");
+                System.out.println("3.- Combos");
+                System.out.println("4.- Regresar");
+                int o=scanner.nextInt();
+                switch (o) {
+                    case 1: System.out.println("Palomitas y Nachos:");
+                        for (Dulceria producto: cine.listaPalomitas) {
+                            System.out.println(producto);}
+                        break;
+                    case 2: System.out.println("Bebidas:");
+                        for (Dulceria producto: cine.listaBebidas) {
+                            System.out.println(producto);}
+                        break;
+                    case 3: System.out.println("Combos:");
+                        for (Dulceria producto: cine.listaCombos) {
+                            System.out.println(producto);}
+                        break;
+                    case 4: break;
+                }
                 break;
             case 5:
                 scanner.nextLine();

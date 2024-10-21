@@ -1,5 +1,6 @@
 package cine;
 
+import dulceria.Dulceria;
 import peliculas.Cartelera;
 import peliculas.Funciones;
 import peliculas.Pelicula;
@@ -14,6 +15,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class Cine {
     public ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     public ArrayList<Administrador> listaAdministradores = new ArrayList<>();
@@ -22,6 +24,10 @@ public class Cine {
     public ArrayList<Pelicula> listaPeliculas = new ArrayList<>();
     public ArrayList<Sala> listaSalas = new ArrayList<>();
     public ArrayList<Funciones> listaFunciones = new ArrayList<>();
+    public ArrayList<Dulceria> listaCombos = new ArrayList<>();
+    public ArrayList<Dulceria> listaBebidas = new ArrayList<>();
+    public ArrayList<Dulceria> listaPalomitas = new ArrayList<>();
+
     ArrayList<Pelicula> peliculasReproducidas = new ArrayList<>();
     ValidadorCine validador = new ValidadorCine();
     Random random = new Random();
@@ -65,6 +71,77 @@ public class Cine {
         listaSalas.add(new Sala("Sala 3", 7, 8));
         listaSalas.add(new Sala("Sala 4", 8, 9));
         listaSalas.add(new Sala("Sala 5", 9, 9));
+
+        //listaEmpleados.add(new Empleado("G1ALV4R4DO","Juan Pablo", "Alvarado Rosales", LocalDate.of(2005,8,24),"4361228361", "Villas del Pedregal #111", "vivaSteelers24", "9J19D1JX0JI1D", registros));
+
+        listaPalomitas.add(new Dulceria("Palomitas Mantequilla", 75, "Chicas", "65gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Caramelo", 85, "Chicas", "65gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Takis", 85, "Chicas", "65gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Cheetos Mix", 90, "Chicas", "65gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Doritos Nacho", 85, "Chicas", "65gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Mantequilla", 80, "Medianas", "116gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Caramelo", 95, "Medianas", "116gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Takis", 95,"Medianas", "116gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Cheetos Mix", 100, "Medianas", "116gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Doritos Nacho", 95, "Medianas", "116gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Mantequilla", 85, "Grandes", "155gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Caramelo", 100, "Grandes", "155gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Takis", 100, "Grandes", "155gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Cheetos Mix", 105, "Grandes", "155gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Doritos Nacho", 100, "Grandes", "155gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Mantequilla", 90, "Jumbo", "203gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Caramelo", 110, "Jumbo", "203gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Takis", 110, "Jumbo", "203gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Cheetos Mix", 115, "Jumbo", "203gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Doritos Nacho", 110, "Jumbo", "203gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Mantequilla", 100, "Para llevar", "285gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Caramelo", 120, "Para llevar", "285gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Takis", 120, "Para llevar", "285gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Cheetos Mix", 125, "Para llevar", "285gr"));
+        listaPalomitas.add(new Dulceria("Palomitas Doritos Nacho", 120, "Para llevar", "285gr"));
+
+        listaPalomitas.add(new Dulceria("Doritos Nacho",90,"Chicos","Acompañados de queso cheddar"));
+        listaPalomitas.add(new Dulceria("Doritos Nacho",105,"Grandes","Acompañados de queso cheddar"));
+        listaPalomitas.add(new Dulceria("Nachos clasicos",75,"Chicos","Acompañados de queso cheddar"));
+        listaPalomitas.add(new Dulceria("Nachos clasicos",90,"Grandes","Acompañados de queso cheddar"));
+
+        listaBebidas.add(new Dulceria("CocaCola",76,"Chico","."));
+        listaBebidas.add(new Dulceria("CocaCola",81,"Mediano","."));
+        listaBebidas.add(new Dulceria("CocaCola",84,"Grande","."));
+        listaBebidas.add(new Dulceria("CocaCola",88,"Jumbo","."));
+        listaBebidas.add(new Dulceria("CocaCola Light",76,"Chico","."));
+        listaBebidas.add(new Dulceria("CocaCola Light",81,"Mediano","."));
+        listaBebidas.add(new Dulceria("CocaCola Light",84,"Grande","."));
+        listaBebidas.add(new Dulceria("CocaCola Light",88,"Jumbo","."));
+        listaBebidas.add(new Dulceria("CocaCola Sin Azúcar",76,"Chico","."));
+        listaBebidas.add(new Dulceria("CocaCola Sin Azúcar",81,"Mediano","."));
+        listaBebidas.add(new Dulceria("CocaCola Sin Azúcar",84,"Grande","."));
+        listaBebidas.add(new Dulceria("CocaCola Sin Azúcar",88,"Jumbo","."));
+        listaBebidas.add(new Dulceria("Sprite Sin Azúcar",76,"Chico","."));
+        listaBebidas.add(new Dulceria("Sprite Sin Azúcar",81,"Mediano","."));
+        listaBebidas.add(new Dulceria("Sprite Sin Azúcar",84,"Grande","."));
+        listaBebidas.add(new Dulceria("Sprite Sin Azúcar",88,"Jumbo","."));
+        listaBebidas.add(new Dulceria("Sidral Mundet Sin Azúcar",76,"Chico","."));
+        listaBebidas.add(new Dulceria("Sidral Mundet Sin Azúcar",81,"Mediano","."));
+        listaBebidas.add(new Dulceria("Sidral Mundet Sin Azúcar",84,"Grande","."));
+        listaBebidas.add(new Dulceria("Sidral Mundet Sin Azúcar",88,"Jumbo","."));
+        listaBebidas.add(new Dulceria("Fuze Tea Sin Azúcar",76,"Chico","."));
+        listaBebidas.add(new Dulceria("Fuze Tea Sin Azúcar",81,"Mediano","."));
+        listaBebidas.add(new Dulceria("Fuze Tea Sin Azúcar",84,"Grande","."));
+        listaBebidas.add(new Dulceria("Fuze Tea Sin Azúcar",88,"Jumbo","."));
+        listaBebidas.add(new Dulceria("Fanta Sin Azúcar",76,"Chico","."));
+        listaBebidas.add(new Dulceria("Fanta Sin Azúcar",81,"Mediano","."));
+        listaBebidas.add(new Dulceria("Fanta Sin Azúcar",84,"Grande","."));
+        listaBebidas.add(new Dulceria("Fanta Sin Azúcar",88,"Jumbo","."));
+        listaBebidas.add(new Dulceria("ICEE Cereza",100,"Grande","."));
+        listaBebidas.add(new Dulceria("ICEE Mora Azul",100,"Grande","."));
+
+        listaCombos.add(new Dulceria("Combo Cuates",265,"Para llevar","1 palomitas para llevar (285 gr) y 2 refrescos jumbo (1.2 ltr)."));
+        listaCombos.add(new Dulceria("Combo Nachos",251,"Para llevar","1 palomitas para llevar (285 gr), 1 refresco jumbo (1.2 ltr), y 1 nachos clásicos chicos (120 gr)."));
+        listaCombos.add(new Dulceria("Combo Ciel",164,"Para llevar","1 palomitas para llevar (285 gr) y 2 aguas Ciel® de 1 L."));
+        listaCombos.add(new Dulceria("Combo Clasico",246,"Para llevar","1 palomitas para llevar (285 gr), 1 refresco jumbo (1.2 ltr) y 1 hot dog."));
+        listaCombos.add(new Dulceria("Combo Micha",335,"Para llevar","1 palomitas para llevar (285 gr), 2 refrescos jumbo (1.2 ltr) y 1 helado micha."));
+
     }
 
     // Generar ID de los Usuarios   U - { Año actua } - { 3 Letras del apellido } - { 1 Letra del nombre } - { Número random }

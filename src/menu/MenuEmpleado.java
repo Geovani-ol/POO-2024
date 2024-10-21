@@ -28,7 +28,7 @@ public class MenuEmpleado {
             case 3:
                 System.out.println(empleadoEnSesion.mostrarDatos());
             case 4:
-                //System.out.println(empleadoEnSesion.mostrarRegistros());
+                //empleadoEnSesion.mostrarRegistros();
             case 5:
                 scanner.nextLine();
                 return false;
