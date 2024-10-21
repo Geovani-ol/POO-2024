@@ -14,8 +14,9 @@ public class MenuCliente {
         System.out.println("\n-- Bienvenido " + clienteEnSesion.getNombre() + " --\n");
         System.out.println("1.- Ver mis datos");
         System.out.println("2.- Comprar boletos");
-        System.out.println("3.- Salir");
-        System.out.println("4.- Mostrar Funciones");
+        System.out.println("3.- Mostrar Funciones");
+        System.out.println("4.- Dulceria");
+        System.out.println("5.- Salir");
 
         System.out.print("Seleccione una opción: ");
         return scanner.nextInt();
@@ -32,9 +33,7 @@ public class MenuCliente {
                 cine.comprarBoleto(clienteEnSesion);
                 break;
             case 3:
-<<<<<<< HEAD
-                System.out.println("\n--    Comprar Boletos    --\n");
-                //trabajando en la compra de boletos
+                cine.mostrarFunciones();
                 break;
             case 4:
 
@@ -62,13 +61,8 @@ public class MenuCliente {
                 }
                 break;
             case 5:
-=======
->>>>>>> f72cd219a770cba49c131c5e51ef33c9f0d38e8a
                 scanner.nextLine();
                 return false;
-            case 4:
-                cine.mostrarFunciones();
-                break;
             default:
                 System.out.println("Selección Incorrecta, Intente Nuevamente");
                 break;

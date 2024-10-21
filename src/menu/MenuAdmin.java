@@ -6,6 +6,7 @@ import peliculas.Funciones;
 import peliculas.Pelicula;
 import usuarios.administradores.Administrador;
 import usuarios.empleados.Empleado;
+import usuarios.utils.Rol;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -151,6 +152,7 @@ public class MenuAdmin {
 
                 Empleado empleado = new Empleado(idEmpleado, nombreEmpleado, apellidosEmpleado, fechaNacimientoEmpleado, telefonoEmpleado, direccionEmpleado, contraseniaEmpleado, rfcEmpleado);
                 cine.registrarEmpleado(empleado);
+                System.out.println("\nEmpleado registado exitosamente\n");
                 break;
             case 5:
                 System.out.println("\nSeleccionaste la opcion de mostrar funciones\n");
