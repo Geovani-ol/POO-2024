@@ -22,12 +22,11 @@ public class MenuAdmin {
         System.out.println("4.- Registrar Empleado");
         System.out.println("5.- Mostrar Funciones");
         System.out.println("6.- Mostrar Cartelera");
-        System.out.println("7.- Mostrar Assientos de Sala");
-        System.out.println("8.- Mostrar Clientes");
-        System.out.println("9.- Registrar Funciones");
-        System.out.println("10.- Editar Funciones");
-        System.out.println("11.- Mostrar Emleados");
-        System.out.println("12.- Salir");
+        System.out.println("7.- Mostrar Clientes");
+        System.out.println("8.- Registrar Funciones");
+        System.out.println("9.- Editar Funciones");
+        System.out.println("10.- Mostrar Emleados");
+        System.out.println("11.- Salir");
 
         System.out.print("Seleccione una opción: ");
         return scanner.nextInt();
@@ -158,14 +157,11 @@ public class MenuAdmin {
                 break;
             case 6:
                 cine.mostrarCartelera();
-
                 break;
             case 7:
-                break;
-            case 8:
                 cine.mostrarClientes();
                 break;
-            case 9:
+            case 8:
                 int numeroDeFunciones;
                 boolean bandera1 = true;
                 while(bandera1){
@@ -182,7 +178,7 @@ public class MenuAdmin {
                 }
 
                 break;
-            case 10:
+            case 9:
                 scanner.nextLine();
                 int opcion = 0;
                 boolean bandera = true;
@@ -249,10 +245,10 @@ public class MenuAdmin {
                     }
                 }
                 break;
-            case 11:
+            case 10:
                 cine.mostrarEmpleados();
                 break;
-            case 12:
+            case 11:
                 scanner.nextLine();
                 return false;
             default:

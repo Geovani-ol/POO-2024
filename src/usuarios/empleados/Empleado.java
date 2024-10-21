@@ -9,7 +9,7 @@ public class Empleado extends Usuario {
     public String rfc;
     public HashMap<String, RegistroHoras> registros;
 
-    public Empleado(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String direccion, String contrasenia, String rfc, HashMap<String, RegistroHoras> registros) {
+    public Empleado(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String direccion, String contrasenia, String rfc) {
         super(id, nombre, apellidos, fechaNacimiento, telefono, direccion, contrasenia, Rol.EMPLEADO);
         this.rfc = rfc;
         this.registros = new HashMap<>();

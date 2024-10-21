@@ -12,17 +12,19 @@ public class MetodoPago {
     private Scanner scanner = new Scanner(System.in);
     private ArrayList<Tarjeta> listaTarjetas = new ArrayList<>();
 
-    public void procesarTarjeta(Cliente clienteEnSesion) {
-        System.out.println("\n-- Procesar Tarjeta --\n");
+    public void procesarPago(Cliente clienteEnSesion) {
+        System.out.println("\n-- Procesar Pago --\n");
         System.out.println("1.- Efectivo");
         System.out.println("2.- Tarjeta");
         int opcion = scanner.nextInt();
 
-        if (opcion == 1) {
-            return;
-        } else {
+        if (opcion == 2) {
             Tarjeta nuevaTarjeta = registrarTarjeta(clienteEnSesion);
             System.out.println(nuevaTarjeta.mostrarInformacion());
+            System.out.println("El pago esta realizado");
+        } else {
+            System.out.println("El pago esta realizado");
+            return;
         }
     }
 

@@ -1,6 +1,9 @@
 package cine;
 
 import dulceria.Dulceria;
+import dulceria.Ticket;
+import menu.MenuAdmin;
+import metodoPago.MetodoPago;
 import peliculas.Cartelera;
 import peliculas.Funciones;
 import peliculas.Pelicula;
@@ -365,6 +368,7 @@ public class Cine {
 
         public void comprarBoleto(Cliente cliente) {
             Scanner scanner = new Scanner(System.in);
+            MetodoPago metodoPago = new MetodoPago();
             this.listaFunciones.removeAll(this.listaFunciones);
             for (int i = 1; i <= 5; i++) {
                 this.funciones(i);
@@ -399,7 +403,7 @@ public class Cine {
                 System.out.println("1.- REGULAR - $100");
                 System.out.println("2.- PREMIUM - $200");
                 System.out.println("3.- VIP - $400");
-                System.out.println("Selecciona una opción:");
+                System.out.println("Selecciona el Tipo de Asiento:");
                 int opcion = scanner.nextInt();
                 String tipoAsiento = "";
                 Double precioAsiento = 0.0, precioAsientoT = 0.0;
@@ -410,8 +414,9 @@ public class Cine {
                         if (descuento) {
                             precioAsientoT = precioAsiento * 0.75;
                             precioAsientoT = precioAsientoT * numeroAsientos;
+                        } else {
+                            precioAsientoT = precioAsiento * numeroAsientos;
                         }
-                        precioAsientoT = precioAsiento * numeroAsientos;
                         break;
                     case 2:
                         tipoAsiento = "PREMIUM";
@@ -419,8 +424,9 @@ public class Cine {
                         if (descuento) {
                             precioAsientoT = precioAsiento * 0.6;
                             precioAsientoT = precioAsientoT * numeroAsientos;
+                        } else {
+                            precioAsientoT = precioAsiento * numeroAsientos;
                         }
-                        precioAsientoT = precioAsiento * numeroAsientos;
                         break;
                     case 3:
                         tipoAsiento = "VIP";
@@ -428,8 +434,9 @@ public class Cine {
                         if (descuento) {
                             precioAsientoT = precioAsiento * 0.35;
                             precioAsientoT = precioAsientoT * numeroAsientos;
+                        } else {
+                            precioAsientoT = precioAsiento * numeroAsientos;
                         }
-                        precioAsientoT = precioAsiento * numeroAsientos;
                         break;
                     default:
                         System.out.println("Opción no válida");
@@ -446,7 +453,7 @@ public class Cine {
                 reservarAsientos(funcionSeleccionada.getSala().getNombre(), asientos);
                 mostrarAsientosDeSala(funcionSeleccionada.getSala().getNombre());
 
-                System.out.println("Boleto comprado con éxito:");
+                System.out.println("\n-- Boleto --\n");
                 System.out.println("Película: " + funcionSeleccionada.getPelicula().getTitulo());
                 System.out.println(funcionSeleccionada.getSala().getNombre());
                 System.out.println("Precio por asiento: " + precioAsiento + " / Precio total: " + (precioAsiento * numeroAsientos));
@@ -456,8 +463,116 @@ public class Cine {
                 System.out.println("Hora: " + funcionSeleccionada.getHorarioInicio());
                 System.out.println("Duración: " + funcionSeleccionada.getPelicula().getDuracion() + " minutos");
                 System.out.println("Descuento aplicable: " + descuento);
+
+                System.out.println("\n Desea comprar en Dulceria");
+                System.out.println("1.- Si, Quiero comprar en Dulceria");
+                System.out.println("2.- No, Estoy bien haci");
+                System.out.print("Selecciona una opción: ");
+                int op = scanner.nextInt();
+
+                if (op == 1) {
+                    this.dulceria(precioAsientoT);
+                }
+
+                metodoPago.procesarPago(cliente);
             } else {
                 System.out.println("Función no encontrada.");
+            }
+        }
+
+        public void dulceria(Double precioAsientoT) {
+            Scanner scanner = new Scanner(System.in);
+            Ticket ticket = new Ticket();
+            while (true) {
+                System.out.println("\n--    Dulceria    --\n");
+                System.out.println("1.- Palomitas y nachos");
+                System.out.println("2.- Bebidas");
+                System.out.println("3.- Combos");
+                System.out.println("4.- Regresar");
+                System.out.print("Selecciona una opción: ");
+                int opcion = scanner.nextInt();
+                switch (opcion) {
+                    case 1:
+                        do {
+                            // Mostrar el menú de productos
+                            System.out.println("\n-- Dulcería --");
+                            System.out.println("Seleccione lo que desea comprar:");
+                            for (int i = 0; i < this.listaPalomitas.size(); i++) {
+                                System.out.println((i + 1) + ". " + this.listaPalomitas.get(i).getNombre() +
+                                        " - Precio: " + this.listaPalomitas.get(i).getPrecio());
+                            }
+                            System.out.println("0. Finalizar compra");
+
+                            opcion = scanner.nextInt();
+
+                            if (opcion > 0 && opcion <= this.listaPalomitas.size()) {
+
+                                Dulceria productoSeleccionado = this.listaPalomitas.get(opcion - 1);
+
+                                ticket.agregarProducto(productoSeleccionado);
+                                System.out.println(productoSeleccionado.getNombre() + " ha sido agregado al carrito.");
+                            } else if (opcion != 0) {
+                                System.out.println("Opción no válida. Intente de nuevo.");
+                            }
+
+
+                        } while (opcion != 0);
+                        break;
+                    case 2:
+                        do {
+                            System.out.println("\n-- Dulcería --");
+                            System.out.println("Seleccione lo que desea comprar:");
+                            for (int i = 0; i < this.listaBebidas.size(); i++) {
+                                System.out.println((i + 1) + ". " + this.listaBebidas.get(i).getNombre() +
+                                        " - Precio: " + this.listaBebidas.get(i).getPrecio());
+                            }
+                            System.out.println("0. Finalizar compra");
+
+                            opcion = scanner.nextInt();
+
+                            // Si la opción es válida (dentro del rango)
+                            if (opcion > 0 && opcion <= this.listaBebidas.size()) {
+                                // Restar 1 a la opción para acceder al índice correcto
+                                Dulceria productoSeleccionado = this.listaBebidas.get(opcion - 1);
+
+                                // Agregar el producto al carrito
+                                ticket.agregarProducto(productoSeleccionado);
+                                System.out.println(productoSeleccionado.getNombre() + " ha sido agregado al carrito.");
+                            } else if (opcion != 0) {
+                                System.out.println("Opción no válida. Intente de nuevo.");
+                            }
+
+                        } while (opcion != 0);
+                        break;
+                    case 3:
+                        do {
+                            // Mostrar el menú de productos
+                            System.out.println("\n-- Dulcería --");
+                            System.out.println("Seleccione lo que desea comprar:");
+                            for (int i = 0; i < this.listaCombos.size(); i++) {
+                                System.out.println((i + 1) + ". " + this.listaCombos.get(i).getNombre() +
+                                        " - Precio: " + this.listaCombos.get(i).getPrecio());
+                            }
+                            System.out.println("0. Finalizar compra");
+
+                            opcion = scanner.nextInt();
+
+                            if (opcion > 0 && opcion <= this.listaCombos.size()) {
+                                Dulceria productoSeleccionado = this.listaCombos.get(opcion - 1);
+
+                                ticket.agregarProducto(productoSeleccionado);
+                                System.out.println(productoSeleccionado.getNombre() + " ha sido agregado al carrito.");
+                            } else if (opcion != 0) {
+                                System.out.println("Opción no válida. Intente de nuevo.");
+                            }
+
+                        } while (opcion != 0);
+                        break;
+                    case 4:
+                        ticket.mostrarTicket(precioAsientoT);
+                        return;
+                }
+
             }
         }
 
