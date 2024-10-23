@@ -4,7 +4,7 @@ import usuarios.utils.Rol;
 
 import java.time.LocalDate;
 
-public class Usuario {
+public abstract class Usuario {
     public String id;
     public String nombre;
     public String apellidos;
@@ -21,6 +21,12 @@ public class Usuario {
         this.telefono = telefono;
         this.contrasenia = contrasenia;
         this.rol = rol;
+    }
+
+    protected String mostrarInformacion() {
+        String nombre = this.nombre + " " + this.apellidos;
+        return String.format("ID: %s  |  Nombre %s  |  Fecha de Nacimiento: %s  |  Telefono: %s",
+                getId(), nombre, getFechaNacimiento(), getTelefono());
     }
 
     public String getId() {

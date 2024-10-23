@@ -17,8 +17,8 @@ public class Medico  extends Usuario {
         return rfc;
     }
 
-    public String mostrarMedico() {
-        return String.format("ID: %s  |  Nombre: %s  |  Apellido: %s  |  Fecha Nacimiento: %s  |  Num. Telefono: %s  |  Rfc: %s",
-                getId(), getNombre(), getApellidos(), getFechaNacimiento(), getTelefono(), getRfc());
+    @Override
+    public String mostrarInformacion() {
+        return super.mostrarInformacion() + String.format("  |  RFC:  %s", getRfc());
     }
 }

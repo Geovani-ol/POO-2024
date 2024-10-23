@@ -31,9 +31,9 @@ public class Paciente extends Usuario {
         return sexo;
     }
 
-    public String mostrarDatos() {
-        return String.format("Id: %s  |  Nombre: %s  |  Apellidos: %s  |  Fecha de Nacimiento: %s  |  Tipo de Sangre: %s  |  Sexo: %s  |  Telefono: %s",
-                getId(), getNombre(), getApellidos(), getFechaNacimiento(), getTipoSangre(), getSexo(), getTelefono());
+    @Override
+    public String mostrarInformacion() {
+        return super.mostrarInformacion() + String.format("  |  Tipo de Sangre %s  |  Sexo:  %s", getTipoSangre(), getSexo());
     }
 
     public void registrarExpediente(Expediente expediente) {

@@ -253,7 +253,7 @@ public class Hospital {
     public List<String> obtenerNombresPacientesPorMedico(String idMedico) {
         return listaConsultas.stream()
                 .filter(c -> c.getMedico().getId().equals(idMedico))
-                .map(c -> c.getPaciente().mostrarDatos().concat("\n"))
+                .map(c -> c.getPaciente().mostrarInformacion().concat("\n"))
                 .collect(Collectors.toList());
     }
 
