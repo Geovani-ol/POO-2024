@@ -8,6 +8,7 @@ import usuarios.Usuario;
 import usuarios.medicos.Medico;
 import usuarios.pacientes.Paciente;
 import usuarios.administradores.Administrador;
+import usuarios.utils.Rol;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,7 +29,7 @@ public class Hospital {
     Random random = new Random();
 
     public Hospital() {
-        Administrador administrador = new Administrador("A-123456", "Geovani", "Lobato", LocalDate.of(1980, 7, 11), "4498326548", "Geo1107*", 50000, "GD156AD5AEF", 5);
+        Administrador administrador = new Administrador("A-123456", "Geovani", "Lobato", LocalDate.of(1980, 7, 11), "4498326548", "davidQ@gmail.com", "Geo1107*", 50000, "GD156AD5AEF", 5);
         this.listaUsuarios.add(administrador);
         this.listaAdministradores.add(administrador);
     }
@@ -72,14 +73,14 @@ public class Hospital {
     public void mostrarPacientes() {
         System.out.println("\n** Pacientes del Hospital **");
         for (Paciente paciente : this.listaPacientes) {
-            System.out.println(paciente.mostrarDatos());
+            System.out.println(paciente.mostrarInformacion());
         }
     }
 
     public void mostrarMedicos() {
         System.out.println("\n** Medicos del Hospital **");
         for (Medico medico : this.listaMedicos) {
-            System.out.println(medico.mostrarMedico());
+            System.out.println(medico.mostrarInformacion());
         }
     }
 
@@ -119,7 +120,7 @@ public class Hospital {
         Paciente paciente = obtenerPacientePorId(idPaciente);
 
         if (paciente != null) {
-            System.out.println(paciente.mostrarDatos());
+            System.out.println(paciente.mostrarInformacion());
         } else {
             System.out.println("No se encontro el paciente");
         }
@@ -129,7 +130,7 @@ public class Hospital {
         Medico medico = obtenerMedicoPorId(idMedico);
 
         if (medico != null) {
-            System.out.println(medico.mostrarMedico());
+            System.out.println(medico.mostrarInformacion());
         }else{
             System.out.println("No se encontro el medico");
         }
@@ -333,5 +334,29 @@ public class Hospital {
 
         Expediente expediente = new Expediente(consulta,observaciones);
         paciente.registrarExpediente(expediente);
+    }
+
+    public boolean validarTelefonoRepetido(String telefono, Rol rol) {
+        ArrayList<? extends Usuario> listaUsuariosTelefono = rol == Rol.PACIENTE ? this.listaPacientes : this.listaMedicos;
+        for (Usuario usuario : listaUsuariosTelefono) {
+            if (usuario.getTelefono().equals(telefono)) {
+                System.out.println("Ya existe un ususario con ese telefono, intenta de nuevo");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean validarEmailRepetido(String email, Rol rol) {
+        ArrayList<? extends Usuario> listaUsuariosEmail= rol == Rol.PACIENTE ? this.listaPacientes : this.listaMedicos;
+        for (Usuario usuario : listaUsuariosEmail) {
+            if (usuario.getTelefono().equals(email)) {
+                System.out.println("Ya existe un ususario con ese email, intenta de nuevo");
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.SimpleTimeZone;
 
 public class MenuAdministrador {
     private Scanner scanner = new Scanner(System.in);
@@ -47,13 +46,14 @@ public class MenuAdministrador {
 
                 String id = hospital.generarIdPaciente();
 
-                ArrayList<String> datosPaciente = this.obtenerDatosComun(Rol.PACIENTE);
+                ArrayList<String> datosPaciente = this.obtenerDatosComun(Rol.PACIENTE, hospital);
 
                 String nombrePaciente = datosPaciente.get(0);
                 String apellidosPaciente = datosPaciente.get(1);
                 LocalDate fechaNacimientoPaciente = LocalDate.parse(datosPaciente.get(2));
                 String telefonoPaciente = datosPaciente.get(3);
-                String contraseniaPaciente = datosPaciente.get(4);
+                String emailPaciente = datosPaciente.get(4);
+                String contraseniaPaciente = datosPaciente.get(5);
 
                 System.out.print("Ingresa el tipo de sangre: ");
                 String tipoSangre = scanner.nextLine();
@@ -64,19 +64,7 @@ public class MenuAdministrador {
                 String sexo2 = scanner.nextLine();
                 char sexo = sexo2.charAt(0);
 
-                /*String telefono = null;
-
-                while (telefono == null){
-                    System.out.print("Ingresa el numero de telefono: ");
-                    telefono = scanner.nextLine();
-
-                    if (!hospital.validarTelefonoPaciente(telefono)) {
-                        System.out.println("\nYa exixte un paciente con el mismo numero de telefono, intente de nuevo\n");
-                        telefono = null;
-                    }
-                }*/
-
-                Paciente paciente = new Paciente(id, nombrePaciente, apellidosPaciente, fechaNacimientoPaciente, tipoSangre, sexo, telefonoPaciente, contraseniaPaciente);
+                Paciente paciente = new Paciente(id, nombrePaciente, apellidosPaciente, fechaNacimientoPaciente, tipoSangre, sexo, telefonoPaciente, emailPaciente, contraseniaPaciente);
                 hospital.registrarPacientes(paciente);
 
                 hospital.listaUsuarios.add(paciente);
@@ -86,25 +74,14 @@ public class MenuAdministrador {
             case 2:
                 System.out.println("\n--Seleccionaste la opción de registrar usuarios.medicos--");
 
-                ArrayList<String> datosMedico = this.obtenerDatosComun(Rol.PACIENTE);
+                ArrayList<String> datosMedico = this.obtenerDatosComun(Rol.PACIENTE, hospital);
 
                 String nombreMedicos = datosMedico.get(0);
                 String apellidosMedico = datosMedico.get(1);
                 LocalDate fechaNacimientoMedico = LocalDate.parse(datosMedico.get(2));
                 String telefonoMedico = datosMedico.get(3);
-                String contraseniaMedico = datosMedico.get(4);
-
-                /*String telMedico = null;
-
-                while (telMedico == null) {
-                    System.out.print("Ingresa el telefono del medico: ");
-                    telMedico = scanner.nextLine();
-
-                    if (!hospital.validarTelefonoMedico(telMedico)) {
-                        System.out.println("\nYa existe un medico con el mismo numero de telefono, Intente de nuevo\n");
-                        telMedico = null;
-                    }
-                }*/
+                String emailMedico = datosMedico.get(4);
+                String contraseniaMedico = datosMedico.get(5);
 
                 String rfcMedico = null;
 
@@ -120,7 +97,7 @@ public class MenuAdministrador {
 
                 String idMedico= hospital.generarIdMedico(apellidosMedico, String.valueOf(fechaNacimientoMedico.getYear()));
 
-                Medico medico = new Medico(idMedico,nombreMedicos,apellidosMedico,fechaNacimientoMedico,telefonoMedico,rfcMedico, contraseniaMedico);
+                Medico medico = new Medico(idMedico,nombreMedicos,apellidosMedico,fechaNacimientoMedico,telefonoMedico, emailMedico, rfcMedico, contraseniaMedico);
                 hospital.registrarMedico(medico);
 
                 hospital.listaUsuarios.add(medico);
@@ -297,6 +274,9 @@ public class MenuAdministrador {
                     }
                 }
 
+                System.out.println("Ingresa el Email: ");
+                String emailAdmin = scanner.nextLine();
+
                 String rfcAdmin = null;
                 while(rfcAdmin == null) {
                     System.out.println("Ingresa el RFC: ");
@@ -316,7 +296,7 @@ public class MenuAdministrador {
 
                 String idAdmin = hospital.generarIdAdmin(apellidosAdmin,String.valueOf(fechaNacimientoAdmin));
 
-                Administrador administrador = new Administrador(idAdmin,nombreAdmin,apellidosAdmin,fechaNacimientoAdmin,telefonoAdmin, contraseniaAdmin,sueldo,rfcAdmin,antiguedad);
+                Administrador administrador = new Administrador(idAdmin,nombreAdmin,apellidosAdmin,fechaNacimientoAdmin,telefonoAdmin, emailAdmin, contraseniaAdmin,sueldo,rfcAdmin,antiguedad);
                 hospital.registrarAdministrador(administrador);
 
                 hospital.listaAdministradores.add(administrador);
@@ -335,7 +315,7 @@ public class MenuAdministrador {
         }
     }
 
-    private ArrayList<String> obtenerDatosComun(Rol rol) {
+    private ArrayList<String> obtenerDatosComun(Rol rol, Hospital hospital) {
         String tipoUsuario = rol == Rol.PACIENTE ? "paciente" : rol == Rol.MEDICO ? "médico" : "administrador";
         ArrayList<String> datosEnComun = new ArrayList<>();
 
@@ -347,26 +327,58 @@ public class MenuAdministrador {
         String apellido = scanner.nextLine();
         datosEnComun.add(apellido);
 
-        System.out.print(String.format("Ingresa el año de nacimiento del %s: ", tipoUsuario));
-        int anio = scanner.nextInt();
+        datosEnComun.add(obtenerFechaNacimientoUsuario(tipoUsuario, hospital));
 
-        System.out.print(String.format("Ingresa el mes de nacimiento del %s: ", tipoUsuario));
-        int mes = scanner.nextInt();
+        boolean esTelefonoValido = false;
+        String numeroTelefono = "";
 
-        System.out.print(String.format("Ingresa el día de nacimiento del %s: ", tipoUsuario));
-        int dia = scanner.nextInt();
+        while (!esTelefonoValido) {
+            System.out.println(String.format("Ingrese el numero de telefono del %s", tipoUsuario));
+            numeroTelefono = scanner.nextLine();
+            esTelefonoValido = hospital.validarTelefonoRepetido(numeroTelefono, rol);
+        }
+        datosEnComun.add(numeroTelefono);
 
-        LocalDate fechaNacimiento = LocalDate.of(anio, mes, dia);
-        datosEnComun.add(fechaNacimiento.toString());
+        boolean esEmailValido = false;
+        String email = "";
 
-        System.out.print(String.format("Ingresa el numero de telefono %s: ", tipoUsuario));
-        String telefono = scanner.nextLine();
-        datosEnComun.add(telefono);
+        while (!esEmailValido) {
+            System.out.println(String.format("Ingrese el email del %s", tipoUsuario));
+            email = scanner.nextLine();
+            esEmailValido = hospital.validarEmailRepetido(email, rol);
+        }
+        datosEnComun.add(email);
 
         System.out.print(String.format("Ingrese la contraseña del %s: ", tipoUsuario));
         String contraseniaPaciente = scanner.nextLine();
         datosEnComun.add(contraseniaPaciente);
 
         return datosEnComun;
+    }
+
+    private String obtenerFechaNacimientoUsuario(String tipoUsuario, Hospital hospital) {
+        boolean esFechaValida = false;
+        LocalDate fechaNacimiento = LocalDate.now();
+
+        while (!esFechaValida) {
+            System.out.print(String.format("Ingresa el año de nacimiento del %s: ", tipoUsuario));
+            int anio = scanner.nextInt();
+
+            System.out.print(String.format("Ingresa el mes de nacimiento del %s: ", tipoUsuario));
+            int mes = scanner.nextInt();
+
+            System.out.print(String.format("Ingresa el día de nacimiento del %s: ", tipoUsuario));
+            int dia = scanner.nextInt();
+
+            fechaNacimiento = LocalDate.of(anio, mes, dia);
+
+            if (fechaNacimiento.isAfter(LocalDate.now())) {
+                System.out.println("La fecha de nacimiento no puede ser posterior al día de hoy");
+            } else {
+                esFechaValida = true;
+            }
+        }
+
+        return fechaNacimiento.toString();
     }
 }

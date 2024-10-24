@@ -10,23 +10,25 @@ public abstract class Usuario {
     public String apellidos;
     public LocalDate fechaNacimiento;
     public String telefono;
+    public String email;
     private String contrasenia;
     public Rol rol; // enumm
 
-    public Usuario(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String contrasenia, Rol rol) {
+    public Usuario(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String email, String contrasenia, Rol rol) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.telefono = telefono;
+        this.email = email;
         this.contrasenia = contrasenia;
         this.rol = rol;
     }
 
     protected String mostrarInformacion() {
         String nombre = this.nombre + " " + this.apellidos;
-        return String.format("ID: %s  |  Nombre %s  |  Fecha de Nacimiento: %s  |  Telefono: %s",
-                getId(), nombre, getFechaNacimiento(), getTelefono());
+        return String.format("ID: %s  |  Nombre %s  |  Fecha de Nacimiento: %s  |  Telefono: %s  |  Email: %s",
+                getId(), nombre, getFechaNacimiento(), getTelefono(), getEmail());
     }
 
     public String getId() {
@@ -47,6 +49,10 @@ public abstract class Usuario {
 
     public String getTelefono() {
         return telefono;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getContrasenia() {

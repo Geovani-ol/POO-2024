@@ -12,8 +12,8 @@ public class Paciente extends Usuario {
     public char sexo;
     public ArrayList<Expediente> expedientes;
 
-    public Paciente(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String tipoSangre, char sexo, String telefono, String contrasenia) {
-        super(id, nombre, apellidos, fechaNacimiento, telefono, contrasenia, Rol.PACIENTE);
+    public Paciente(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String tipoSangre, char sexo, String telefono, String email, String contrasenia) {
+        super(id, nombre, apellidos, fechaNacimiento, telefono, email, contrasenia, Rol.PACIENTE);
         this.tipoSangre = tipoSangre;
         this.sexo = sexo;
     }
