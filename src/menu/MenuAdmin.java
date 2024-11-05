@@ -1,12 +1,10 @@
 package menu;
 
 import cine.Cine;
-import metodoPago.MetodoPago;
 import peliculas.Funciones;
 import peliculas.Pelicula;
 import usuarios.administradores.Administrador;
 import usuarios.empleados.Empleado;
-import usuarios.utils.Rol;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

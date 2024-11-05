@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Menu {
     Cine cine;
     Scanner scanner = new Scanner(System.in);
+
     public Menu(Cine cine) {
         this.cine = cine;
     }

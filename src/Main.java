@@ -9,8 +9,11 @@ public class Main {
         cine.generarFunciones();
         Menu menu = new Menu(cine);
 
-        menu.inicioSecion();
-
+        try {
+            menu.inicioSecion();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
 
     }
 
