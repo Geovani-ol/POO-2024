@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 class HabitacionNoDisponibleException extends Exception {
     public HabitacionNoDisponibleException(String mensaje) {
         super(mensaje);
