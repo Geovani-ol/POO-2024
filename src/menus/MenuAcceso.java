@@ -6,12 +6,17 @@ import usuarios.cliente.Cliente;
 import usuarios.ejecutivo.Ejecutivo;
 import usuarios.gerente.Gerente;
 import usuarios.utils.Rol;
+import utils.JsonManager;
 
 import java.util.Scanner;
 
 public class MenuAcceso {
-    Banco banco = new Banco();
+    Banco banco;
     Scanner scanner = new Scanner(System.in);
+
+    public MenuAcceso(Banco banco) {
+        this.banco = banco;
+    }
 
     public void iniciarSesion() {
         int intentosMaximos = 3, intentosUsuario = 0;
@@ -26,7 +31,7 @@ public class MenuAcceso {
             System.out.println("Ingresa la contrasenia: ");
             String contrasenia = scanner.nextLine();
 
-            Usuario usuarioEnSesion = banco.validarInisioSesion(usuario, contrasenia);
+            Usuario usuarioEnSesion = banco.validarInicioSesion(usuario, contrasenia);
 
             if (usuarioEnSesion instanceof Usuario) {
                 if (usuarioEnSesion.getRol() == Rol.GERENTE) {
@@ -62,8 +67,19 @@ public class MenuAcceso {
                 }
             } else {
                 System.out.println("\nError: Credenciales Incorrectas");
-                System.out.println("Por favor intente nuevamente");
-                intentosUsuario++;
+                System.out.println("1.- Intentar nuevamente");
+                System.out.println("2.- Terminar programa");
+                System.out.print("Seleccione una opcion: ");
+                int op = scanner.nextInt();
+
+                switch (op) {
+                    case 1:
+                        intentosUsuario++;
+                        break;
+                    case 2:
+                        intentosUsuario = intentosMaximos;
+                        break;
+                }
             }
         }
     }

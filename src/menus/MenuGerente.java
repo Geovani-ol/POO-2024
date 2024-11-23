@@ -17,6 +17,10 @@ public class MenuGerente {
     }
 
     public boolean procesarDatos(int opcionGerente, Banco banco, Gerente gerenteEnSesion) {
+        switch (opcionGerente) {
+            case 1:
+                return false;
+        }
         return true;
     }
 }

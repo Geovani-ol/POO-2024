@@ -1,21 +1,19 @@
 import banco.Banco;
+import com.google.gson.GsonBuilder;
 import menus.MenuAcceso;
-import usuarios.Usuario;
 import utils.JsonManager;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        //Banco banco;
-        //String filePath = "banco.json";
+        String filePath = "banco.json";
+        Banco banco = JsonManager.cargarBancoDesdeJson(filePath);
 
-        //banco = JsonManager.cargarBancoDesdeJson(filePath);*/
-
-        MenuAcceso menuAcceso = new MenuAcceso();
+        MenuAcceso menuAcceso = new MenuAcceso(banco);
         menuAcceso.iniciarSesion();
 
-        //JsonManager.guardarBancoEnJson(banco, filePath);
+        JsonManager.guardarBancoEnJson(banco, filePath);
 
     }
 

@@ -1,6 +1,7 @@
 {
   "listaUsuarios": [
     {
+      "salario": 10000.0,
       "id": "dgol",
       "nombre": "Geovani",
       "apellidos": "Lobato",
@@ -9,12 +10,12 @@
       "direccion": "Arriaga 45",
       "sucursal": "Norte",
       "contrasenia": "123",
-      "rol": "GERENTE",
-      "salario": 10000
+      "rol": "GERENTE"
     }
   ],
   "listaGerentes": [
     {
+      "salario": 10000.0,
       "id": "dgol",
       "nombre": "Geovani",
       "apellidos": "Lobato",
@@ -23,8 +24,7 @@
       "direccion": "Arriaga 45",
       "sucursal": "Norte",
       "contrasenia": "123",
-      "rol": "GERENTE",
-      "salario": 10000
+      "rol": "GERENTE"
     }
   ],
   "listaEjecutivos": [],
