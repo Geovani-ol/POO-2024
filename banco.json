@@ -1,0 +1,32 @@
+{
+  "listaUsuarios": [
+    {
+      "id": "dgol",
+      "nombre": "Geovani",
+      "apellidos": "Lobato",
+      "curp": "NDJKRBLEFJA",
+      "rfc": "NJAEKFELK",
+      "direccion": "Arriaga 45",
+      "sucursal": "Norte",
+      "contrasenia": "123",
+      "rol": "GERENTE",
+      "salario": 10000
+    }
+  ],
+  "listaGerentes": [
+    {
+      "id": "dgol",
+      "nombre": "Geovani",
+      "apellidos": "Lobato",
+      "curp": "NDJKRBLEFJA",
+      "rfc": "NJAEKFELK",
+      "direccion": "Arriaga 45",
+      "sucursal": "Norte",
+      "contrasenia": "123",
+      "rol": "GERENTE",
+      "salario": 10000
+    }
+  ],
+  "listaEjecutivos": [],
+  "listaClientes": []
+}
