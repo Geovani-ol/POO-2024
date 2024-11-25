@@ -29,4 +29,19 @@ public class Banco {
         }
         return null;
     }
+
+    public void registrarGerente(Gerente gerente) {
+        this.listaUsuarios.add(gerente);
+        this.listaGerentes.add(gerente);
+    }
+
+    public void registrarEjecutivo(Ejecutivo ejecutivo) {
+        this.listaUsuarios.add(ejecutivo);
+        this.listaEjecutivos.add(ejecutivo);
+    }
+
+    public void registrarCliente(Cliente cliente) {
+        this.listaUsuarios.add(cliente);
+        this.listaClientes.add(cliente);
+    }
 }
