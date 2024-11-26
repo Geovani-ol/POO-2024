@@ -3,7 +3,6 @@ package menus;
 import banco.Banco;
 import usuarios.ejecutivo.Ejecutivo;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class MenuEjecutivo {

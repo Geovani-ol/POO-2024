@@ -1,8 +1,8 @@
 {
   "listaUsuarios": [
     {
-      "salario": 10000.0,
-      "id": "dgol",
+      "salario": 50000.0,
+      "id": "G-DAV202411",
       "nombre": "Geovani",
       "apellidos": "Lobato",
       "curp": "NDJKRBLEFJA",
@@ -15,8 +15,8 @@
   ],
   "listaGerentes": [
     {
-      "salario": 10000.0,
-      "id": "dgol",
+      "salario": 50000.0,
+      "id": "G-GEO202411",
       "nombre": "Geovani",
       "apellidos": "Lobato",
       "curp": "NDJKRBLEFJA",
