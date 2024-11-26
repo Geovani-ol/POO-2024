@@ -8,6 +8,7 @@ import usuarios.gerente.Gerente;
 import usuarios.utils.Rol;
 import utils.JsonManager;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuAcceso {
@@ -69,16 +70,24 @@ public class MenuAcceso {
                 System.out.println("\nError: Credenciales Incorrectas");
                 System.out.println("1.- Intentar nuevamente");
                 System.out.println("2.- Terminar programa");
-                System.out.print("Seleccione una opción: ");
-                int op = scanner.nextInt();
 
-                switch (op) {
-                    case 1:
-                        intentosUsuario++;
-                        break;
-                    case 2:
-                        intentosUsuario = intentosMaximos;
-                        break;
+                try {
+                    System.out.print("Seleccione una opcion: ");
+                    int op = scanner.nextInt();
+
+                    switch (op) {
+                        case 1:
+                            intentosUsuario++;
+                            break;
+                        case 2:
+                            intentosUsuario = intentosMaximos;
+                            break;
+                        default:
+                            System.out.println("Opción invalida");
+                            break;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida: " + e.getMessage());
                 }
             }
         }
