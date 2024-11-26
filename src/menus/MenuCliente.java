@@ -23,16 +23,21 @@ public class MenuCliente {
 
     public boolean procesarDatos(int opcionCliente, Banco banco, Cliente clienteEnSesion) {
        switch (opcionCliente) {
-           case 1: System.out.println(clienteEnSesion.mostrarDatos());
-           break;
-           case 2: banco.tarjetaDebito(clienteEnSesion);
-           break;
-           case 3: banco.tarjetaCredito(clienteEnSesion);
-           break;
-           case 4: this.scanner.nextLine();
-           return false;
-           break;
-           default: System.out.println("Opcion no valida, intentelo de nuevo.");
+           case 1:
+               System.out.println(clienteEnSesion.mostrarDatos());
+               break;
+           case 2:
+               banco.tarjetaDebito(clienteEnSesion);
+               break;
+           case 3:
+               banco.tarjetaCredito(clienteEnSesion);
+               break;
+           case 4:
+               this.scanner.nextLine();
+               return false;
+               break;
+           default:
+               System.out.println("Opcion no valida, intentelo de nuevo.");
        }
         return true;
     }

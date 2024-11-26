@@ -23,34 +23,46 @@ public class MenuGerente {
 
     public boolean procesarDatos(int opcionGerente, Banco banco, Gerente gerenteEnSesion) {
         switch (opcionGerente) {
-            case 1: System.out.println(gerenteEnSesion.mostrarDatos);
-            break;
+            case 1:
+                System.out.println(gerenteEnSesion.mostrarDatos);
+                break;
             case 2: this.scanner.nextLine();
                 System.out.println("--INGRESAR NUEVO EJECUTIVO--");
+
                 System.out.println("Ingrese el nombre del empleado: ");
                 String nombreEjecutivo = scanner.next();
+
                 System.out.println("Ingrese el apellido del empleado: ");
                 String apellidoEjecutivo = scanner.nextLine();
+
                 System.out.println("Ingrese la CURP del empleado: ");
                 String curpEjecutivo = scanner.nextLine();
+
                 System.out.println("Ingrese el RFC del empleado: ");
                 String rfcEjecutivo = scanner.nextLine();
+
                 System.out.println("Ingrese la dirección del empleado: ");
                 String direccionEjecutivo = scanner.nextLine();
+
                 System.out.println("Ingrese la sucursal afiliada al empleado: ");
                 String sucursalEjecutivo = scanner.nextLine();
+
                 System.out.println("Ingrese una contraseña segura y guardela: ");
                 String contraseniaEjecutivo = scanner.nextLine();
+
                 System.out.println("Ingrese el salario mensual que se le asignara al empleado: ");
                 double salarioEjecutivo = scanner.nextDouble();
-            break;
-            case 3: banco.mostrarClientes;
-            break;
-            case 4: banco.mostrarEjecutivos;
-            break;
-            case 5: this.scanner.nextLine();
+                break;
+            case 3:
+                banco.mostrarClientes;
+                break;
+            case 4:
+                banco.mostrarEjecutivos;
+                break;
+            case 5:
+                this.scanner.nextLine();
                 return false;
-            break;
+                break;
             default:
                 System.out.println("Opcion no valida, intentelo de nuevo: ");
         }
