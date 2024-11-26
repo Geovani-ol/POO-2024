@@ -69,7 +69,7 @@ public class MenuAcceso {
                 System.out.println("\nError: Credenciales Incorrectas");
                 System.out.println("1.- Intentar nuevamente");
                 System.out.println("2.- Terminar programa");
-                System.out.print("Seleccione una opcion: ");
+                System.out.print("Seleccione una opción: ");
                 int op = scanner.nextInt();
 
                 switch (op) {
