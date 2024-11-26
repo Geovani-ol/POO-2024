@@ -1,0 +1,32 @@
+{
+  "listaUsuarios": [
+    {
+      "salario": 50000.0,
+      "id": "G-DAV202411",
+      "nombre": "Geovani",
+      "apellidos": "Lobato",
+      "curp": "NDJKRBLEFJA",
+      "rfc": "NJAEKFELK",
+      "direccion": "Arriaga 45",
+      "sucursal": "Central",
+      "contrasenia": "123",
+      "rol": "GERENTE"
+    }
+  ],
+  "listaGerentes": [
+    {
+      "salario": 50000.0,
+      "id": "G-GEO202411",
+      "nombre": "Geovani",
+      "apellidos": "Lobato",
+      "curp": "NDJKRBLEFJA",
+      "rfc": "NJAEKFELK",
+      "direccion": "Arriaga 45",
+      "sucursal": "Cental",
+      "contrasenia": "123",
+      "rol": "GERENTE"
+    }
+  ],
+  "listaEjecutivos": [],
+  "listaClientes": []
+}
