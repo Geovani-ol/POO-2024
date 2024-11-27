@@ -41,4 +41,10 @@ public class MenuCliente {
        }
         return true;
     }
+
+    public void depositar(Cliente clienteEnSesion) {
+        System.out.println("Ingrese el monto a depositar: ");
+        double monto = scanner.nextDouble();
+        clienteEnSesion.depositar(monto);
+    }
 }

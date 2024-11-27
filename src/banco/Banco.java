@@ -9,6 +9,7 @@ import usuarios.utils.Rol;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Banco {
     public ArrayList<Usuario> listaUsuarios;
@@ -146,5 +147,35 @@ public class Banco {
         }
 
         return rfc.toString();
+    }
+
+    //metodo tarjetaDebito
+    public void tarjetaDebito(Cliente clienteEnSesion) {
+        Scanner leer = new Scanner(System.in);
+        while(true) {
+            System.out.printf("\n☻ Tarjeta Debito ☻\n");
+            System.out.println("1.- Ver Informacion de mi tarjeta");
+            System.out.println("2.- Depositar");
+            System.out.println("3.- Retirar");
+            System.out.println("4.- Comprar");
+            System.out.println("5.- Salir");
+            System.out.print("Seleccione una opcion: ");
+            int opcion = leer.nextInt();
+            switch (opcion) {
+                case 1:
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    return;
+                    default:
+                        System.out.println("Operacion no valida, intentelo de nuevo.");
+            }
+        }
     }
 }

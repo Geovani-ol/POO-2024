@@ -52,6 +52,9 @@ public class MenuEjecutivo {
 
                 System.out.println("Ingrese una contraseña segura y guardela: ");
                 String contraseniaCliente = scanner.nextLine();
+
+
+
                 break;
             case 4:
                 return false;
