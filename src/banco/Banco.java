@@ -147,19 +147,4 @@ public class Banco {
 
         return rfc.toString();
     }
-
-    public void mostrarClientes() {
-        System.out.println("\n-- Clientes de Ponybank:");
-
-        for (Cliente cliente : this.listaClientes) {
-            System.out.println(cliente.mostrarDatos());
-        }
-    }
-    public void mostrarEjecutivos() {
-        System.out.println("\n-- Gerentes de Ponybank:");
-
-        for (Ejecutivo ejecutivo : this.listaEjecutivos) {
-            System.out.println(ejecutivo.mostrarDatos());
-        }
-    }
 }
