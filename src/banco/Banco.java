@@ -15,12 +15,14 @@ public class Banco {
     public ArrayList<Gerente> listaGerentes;
     public ArrayList<Ejecutivo> listaEjecutivos;
     public ArrayList<Cliente> listaClientes;
+    public ArrayList<Cliente> solicitudesTarjetaCredito;
 
     public Banco() {
         this.listaUsuarios = new ArrayList<>();
         this.listaGerentes = new ArrayList<>();
         this.listaEjecutivos = new ArrayList<>();
         this.listaClientes = new ArrayList<>();
+        this.solicitudesTarjetaCredito = new ArrayList<>();
     }
 
     public Usuario validarInicioSesion(String idUsuario, String contrasenia) {
@@ -49,23 +51,38 @@ public class Banco {
     }
 
     public String generarIdUsuario(String nombre, Rol rolNuevo) {
-        int mes = LocalDate.now().getMonthValue();
-        int anio = LocalDate.now().getYear();
-        String nom = nombre.substring(0, 3).toUpperCase();
-        String inicial = "";
+        boolean band = true;
+        String id = "";
 
-        if (rolNuevo == Rol.GERENTE) {
-            inicial = "G";
-        } else if (rolNuevo == Rol.EJECUTIVO) {
-            inicial = "E";
-        } else {
-            inicial = "C";
+        while (band) {
+            int mes = LocalDate.now().getMonthValue();
+            int anio = LocalDate.now().getYear();
+            String nom = nombre.substring(0, 3).toUpperCase();
+            String inicial = "";
+
+            if (rolNuevo == Rol.GERENTE) {
+                inicial = "G";
+            } else if (rolNuevo == Rol.EJECUTIVO) {
+                inicial = "E";
+            } else {
+                inicial = "C";
+            }
+
+            Random random = new Random();
+            int numeroRandom = random.nextInt(100);
+
+            id = String.format("%s-%s%d%d%02d", inicial, nom, anio, mes, numeroRandom);
+
+            band = false;
+            for (Usuario usuario : listaUsuarios) {
+                if (usuario.getId().equals(id)) {
+                    band = true;
+                    break;
+                }
+            }
         }
 
-        Random random = new Random();
-        int numeroRandom = random.nextInt(100);
-
-        return String.format("%s-%s%d%d%02d", inicial, nom, anio, mes, numeroRandom);
+        return id;
     }
 
     public String generarCurp() {
@@ -146,5 +163,86 @@ public class Banco {
         }
 
         return rfc.toString();
+    }
+
+    public String generarNumeroDeCuenta() {
+        boolean band = true;
+        String numeroDeCuenta = "";
+        String digitosIniciales = "7";
+        Random random = new Random();
+
+        while (band) {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < 19; i++) {
+                sb.append(random.nextInt(10));
+            }
+
+            numeroDeCuenta = digitosIniciales + sb;
+
+            band = false;
+            for (Cliente cliente : listaClientes) {
+                if (cliente.getNumeroCuenta().equals(numeroDeCuenta)) {
+                    band = true;
+                    break;
+                }
+            }
+        }
+
+        return numeroDeCuenta;
+    }
+
+    public String generarNumeroDeTarjetaDedito() {
+        boolean band = true;
+        String numeroDeTarjetaDebito = "";
+        String digitosIniciales = "4257";
+        Random random = new Random();
+
+        while (band) {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < 12; i++) {
+                sb.append(random.nextInt(10));
+            }
+
+            numeroDeTarjetaDebito = digitosIniciales + sb;
+
+            band = false;
+            for (Cliente cliente : listaClientes) {
+                if (cliente.getNumeroCuenta().equals(numeroDeTarjetaDebito)) {
+                    band = true;
+                    break;
+                }
+            }
+        }
+
+        return numeroDeTarjetaDebito;
+    }
+
+    public String generarNumeroDeTarjetaDCredito() {
+        boolean band = true;
+        String numeroDeTarjetaCredito = "";
+        String digitosIniciales = "5742";
+        Random random = new Random();
+
+        while (band) {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < 12; i++) {
+                sb.append(random.nextInt(10));
+            }
+
+            numeroDeTarjetaCredito = digitosIniciales + sb;
+
+            band = false;
+            for (Cliente cliente : listaClientes) {
+                if (cliente.getNumeroCuenta().equals(numeroDeTarjetaCredito)) {
+                    band = true;
+                    break;
+                }
+            }
+        }
+
+        return numeroDeTarjetaCredito;
     }
 }

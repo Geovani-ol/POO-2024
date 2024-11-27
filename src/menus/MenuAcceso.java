@@ -6,7 +6,6 @@ import usuarios.cliente.Cliente;
 import usuarios.ejecutivo.Ejecutivo;
 import usuarios.gerente.Gerente;
 import usuarios.utils.Rol;
-import utils.JsonManager;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

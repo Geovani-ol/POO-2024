@@ -4,7 +4,14 @@ import usuarios.Usuario;
 import usuarios.utils.Rol;
 
 public class Cliente extends Usuario {
-    public Cliente(String id, String nombre, String apellidos, String curp, String rfc, String direccion, String sucursal, String contrasenia) {
-        super(id, nombre, apellidos, curp, rfc, direccion, sucursal, contrasenia, Rol.CLIENTE);
+    private String numeroCuenta;
+
+    public Cliente(String id, String nombre, String apellidos, String curp, String rfc, String direccion, String sucursal, String contrasenia, Rol rol, String numeroCuenta) {
+        super(id, nombre, apellidos, curp, rfc, direccion, sucursal, contrasenia, rol);
+        this.numeroCuenta = numeroCuenta;
+    }
+
+    public String getNumeroCuenta() {
+        return numeroCuenta;
     }
 }
