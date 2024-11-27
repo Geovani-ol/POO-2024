@@ -23,10 +23,10 @@ public class MenuEjecutivo {
     public boolean procesarDatos(int opcionEjecutivo, Banco banco, Ejecutivo ejecutivoEnSesion) {
         switch (opcionEjecutivo) {
             case 1:
-                System.out.println(ejecutivoEnSesion.mostrarDatos);
+                System.out.println(ejecutivoEnSesion.mostrarDatos());
                 break;
             case 2:
-                banco.mostrarClientes;
+                banco.mostrarClientes();
                 break;
             case 3:
                 this.scanner.nextLine();

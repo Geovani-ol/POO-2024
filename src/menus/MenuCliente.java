@@ -27,10 +27,10 @@ public class MenuCliente {
                System.out.println(clienteEnSesion.mostrarDatos());
                break;
            case 2:
-               banco.tarjetaDebito(clienteEnSesion);
+               Tarjetas.Debito(clienteEnSesion);
                break;
            case 3:
-               banco.tarjetaCredito(clienteEnSesion);
+               Tarjetas.Credito(clienteEnSesion);
                break;
            case 4:
                this.scanner.nextLine();

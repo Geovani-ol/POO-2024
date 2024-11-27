@@ -72,7 +72,7 @@ public class Tarjeta {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    //metodos
+    //usuarios.metodos
 
     public Tarjeta() {
         this.saldo = saldo;
