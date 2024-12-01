@@ -1,39 +1,36 @@
 package Tarjetas;
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Tarjeta {
+    public String titular;
     public int numero;
     public LocalDateTime fechaCreacion;
-    public double saldo;
     public int cvv;
     public int cableInterbancaria;
     public LocalDateTime fechaVencimiento;
 
-
-    public Tarjeta(int numero) {
-        this.numero = numero;
-    }
-
-    public Tarjeta(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Tarjeta(double saldo)
-    {
-        this.saldo = saldo;
+    public Tarjeta(String titular,
+                   int numero,
+                   LocalDateTime fechaCreacion,
+                   int cvv,
+                   int clabeInterbancaria,
+                   LocalDateTime fechaVencimiento) {
     }
 
     //getters
+
+    public String getTitular() {
+        return titular;
+    }
+
     public int getNumero() {
         return numero;
     }
 
     public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
-    }
-
-    public double getSaldo() {
-        return saldo;
     }
 
     public int getCvv() {
@@ -48,19 +45,22 @@ public class Tarjeta {
     }
 
     //setters
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
     public void setNumero(int numero) {
         this.numero = numero;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
     public void setFechaCreacion(LocalDateTime fechaCreacion) {
+
         this.fechaCreacion = fechaCreacion;
     }
 
     public void setCvv(int cvv) {
+
         this.cvv = cvv;
     }
 
@@ -74,7 +74,14 @@ public class Tarjeta {
 
     //metodos
 
-    public Tarjeta() {
-        this.saldo = saldo;
+    public String realizarCompras(){
+        return titular;
+
+
+    public Date calcularFechaVencimiento() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, 5);
+        return cal.getTime();
+        }
     }
 }

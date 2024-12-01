@@ -1,9 +1,21 @@
 package Tarjetas;
 
-public class Credito extends Tarjeta {
-    double limiteDeCredito = 30000.00;
+import java.time.LocalDateTime;
+import Tarjetas.Tarjeta;
+import Tarjetas.Debito;
 
-    public void limiteDeCredito() {
-        System.out.println("El limite de Credito es: " + limiteDeCredito);
+public class Credito extends Tarjeta {
+    double limiteDeCredito = 100000.00;
+
+    public Credito(String titular, int numero, LocalDateTime fechaCreacion, int cvv, int clabeInterbancaria, LocalDateTime fechaVencimiento) {
+        super(titular, numero, fechaCreacion, cvv, clabeInterbancaria, fechaVencimiento);
+    }
+
+    public double getLimiteDeCredito() {
+
+        return limiteDeCredito;
+}
+    public void limiteDeCredito(){
+        this.limiteDeCredito = limiteDeCredito + limiteDeCredito;
     }
 }
