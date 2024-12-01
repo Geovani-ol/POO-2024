@@ -96,4 +96,8 @@ public class Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public String mostrarDatos() {
+        return String.format("ID: %s | Nombre: %s | Apellidos: %s | CURP: %s | RFC: %s | Dirección: %s | Sucursal: %s", this.getId(), this.getNombre(), this.getApellidos(), this.getCurp(), this.getRfc(), this.getDireccion(), this.getSucursal());
+    }
 }

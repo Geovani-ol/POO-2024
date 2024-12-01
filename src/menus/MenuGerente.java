@@ -24,7 +24,7 @@ public class MenuGerente {
     public boolean procesarDatos(int opcionGerente, Banco banco, Gerente gerenteEnSesion) {
         switch (opcionGerente) {
             case 1:
-                System.out.println(gerenteEnSesion.mostrarDatos);
+                System.out.println(gerenteEnSesion.mostrarDatos());
                 break;
             case 2: this.scanner.nextLine();
                 System.out.println("--INGRESAR NUEVO EJECUTIVO--");
@@ -54,15 +54,14 @@ public class MenuGerente {
                 double salarioEjecutivo = scanner.nextDouble();
                 break;
             case 3:
-                banco.mostrarClientes;
+                banco.mostrarClientes();
                 break;
             case 4:
-                banco.mostrarEjecutivos;
+                banco.mostrarEjecutivos();
                 break;
             case 5:
                 this.scanner.nextLine();
                 return false;
-                break;
             default:
                 System.out.println("Opcion no valida, intentelo de nuevo: ");
         }

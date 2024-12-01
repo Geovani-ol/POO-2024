@@ -1,7 +1,10 @@
 package usuarios.gerente;
 
 import usuarios.Usuario;
+import usuarios.ejecutivo.Ejecutivo;
 import usuarios.utils.Rol;
+
+import java.util.ArrayList;
 
 public class Gerente extends Usuario {
     private double salario;
@@ -18,4 +21,5 @@ public class Gerente extends Usuario {
     public void setSalario(double salario) {
         this.salario = salario;
     }
+
 }
