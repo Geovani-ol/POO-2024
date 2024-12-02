@@ -98,6 +98,6 @@ public class Usuario {
     }
 
     public String mostrarDatos() {
-        return String.format("ID: %s | Nombre: %s | Apellidos: %s | CURP: %s | RFC: %s | Dirección: %s | Sucursal: %s", this.getId(), this.getNombre(), this.getApellidos(), this.getCurp(), this.getRfc(), this.getDireccion(), this.getSucursal());
+        return String.format("ID: %s | Nombre: %s | Apellidos: %s | CURP: %s | RFC: %s | Dirección: %s | Sucursal: %s", getId(), getNombre(), getApellidos(), getCurp(), getRfc(), getDireccion(), getSucursal());
     }
 }

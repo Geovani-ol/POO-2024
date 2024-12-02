@@ -74,19 +74,6 @@ public class Banco {
         String numeros = "0123456789";
         Random random = new Random();
 
-        // Primera letra y vocal interna del primer apellido
-
-        // Primera letra del segundo apellido
-        // Primera letra del primer nombre
-        // Fecha de nacimiento (Año-Mes-Día)
-        // Últimos 2 dígitos del año
-        // Mes
-        // Día
-        // Sexo (H/M)
-        // Entidad federativa (2 letras)
-        // Primeras consonantes internas de los apellidos y nombre
-        // Homoclave (2 letras y 1 número)
-
         return String.valueOf(letras.charAt(random.nextInt(letras.length()))) +
                 vocales.charAt(random.nextInt(vocales.length())) +
 
@@ -126,17 +113,14 @@ public class Banco {
 
         StringBuilder rfc = new StringBuilder();
 
-        // Primeras 4 letras (3 de nombres y apellidos)
         for (int i = 0; i < 4; i++) {
             rfc.append(letras.charAt(random.nextInt(letras.length())));
         }
 
-        // Fecha de nacimiento o creación (Año-Mes-Día)
         rfc.append(String.format("%02d", random.nextInt(100))); // Últimos 2 dígitos del año
         rfc.append(String.format("%02d", 1 + random.nextInt(12))); // Mes
         rfc.append(String.format("%02d", 1 + random.nextInt(28))); // Día
 
-        // Homoclave (3 caracteres alfanuméricos)
         for (int i = 0; i < 3; i++) {
             if (random.nextBoolean()) {
                 rfc.append(letras.charAt(random.nextInt(letras.length())));
@@ -146,5 +130,5 @@ public class Banco {
         }
 
         return rfc.toString();
-    }
+    }   
 }

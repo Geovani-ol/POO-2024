@@ -27,7 +27,7 @@ public class MenuCliente {
                System.out.println(clienteEnSesion.mostrarDatos());
                break;
            case 2:
-               Tarjetas.Debito(clienteEnSesion);
+               Tarjeta.Debito(clienteEnSesion);
                break;
            case 3:
                Tarjetas.Credito(clienteEnSesion);
