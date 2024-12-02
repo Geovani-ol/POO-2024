@@ -1,3 +1,4 @@
+import Tarjetas.Tarjeta;
 import banco.Banco;
 import menus.MenuAcceso;
 import utils.JsonManager;
@@ -11,6 +12,7 @@ public class Main {
 
         MenuAcceso menuAcceso = new MenuAcceso(banco);
         menuAcceso.iniciarSesion();
+        Tarjeta tarjeta = new Tarjeta();
 
         JsonManager.guardarBancoEnJson(banco, filePath);
 

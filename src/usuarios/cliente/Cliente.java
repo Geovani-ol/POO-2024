@@ -30,8 +30,21 @@ public class Cliente extends Usuario {
     public Debito getTarjetaDebito() {
         return tarjetaDebito;
     }
-
     public void setTarjetaDebito(Debito tarjetaDebito) {
         this.tarjetaDebito = tarjetaDebito;
+    }
+    // Metodo para mandar llamar la tarjeta de credito
+    public Credito getTarjetaCredito() {
+        return tarjetaCredito;}
+    public boolean puedeSolicitarTarjetaCredito () {
+        return tarjetaDebito.getSaldo()>= 30000.00;
+    }
+    public void solicitarTarjetaCredito () {
+        if (puedeSolicitarTarjetaCredito()) {
+            this.tarjetaCredito = new Credito();
+            System.out.println("Tarjeta de crédito solicitada con éxito.");
+        } else {
+            System.out.println("No cumple con los requisitos para obtener una tarjeta de crédito.");
+        }
     }
 }

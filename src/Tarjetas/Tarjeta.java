@@ -2,46 +2,44 @@ package Tarjetas;
 import java.time.LocalDateTime;
 
 public class Tarjeta {
-    public int numero;
+    public String titular;
+    public int numeroTarjeta;
     public LocalDateTime fechaCreacion;
     public double saldo;
     public int cvv;
-    public int cableInterbancaria;
+    public int clabeInterbancaria;
     public LocalDateTime fechaVencimiento;
 
+    public Tarjeta() {
+    }
 
-
-    public Tarjeta(int numero) {
-        this.numero = numero;
+    public Tarjeta(String titular) {
+        this.titular = titular;
     }
 
     public Tarjeta(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Tarjeta(double saldo)
-    {
-        this.saldo = saldo;
+    //getters
+    public String getTitular() {
+        return titular;
     }
 
-    //getters
-    public int getNumero() {
-        return numero;
+    public int getNumeroTarjeta() {
+        return numeroTarjeta;
     }
 
     public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public double getSaldo() {
-        return saldo;
-    }
-
     public int getCvv() {
         return cvv;
     }
-    public int getCableInterbancaria() {
-        return cableInterbancaria;
+
+    public int getClabeInterbancaria() {
+        return clabeInterbancaria;
     }
 
     public LocalDateTime getFechaVencimiento() {
@@ -49,12 +47,12 @@ public class Tarjeta {
     }
 
     //setters
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setTitular(String titular) {
+        this.titular = titular;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
+    public void setNumero(int numeroTarjeta) {
+        this.numeroTarjeta = numeroTarjeta;
     }
 
     public void setFechaCreacion(LocalDateTime fechaCreacion) {
@@ -65,8 +63,8 @@ public class Tarjeta {
         this.cvv = cvv;
     }
 
-    public void setCableInterbancaria(int cableInterbancaria) {
-        this.cableInterbancaria = cableInterbancaria;
+    public void setClabeInterbancaria(int clabeInterbancaria) {
+        this.clabeInterbancaria = clabeInterbancaria;
     }
 
     public void setFechaVencimiento(LocalDateTime fechaVencimiento) {
@@ -75,7 +73,8 @@ public class Tarjeta {
 
     //metodos
 
-    public Tarjeta() {
-        this.saldo = saldo;
+    public String mostrarDatosTarjeta() {
+        return String.format(" Titular:  s% | Numero Tarjeta: s% | Fecha Creacion: s% | CVV: s% | Clabe Interbancaria: s% | Fecha de Vencimiento: s%  ",this.getTitular(), this.getNumeroTarjeta(), this.getFechaCreacion(), this.getCvv(), this.getClabeInterbancaria(), this.getFechaVencimiento());
+
     }
 }
