@@ -76,6 +76,18 @@ public class MenuAcceso {
 
                     switch (op) {
                         case 1:
+
+
+
+
+
+
+
+
+
+
+
+
                             intentosUsuario++;
                             break;
                         case 2:

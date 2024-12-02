@@ -1,21 +1,24 @@
 package Tarjetas;
 
-import java.time.LocalDateTime;
 import Tarjetas.Tarjeta;
-import Tarjetas.Debito;
 
 public class Credito extends Tarjeta {
-    double limiteDeCredito = 100000.00;
+    boolean puedeSolicitarTarjetaCredito() {return false;}
 
-    public Credito(String titular, int numero, LocalDateTime fechaCreacion, int cvv, int clabeInterbancaria, LocalDateTime fechaVencimiento) {
-        super(titular, numero, fechaCreacion, cvv, clabeInterbancaria, fechaVencimiento);
+    double limiteDeCredito = 100000.00;
+    double montoMinimo = 30000.00;
+    public double saldoCredito;
+
+    public Credito() {
+        super();
+        this.saldoCredito = limiteDeCredito;
     }
 
-    public double getLimiteDeCredito() {
+    public double getSaldoCredito() {
+        return saldoCredito;
+    }
 
-        return limiteDeCredito;
-}
-    public void limiteDeCredito(){
-        this.limiteDeCredito = limiteDeCredito + limiteDeCredito;
+    public void setSaldoCredito(double saldoCredito) {
+        this.saldoCredito = saldoCredito;
     }
 }

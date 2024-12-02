@@ -1,13 +1,16 @@
 package menus;
 
+import Tarjetas.Tarjeta;
 import banco.Banco;
 import usuarios.cliente.Cliente;
+import Tarjetas.Debito;
+import Tarjetas.Credito;
 
 import java.util.Scanner;
 
 public class MenuCliente {
     public Scanner scanner = new Scanner(System.in);
-
+    Tarjeta tarjeta = new Tarjeta();
     public int mostrarMenu(Cliente clienteEnSesion) {
         System.out.println("\n== Bienvenido " + clienteEnSesion.getNombre() + " ==\n");
         System.out.println();
