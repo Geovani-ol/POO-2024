@@ -9,15 +9,15 @@ public class Cliente extends Usuario {
     private String numeroCuenta;
     private Debito tarjetaDebito;
     private Credito tarjetaCredito;
+    private String clave;
 
-    public Cliente(String id, String nombre, String apellidos, String curp, String rfc, String direccion, String sucursal, String contrasenia, Debito tarjetaDebito, Credito tarjetaCredito, String numeroCuenta) {
+    public Cliente(String id, String nombre, String apellidos, String curp, String rfc, String direccion, String sucursal, String contrasenia, String numeroCuenta, Debito tarjetaDebito, String clave) {
         super(id, nombre, apellidos, curp, rfc, direccion, sucursal, contrasenia, Rol.CLIENTE);
-        this.tarjetaDebito = null;
-        this.tarjetaCredito = null;
         this.numeroCuenta = numeroCuenta;
+        this.tarjetaDebito = tarjetaDebito;
+        this.tarjetaCredito = null;
+        this.clave = clave;
     }
-    //metodo mostrar datos
-
 
     public String getNumeroCuenta() {
         return numeroCuenta;
@@ -30,21 +30,30 @@ public class Cliente extends Usuario {
     public Debito getTarjetaDebito() {
         return tarjetaDebito;
     }
+
     public void setTarjetaDebito(Debito tarjetaDebito) {
         this.tarjetaDebito = tarjetaDebito;
     }
-    // Metodo para mandar llamar la tarjeta de credito
+
+    public void setTarjetaCredito(Credito tarjetaCredito) {
+        this.tarjetaCredito = tarjetaCredito;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
     public Credito getTarjetaCredito() {
-        return tarjetaCredito;}
-    public boolean puedeSolicitarTarjetaCredito () {
-        return tarjetaDebito.getSaldo()>= 30000.00;
+        return tarjetaCredito;
     }
-    public void solicitarTarjetaCredito () {
-        if (puedeSolicitarTarjetaCredito()) {
-            this.tarjetaCredito = new Credito();
-            System.out.println("Tarjeta de crédito solicitada con éxito.");
-        } else {
-            System.out.println("No cumple con los requisitos para obtener una tarjeta de crédito.");
-        }
+
+    @Override
+    public String mostrarDatos() {
+        return super.mostrarDatos() + String.format(" | Numero De Cuenta: %s | Clave: %s", getNumeroCuenta(), getClave());
     }
+
 }

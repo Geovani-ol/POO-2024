@@ -1,5 +1,7 @@
 package banco;
 
+import Tarjetas.Credito;
+import Tarjetas.Tarjeta;
 import usuarios.Usuario;
 import usuarios.cliente.Cliente;
 import usuarios.ejecutivo.Ejecutivo;
@@ -15,12 +17,14 @@ public class Banco {
     public ArrayList<Gerente> listaGerentes;
     public ArrayList<Ejecutivo> listaEjecutivos;
     public ArrayList<Cliente> listaClientes;
+    public ArrayList<Cliente> solicitudesTarjetaCredito;
 
     public Banco() {
         this.listaUsuarios = new ArrayList<>();
         this.listaGerentes = new ArrayList<>();
         this.listaEjecutivos = new ArrayList<>();
         this.listaClientes = new ArrayList<>();
+        this.solicitudesTarjetaCredito = new ArrayList<>();
     }
 
     public Usuario validarInicioSesion(String idUsuario, String contrasenia) {
@@ -48,15 +52,15 @@ public class Banco {
         this.listaClientes.add(cliente);
     }
 
-    public String generarIdUsuario(String nombre, Rol rolNuevo) {
+    public String generarIdUsuario(String nombre, Rol rol) {
         int mes = LocalDate.now().getMonthValue();
         int anio = LocalDate.now().getYear();
         String nom = nombre.substring(0, 3).toUpperCase();
         String inicial = "";
 
-        if (rolNuevo == Rol.GERENTE) {
+        if (rol == Rol.GERENTE) {
             inicial = "G";
-        } else if (rolNuevo == Rol.EJECUTIVO) {
+        } else if (rol == Rol.EJECUTIVO) {
             inicial = "E";
         } else {
             inicial = "C";
@@ -130,5 +134,165 @@ public class Banco {
         }
 
         return rfc.toString();
-    }   
+    }
+
+    public String generarNumeroDeCuenta() {
+        boolean band = true;
+        String numeroDeCuenta = "";
+        String digitosIniciales = "7";
+        Random random = new Random();
+        while (band) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 19; i++) {
+                sb.append(random.nextInt(10));
+            }
+            numeroDeCuenta = digitosIniciales + sb;
+            band = false;
+            for (Cliente cliente : listaClientes) {
+                if (cliente.getNumeroCuenta().equals(numeroDeCuenta)) {
+                    band = true;
+                    break;
+                }
+            }
+        }
+        return numeroDeCuenta;
+    }
+
+    public String generarNumeroDeTarjetaDedito() {
+        boolean band = true;
+        String numeroDeTarjetaDebito = "";
+        String digitosIniciales = "4257";
+        Random random = new Random();
+        while (band) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 12; i++) {
+                sb.append(random.nextInt(10));
+            }
+            numeroDeTarjetaDebito = digitosIniciales + sb;
+            band = false;
+            for (Cliente cliente : listaClientes) {
+                if (cliente.getNumeroCuenta().equals(numeroDeTarjetaDebito)) {
+                    band = true;
+                    break;
+                }
+            }
+        }
+        return numeroDeTarjetaDebito;
+    }
+
+    public String generarNumeroDeTarjetaDCredito() {
+        boolean band = true;
+        String numeroDeTarjetaCredito = "";
+        String digitosIniciales = "5742";
+        Random random = new Random();
+        while (band) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 12; i++) {
+                sb.append(random.nextInt(10));
+            }
+            numeroDeTarjetaCredito = digitosIniciales + sb;
+            band = false;
+            for (Cliente cliente : listaClientes) {
+                if (cliente.getNumeroCuenta().equals(numeroDeTarjetaCredito)) {
+                    band = true;
+                    break;
+                }
+            }
+        }
+        return numeroDeTarjetaCredito;
+    }
+
+    public String generarClaveInterbancaria() {
+        boolean band = true;
+        String clave = "";
+        Random random = new Random();
+        while (band) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 18; i++) {
+                sb.append(random.nextInt(10));
+            }
+            clave = sb.toString();
+            band = false;
+            for (Cliente cliente : listaClientes) {
+                if (cliente.getClave().equals(clave)) {
+                    band = true;
+                    break;
+                }
+            }
+        }
+        return clave;
+    }
+
+    public void mostrarGerentes() {
+        if (this.listaGerentes.isEmpty()) {
+            System.out.println("No hay gerentes registrados");
+        } else {
+            for (Gerente gerente : this.listaGerentes) {
+                System.out.println(gerente.mostrarDatos());
+            }
+        }
+    }
+
+    public void mostrarEjecutivos() {
+        if (this.listaEjecutivos.isEmpty()) {
+            System.out.println("No hay ejecutivos registrados");
+        } else {
+            for (Ejecutivo ejecutivo : this.listaEjecutivos) {
+                System.out.println(ejecutivo.mostrarDatos());
+            }
+        }
+    }
+
+    public void mostrarClientes() {
+        if (this.listaClientes.isEmpty()) {
+            System.out.println("No hay clientes registrados");
+        } else {
+            for (Cliente cliente : this.listaClientes) {
+                System.out.println(cliente.mostrarDatos());
+            }
+        }
+    }
+
+    public String solicitarTarjetaCredito(Cliente cliente) {
+        if (cliente.getTarjetaDebito().getSaldo() >= 30000) {
+            if (this.solicitudesTarjetaCredito.contains(cliente)) {
+                return "Ya tienes una solicitud de tarjeta de crédito pendiente";
+            }
+
+            this.solicitudesTarjetaCredito.add(cliente);
+
+            return "Solicitud de tarjeta de crédito registrada exitosamente.";
+        } else {
+            return "Saldo insuficiente en la tarjeta de débito. Necesitas al menos 30,000.";
+        }
+    }
+
+    public void verSolicitudesPendientes() {
+        if (this.solicitudesTarjetaCredito.isEmpty()) {
+            System.out.println("No hay solicitudes pendientes");
+        } else {
+            for (Cliente cliente : this.solicitudesTarjetaCredito) {
+                System.out.println("Cliente: " + cliente.getNombre() + " " + cliente.getApellidos() + "  |  Saldo: " + cliente.getTarjetaDebito().getSaldo());
+            }
+        }
+    }
+
+    public String procesarSolicitudTarjeta(Cliente cliente, boolean aprobar) {
+        if (!this.solicitudesTarjetaCredito.contains(cliente)) {
+            return "El cliente no tiene una solicitud pendiente";
+        }
+
+        if (aprobar){
+            String numeroTarjeta = generarNumeroDeTarjetaDCredito();
+            String titular = cliente.getNombre() + " " + cliente.getApellidos();
+            Credito credito = new Credito(titular, numeroTarjeta);
+            cliente.setTarjetaCredito(credito);
+            this.solicitudesTarjetaCredito.remove(cliente);
+            return "Solicitud aprobada y asociada al cliente";
+        } else {
+            this.solicitudesTarjetaCredito.remove(cliente);
+            return "Solicitud rechazada";
+        }
+    }
+
 }

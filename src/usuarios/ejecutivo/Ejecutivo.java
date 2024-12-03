@@ -19,4 +19,8 @@ public class Ejecutivo extends Usuario {
         this.salario = salario;
     }
 
+    @Override
+    public String mostrarDatos() {
+        return super.mostrarDatos() + String.format(" | Salario: %s", getSalario());
+    }
 }

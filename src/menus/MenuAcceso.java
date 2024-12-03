@@ -20,7 +20,9 @@ public class MenuAcceso {
 
     public void iniciarSesion() {
         int intentosMaximos = 3, intentosUsuario = 0;
-        System.out.println("=== Bienvenido al PonyBank ===");
+        System.out.println("--------------------------");
+        System.out.println("- Bienvenido al PonyBank -");
+        System.out.println("--------------------------");
 
         while (intentosUsuario < intentosMaximos) {
             System.out.println("\n-- Inicia Sesión --");
@@ -76,19 +78,8 @@ public class MenuAcceso {
 
                     switch (op) {
                         case 1:
-
-
-
-
-
-
-
-
-
-
-
-
                             intentosUsuario++;
+                            scanner.nextLine();
                             break;
                         case 2:
                             intentosUsuario = intentosMaximos;
