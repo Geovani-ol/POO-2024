@@ -32,6 +32,11 @@ public class Credito extends Tarjeta {
         setDeudaCredito(deudaCredito + gasto);
     }
 
+    public void abonarADeuda(double abono) {
+        setLimiteDeCredito(limiteDeCredito + abono);
+        setDeudaCredito(deudaCredito - abono);
+    }
+
     @Override
     public String mostrarDatosTarjeta() {
         return super.mostrarDatosTarjeta() + String.format(" | Limite de crédito: %s | Deuda: %s", getLimiteDeCredito(), getDeudaCredito());

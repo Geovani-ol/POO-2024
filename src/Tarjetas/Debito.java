@@ -14,6 +14,10 @@ public class Debito extends Tarjeta {
 
     public void setSaldo(double saldo) {this.saldoDebito = saldo;}
 
+    public void compra(double compra) {
+        setSaldo(getSaldo()-compra);
+    }
+
     @Override
     public String mostrarDatosTarjeta() {
         return super.mostrarDatosTarjeta() + String.format(" | Saldo: %s", getSaldo());

@@ -272,7 +272,7 @@ public class Banco {
             System.out.println("No hay solicitudes pendientes");
         } else {
             for (Cliente cliente : this.solicitudesTarjetaCredito) {
-                System.out.println("Cliente: " + cliente.getNombre() + " " + cliente.getApellidos() + "  |  Saldo: " + cliente.getTarjetaDebito().getSaldo());
+                System.out.println("Id: "+ cliente.getId() + "Cliente: " + cliente.getNombre() + " " + cliente.getApellidos() + "  |  Saldo: " + cliente.getTarjetaDebito().getSaldo());
             }
         }
     }

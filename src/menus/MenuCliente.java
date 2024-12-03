@@ -17,8 +17,13 @@ public class MenuCliente {
         System.out.println("3. Tarjeta de credito.");
         System.out.println("4. Salir.");
 
-        System.out.print("Seleccione una opción: ");
-        return scanner.nextInt();
+        try {
+            System.out.print("Seleccione una opción: ");
+            return scanner.nextInt();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Tipo de dato no solicitado");
+            return 0;
+        }
     }
 
     public boolean procesarDatos(int opcionCliente, Banco banco, Cliente clienteEnSesion) {
@@ -35,23 +40,32 @@ public class MenuCliente {
 
                    System.out.println("\n1. Depositar");
                    System.out.println("2. Retirar");
-                   System.out.println("3. Salir");
-                   System.out.print("Selecciona una opción: ");
-                   int op = scanner.nextInt();
+                   System.out.println("3. Comprar");
+                   System.out.println("4. Salir");
 
-                   switch (op) {
-                       case 1:
-                           depositar(clienteEnSesion);
-                           break;
-                       case 2:
-                           retirar(clienteEnSesion);
-                           break;
-                       case 3:
-                           opcion = false;
-                           break;
-                       default:
-                           System.out.println("No existe esa opcion");
-                           break;
+                   try {
+                       System.out.print("Selecciona una opción: ");
+                       int op = scanner.nextInt();
+
+                       switch (op) {
+                           case 1:
+                               depositar(clienteEnSesion);
+                               break;
+                           case 2:
+                               retirar(clienteEnSesion);
+                               break;
+                           case 3:
+                               comparDebito(clienteEnSesion);
+                               break;
+                           case 4:
+                               opcion = false;
+                               break;
+                           default:
+                               System.out.println("No existe esa opcion");
+                               break;
+                       }
+                   } catch (IllegalArgumentException e) {
+                       System.out.println("Tipo de dato no solicitado");
                    }
                }
                break;
@@ -63,34 +77,46 @@ public class MenuCliente {
                        System.out.println(clienteEnSesion.getTarjetaCredito().mostrarDatosTarjeta());
 
                        System.out.println("\n1. Comprar");
-                       System.out.println("2. Salir");
-                       System.out.print("Selecciona una opción: ");
-                       int opc = scanner.nextInt();
+                       System.out.println("2. Abonar a deuda");
+                       System.out.println("3. Salir");
 
-                       switch (opc) {
-                           case 1:
-                               comprar(clienteEnSesion);
-                               break;
-                           case 2:
-                               opcionC = false;
-                               break;
-                           default:
-                               System.out.println("No existe esa opción");
-                               break;
+                       try {
+                           System.out.print("Selecciona una opción: ");
+                           int opc = scanner.nextInt();
+
+                           switch (opc) {
+                               case 1:
+                                   comprarCredito(clienteEnSesion);
+                                   break;
+                               case 2:
+                                   abonarADeuda(clienteEnSesion);
+                               case 3:
+                                   opcionC = false;
+                                   break;
+                               default:
+                                   System.out.println("No existe esa opción");
+                                   break;
+                           }
+                       } catch (IllegalArgumentException e) {
+                           System.out.println("Tipo de dato no soolicitado");
                        }
                    } else {
                        System.out.println("\nNo tienes una tarjeta de crédito asociada");
-                       System.out.print("\nSolicitar tarjeta de credito? (1 - Para sí, 2 - Para no): ");
-                       int op = scanner.nextInt();
+                       try {
+                           System.out.print("\nSolicitar tarjeta de credito? (1 - Para sí, 2 - Para no): ");
+                           int op = scanner.nextInt();
 
-                       switch (op) {
-                           case 1:
-                               System.out.println(banco.solicitarTarjetaCredito(clienteEnSesion));
-                               break;
-                           case 2:
-                               break;
-                           default:
-                               System.out.println("La opción no existe");
+                           switch (op) {
+                               case 1:
+                                   System.out.println(banco.solicitarTarjetaCredito(clienteEnSesion));
+                                   break;
+                               case 2:
+                                   break;
+                               default:
+                                   System.out.println("La opción no existe");
+                           }
+                       } catch (IllegalArgumentException e){
+                           System.out.println("Tipo de dato no solicitado");
                        }
                        opcionC = false;
                    }
@@ -106,39 +132,107 @@ public class MenuCliente {
     }
 
     public void depositar(Cliente clienteEnSesion) {
-        System.out.print("\nIngrese el monto a depositar: ");
-        double deposito = scanner.nextDouble();
+        try {
+            System.out.print("\nIngrese el monto a depositar: ");
+            double deposito = scanner.nextDouble();
 
-        clienteEnSesion.getTarjetaDebito().setSaldo(clienteEnSesion.getTarjetaDebito().getSaldo() + deposito);
-        System.out.println("Deposito exitoso");
+            clienteEnSesion.getTarjetaDebito().setSaldo(clienteEnSesion.getTarjetaDebito().getSaldo() + deposito);
+            System.out.println("Deposito exitoso");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Tipo de dato no solicitado");
+        }
     }
 
     public void retirar(Cliente clienteEnSession) {
         while (true) {
-            System.out.print("\nIngrese el monto a retirar: ");
-            double retiro = scanner.nextDouble();
-
-            if (clienteEnSession.getTarjetaDebito().getSaldo() >= retiro) {
-                clienteEnSession.getTarjetaDebito().setSaldo(clienteEnSession.getTarjetaDebito().getSaldo() - retiro);
-                System.out.println("Retiro exitoso");
+            if (clienteEnSession.getTarjetaDebito().getSaldo() == 0) {
+                System.out.println("No tienes saldo en tu tarjeta");
                 return;
             } else {
-                System.out.println("El monto del retiro es mayor a tu saldo");
+                try {
+                    System.out.print("\nIngrese el monto a retirar (mínimo de 100 pesos): ");
+                    double retiro = scanner.nextDouble();
+
+                    if (retiro < 100) {
+                        System.out.println("El retiro debe ser minimo de 100 pesos");
+                    } else {
+                        if (clienteEnSession.getTarjetaDebito().getSaldo() >= retiro) {
+                            clienteEnSession.getTarjetaDebito().setSaldo(clienteEnSession.getTarjetaDebito().getSaldo() - retiro);
+                            System.out.println("Retiro exitoso");
+                            return;
+                        } else {
+                            System.out.println("El monto del retiro es mayor a tu saldo");
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Tipo de dato no solicitado");
+                }
             }
         }
     }
 
-    public void comprar(Cliente clienteEnSesion) {
+    public  void comparDebito(Cliente clienteEnSesion) {
         while (true) {
-            System.out.print("\nIngrese el monto de la compra: ");
-            double compra = scanner.nextDouble();
-
-            if (clienteEnSesion.getTarjetaCredito().getLimiteDeCredito() >= compra) {
-                clienteEnSesion.getTarjetaCredito().limiteDeCredito(compra);
-                System.out.println("Compra exitosa");
+            if (clienteEnSesion.getTarjetaDebito().getSaldo() == 0) {
+                System.out.println("No tienes saldo en tu tarjeta");
                 return;
             } else {
-                System.out.println("El monto de la compra exede el limite de crédito");
+                try {
+                    System.out.print("\nIngrese el monto de la compra: ");
+                    double compra = scanner.nextDouble();
+
+                    if (clienteEnSesion.getTarjetaDebito().getSaldo() >= compra) {
+                        clienteEnSesion.getTarjetaDebito().compra(compra);
+                        System.out.println("Compra exitosa");
+                        return;
+                    } else {
+                        System.out.println("El monto de la compra exede el saldo de la tarjeta");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Tipo de dato no solicitado");
+                }
+            }
+        }
+    }
+
+    public void comprarCredito(Cliente clienteEnSesion) {
+        while (true) {
+            if (clienteEnSesion.getTarjetaCredito().getLimiteDeCredito() == 0) {
+                System.out.println("No tienes más credito en tu tarjeta");
+            } else {
+                try {
+                    System.out.print("\nIngrese el monto de la compra: ");
+                    double compra = scanner.nextDouble();
+
+                    if (clienteEnSesion.getTarjetaCredito().getLimiteDeCredito() >= compra) {
+                        clienteEnSesion.getTarjetaCredito().limiteDeCredito(compra);
+                        System.out.println("Compra exitosa");
+                        return;
+                    } else {
+                        System.out.println("El monto de la compra exede el limite de crédito");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Tipo de dato no solicitado");
+                }
+            }
+        }
+    }
+
+    public void abonarADeuda(Cliente clienteEnSesion) {
+        while (true) {
+            try {
+                System.out.print("\nIngrese el monto a abonar: ");
+                double abonar = scanner.nextDouble();
+
+                if (clienteEnSesion.getTarjetaCredito().getDeudaCredito() <= abonar) {
+                    clienteEnSesion.getTarjetaCredito().abonarADeuda(abonar);
+                    System.out.println("Abono a deuda exitoso");
+                    return;
+                } else {
+                    System.out.println("El abono es mayor a la deuda existente");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Tipo de dato no solicitado");
             }
         }
     }

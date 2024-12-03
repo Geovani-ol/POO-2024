@@ -20,8 +20,13 @@ public class MenuGerente {
         System.out.println("6. Ver gerentes");
         System.out.println("7. Salir ");
 
-        System.out.print("Seleccione una opción: ");
-        return scanner.nextInt();
+        try {
+            System.out.print("Seleccione una opción: ");
+            return scanner.nextInt();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Tipo de dato no solicitado");
+            return 0;
+        }
     }
 
     public boolean procesarDatos(int opcionGerente, Banco banco, Gerente gerenteEnSesion) {
@@ -32,24 +37,24 @@ public class MenuGerente {
             case 2:
                 System.out.println("\n--INGRESAR NUEVO EJECUTIVO--");
 
-                System.out.println("Ingrese el nombre del empleado: ");
+                System.out.println("Ingrese el nombre del ejecutivo: ");
                 String nombreEjecutivo = scanner.next();
 
                 scanner.nextLine();
 
-                System.out.println("Ingrese el apellido del empleado: ");
+                System.out.println("Ingrese el apellido del ejecutivo: ");
                 String apellidoEjecutivo = scanner.nextLine();
 
-                System.out.println("Ingrese la dirección del empleado: ");
+                System.out.println("Ingrese la dirección del ejecutivo: ");
                 String direccionEjecutivo = scanner.nextLine();
 
-                System.out.println("Ingrese la sucursal afiliada al empleado: ");
+                System.out.println("Ingrese la sucursal afiliada al ejecutivo: ");
                 String sucursalEjecutivo = scanner.nextLine();
 
                 System.out.println("Ingrese una contraseña segura y guardela: ");
                 String contraseniaEjecutivo = scanner.nextLine();
 
-                System.out.println("Ingrese el salario mensual que se le asignara al empleado: ");
+                System.out.println("Ingrese el salario mensual que se le asignara al ejecutivo: ");
                 double salarioEjecutivo = scanner.nextDouble();
 
                 String id = banco.generarIdUsuario(nombreEjecutivo, Rol.EJECUTIVO);
@@ -58,6 +63,8 @@ public class MenuGerente {
 
                 Ejecutivo ejecutivo = new Ejecutivo(id, nombreEjecutivo, apellidoEjecutivo, curp, rfc, direccionEjecutivo, sucursalEjecutivo, contraseniaEjecutivo, salarioEjecutivo);
                 banco.registrarEjecutivo(ejecutivo);
+
+                System.out.println("Usuario: " + id + " | Nombre: " + nombreEjecutivo + " " +  apellidoEjecutivo + " | Contraseña: " + contraseniaEjecutivo);
                 break;
             case 3:
                 System.out.println("\n--INGRESAR NUEVO GERENTE--");
@@ -87,6 +94,9 @@ public class MenuGerente {
                 String rfcG = banco.generarRfc();
 
                 Gerente gerente = new Gerente(idG, nombreGerente, apellidoGerente, curpG, rfcG, direccionGerente, sucursalGerente, contraseniaGerente, salarioGerente);
+                banco.registrarGerente(gerente);
+
+                System.out.println("Usuario: " + idG + " | Nombre: " + nombreGerente + " " + apellidoGerente + " | Contraseña: " + contraseniaGerente);
                 break;
             case 4:
                 System.out.println("\n== Clientes Del Banco ==\n");

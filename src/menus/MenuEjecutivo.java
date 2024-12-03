@@ -19,8 +19,13 @@ public class MenuEjecutivo {
         System.out.println("4. Gestionar solisitudes de clientes");
         System.out.println("5. Salir ");
 
-        System.out.print("Seleccione una opción: ");
-        return scanner.nextInt();
+        try {
+            System.out.print("Seleccione una opción: ");
+            return scanner.nextInt();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Tipo de dato no solicitado");
+            return 0;
+        }
     }
 
     public boolean procesarDatos(int opcionEjecutivo, Banco banco, Ejecutivo ejecutivoEnSesion) {
@@ -68,6 +73,8 @@ public class MenuEjecutivo {
                 Cliente cliente = new Cliente(id, nombreCliente, apellidoCliente, curp, rfc, direccionCliente, sucursalCliente, contraseniaCliente, numeroDeCuenta, debito, clave);
 
                 banco.registrarCliente(cliente);
+
+                System.out.println("Usuario: " + id + " | Nombre: " + nombreCliente + apellidoCliente + " | Contraseña: " + contraseniaCliente);
                 break;
             case 4:
                 System.out.println("\n== Solicitudes De Tarjeta De Crédito ==\n");

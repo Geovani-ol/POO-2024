@@ -11,6 +11,69 @@
       "sucursal": "Central",
       "contrasenia": "123",
       "rol": "GERENTE"
+    },
+    {
+      "salario": 15000.0,
+      "id": "E-PAN20241264",
+      "nombre": "Panfilo",
+      "apellidos": "Morales",
+      "curp": "PAHX650604HIOUDVXL5",
+      "rfc": "EZPY350121O0X",
+      "direccion": "Villas del Pedreegal",
+      "sucursal": "Central",
+      "contrasenia": "1029",
+      "rol": "EJECUTIVO"
+    },
+    {
+      "numeroCuenta": "79347174123298006410",
+      "tarjetaDebito": {
+        "saldoDebito": 30150.0,
+        "titular": "Israel Olvera",
+        "numeroTarjeta": "4257256490032571",
+        "fechaCreacion": "2024-12-03",
+        "cvv": 643,
+        "fechaVencimiento": "2029-12-03"
+      },
+      "tarjetaCredito": {
+        "limiteDeCredito": 99000.0,
+        "deudaCredito": 1000.0,
+        "titular": "Israel Olvera",
+        "numeroTarjeta": "5742433449158980",
+        "fechaCreacion": "2024-12-03",
+        "cvv": 193,
+        "fechaVencimiento": "2029-12-03"
+      },
+      "clave": "669660598438502718",
+      "id": "C-ISR20241250",
+      "nombre": "Israel",
+      "apellidos": "Olvera",
+      "curp": "QEIX720311MSGPGCGY3",
+      "rfc": "GLME800903938",
+      "direccion": "Cd. Hidalgo",
+      "sucursal": "Central",
+      "contrasenia": "Huevos1",
+      "rol": "CLIENTE"
+    },
+    {
+      "numeroCuenta": "74667051525432828469",
+      "tarjetaDebito": {
+        "saldoDebito": 1.5E7,
+        "titular": "Juan Alvarado Rosales",
+        "numeroTarjeta": "4257053807810450",
+        "fechaCreacion": "2024-12-03",
+        "cvv": 727,
+        "fechaVencimiento": "2029-12-03"
+      },
+      "clave": "870490573317253775",
+      "id": "C-JUA20241240",
+      "nombre": "Juan",
+      "apellidos": "Alvarado Rosales",
+      "curp": "UISE721218MHVEVMCK5",
+      "rfc": "OHIT670120E38",
+      "direccion": "purepecha #111",
+      "sucursal": "central",
+      "contrasenia": "hola",
+      "rol": "CLIENTE"
     }
   ],
   "listaGerentes": [
@@ -27,7 +90,72 @@
       "rol": "GERENTE"
     }
   ],
-  "listaEjecutivos": [],
-  "listaClientes": [],
+  "listaEjecutivos": [
+    {
+      "salario": 15000.0,
+      "id": "E-PAN20241264",
+      "nombre": "Panfilo",
+      "apellidos": "Morales",
+      "curp": "PAHX650604HIOUDVXL5",
+      "rfc": "EZPY350121O0X",
+      "direccion": "Villas del Pedreegal",
+      "sucursal": "Central",
+      "contrasenia": "1029",
+      "rol": "EJECUTIVO"
+    }
+  ],
+  "listaClientes": [
+    {
+      "numeroCuenta": "79347174123298006410",
+      "tarjetaDebito": {
+        "saldoDebito": 30150.0,
+        "titular": "Israel Olvera",
+        "numeroTarjeta": "4257256490032571",
+        "fechaCreacion": "2024-12-03",
+        "cvv": 643,
+        "fechaVencimiento": "2029-12-03"
+      },
+      "tarjetaCredito": {
+        "limiteDeCredito": 99000.0,
+        "deudaCredito": 1000.0,
+        "titular": "Israel Olvera",
+        "numeroTarjeta": "5742433449158980",
+        "fechaCreacion": "2024-12-03",
+        "cvv": 193,
+        "fechaVencimiento": "2029-12-03"
+      },
+      "clave": "669660598438502718",
+      "id": "C-ISR20241250",
+      "nombre": "Israel",
+      "apellidos": "Olvera",
+      "curp": "QEIX720311MSGPGCGY3",
+      "rfc": "GLME800903938",
+      "direccion": "Cd. Hidalgo",
+      "sucursal": "Central",
+      "contrasenia": "Huevos1",
+      "rol": "CLIENTE"
+    },
+    {
+      "numeroCuenta": "74667051525432828469",
+      "tarjetaDebito": {
+        "saldoDebito": 1.5E7,
+        "titular": "Juan Alvarado Rosales",
+        "numeroTarjeta": "4257053807810450",
+        "fechaCreacion": "2024-12-03",
+        "cvv": 727,
+        "fechaVencimiento": "2029-12-03"
+      },
+      "clave": "870490573317253775",
+      "id": "C-JUA20241240",
+      "nombre": "Juan",
+      "apellidos": "Alvarado Rosales",
+      "curp": "UISE721218MHVEVMCK5",
+      "rfc": "OHIT670120E38",
+      "direccion": "purepecha #111",
+      "sucursal": "central",
+      "contrasenia": "hola",
+      "rol": "CLIENTE"
+    }
+  ],
   "solicitudesTarjetaCredito": []
 }
